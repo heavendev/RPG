@@ -1,0 +1,17 @@
+package Projet;
+
+public enum Displaying {
+	
+	MAIN_MENU,
+	GAME_MENU,
+	MAP,
+	DIALOGUE,
+	COMBAT,
+	SAVE_GAME,
+	LOAD_GAME,
+	INVENTORY,
+	QUESTS,
+	INTRO_STORY,
+	INTRO_GAMEPLAY;
+	
+}
