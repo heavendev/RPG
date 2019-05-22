@@ -1,7 +1,5 @@
 package ProjetMenu;
 
-import Projet.Jeu;
-
 public class DisplayMainMenu {
 	
 	private int selection = 0;

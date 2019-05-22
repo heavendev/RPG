@@ -1,4 +1,4 @@
-package Projet;
+package nonActiveClasses;
 
 public enum Elements{
 	

@@ -3,16 +3,16 @@ package Projet;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import ProjetMenu.Scroll;
+import nonActiveClasses.Scroll;
 
-public class ScrollingKeyListener implements KeyListener, Runnable {
+public class OurKeyListener implements KeyListener, Runnable {
 
 	private Jeu jeu;
 	private Thread t;
 	
 	Scroll action = null;
 	
-	public ScrollingKeyListener(Jeu jeu) {
+	public OurKeyListener(Jeu jeu) {
 		this.jeu = jeu;
 		t = new Thread(this);
 		t.start();
@@ -43,7 +43,6 @@ public class ScrollingKeyListener implements KeyListener, Runnable {
 	
 	public void keyReleased(KeyEvent e) {
 	}
-	
 	
 	public void run() {
 		while (!jeu.isGameOver()) {

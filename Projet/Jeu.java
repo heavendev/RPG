@@ -4,24 +4,28 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 
 import Intro.GameplayIntro;
+import Intro.StoryIntro;
 import ProjetMenu.*;
+import nonActiveClasses.Scroll;
 
 public class Jeu extends JFrame{
 	
 	private boolean gameOver = false;
 	
-	HashMap<String,Object> game = new HashMap<String,Object>();
-	private MouvementKeyListener mouvementListener = new MouvementKeyListener(this);
-	private ScrollingKeyListener menuListener = new ScrollingKeyListener(this);
 	private Displaying onDisplay;
+	HashMap<String,Object> game = new HashMap<String,Object>();
+	
+	private MouvementKeyListener mouvementListener = new MouvementKeyListener(this);
+	private OurKeyListener keyListener = new OurKeyListener(this);
+	
 	
 	
 	public Jeu() {
 		this.setSize(50, 20);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-//		this.addKeyListener(mouvementListener);
-		this.addKeyListener(menuListener);
+		this.addKeyListener(mouvementListener);
+		this.addKeyListener(keyListener);
 		init();
 	}
 	
@@ -34,34 +38,6 @@ public class Jeu extends JFrame{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public void startNewGame() {
-		onDisplay = Displaying.INTRO_GAMEPLAY;
-		game.put("GameplayIntro", new GameplayIntro(this));
-	}
-	
-	public void goToStoryIntro() {
-		onDisplay = Displaying.INTRO_STORY;
-	}
-	
-	public void loadGame() {
-		System.out.println("loading game!");
-	}
-	
-	public void quitGame() {
-		gameOver = true;
-		System.out.println("exiting");
-		System.exit(0);
-	}
 	
 	
 	// Le ScrollActionListener appele cette fonction pour se deplacer dans les menus
@@ -89,6 +65,45 @@ public class Jeu extends JFrame{
 			default:
 				break;
 		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void startNewGame() {
+		onDisplay = Displaying.INTRO_GAMEPLAY;
+		game.put("GameplayIntro", new GameplayIntro(this));
+	}
+	
+	
+	public void goToStoryIntro() {
+		onDisplay = Displaying.INTRO_STORY;
+		game.put("StoryIntro", new StoryIntro(this));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void loadGame() {
+		System.out.println("loading game!");
+	}
+	
+	public void quitGame() {
+		gameOver = true;
+		System.exit(0);
 	}
 	
 	

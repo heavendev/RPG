@@ -1,9 +1,10 @@
 package Intro;
 
 import Projet.Jeu;
-import ProjetMenu.Scroll;
+import nonActiveClasses.Scroll;
+import nonActiveClasses.ScrollInterface;
 
-public class GameplayIntro {
+public class GameplayIntro implements ScrollInterface{
 	
 	private Jeu jeu;
 	private int page;

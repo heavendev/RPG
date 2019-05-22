@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import nonActiveClasses.Elements;
+
 public class FileToMap {
 	
 	String path = "C:\\Users\\stagiaire\\eclipse-workspace\\FileRouge\\src\\FileRouge\\carte.txt";

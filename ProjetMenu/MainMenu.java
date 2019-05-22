@@ -1,11 +1,11 @@
 package ProjetMenu;
 
-import java.io.IOException;
-
 import Projet.Jeu;
+import nonActiveClasses.Scroll;
+import nonActiveClasses.ScrollInterface;
 
 
-public class MainMenu {
+public class MainMenu implements ScrollInterface{
 	
 	private Jeu jeu;
 	private  int selection = 0;

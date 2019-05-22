@@ -24,7 +24,7 @@ public class DisplayGameplayIntro {
 			"*                                                           prochaine page     *",
 			"*                                                                              *",
 			"********************************************************************************",
-			"q = selection precedente, d = selection suivante, entrer = valider              "};
+			" entrer = valider                                                               "};
 	
 	private String[] pageTwo = {"********************************************************************************",
 			"*                                                                              *",

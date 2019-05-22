@@ -3,6 +3,8 @@ package Projet;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import nonActiveClasses.Direction;
+
 public class MouvementKeyListener implements KeyListener, Runnable {
 
 	private Jeu jeu;
@@ -10,6 +12,10 @@ public class MouvementKeyListener implements KeyListener, Runnable {
 	
 	Direction directionXAxis;
 	Direction directionYAxis;
+	boolean up = false;
+	boolean down = false;
+	boolean right = false;
+	boolean left = false;
 	
 	public MouvementKeyListener(Jeu jeu) {
 		this.jeu = jeu;
@@ -21,15 +27,19 @@ public class MouvementKeyListener implements KeyListener, Runnable {
 		switch (e.getKeyCode()) {
 			case (KeyEvent.VK_Z) :
 				directionYAxis = Direction.UP;
+				up = true;
 				break;
 			case (KeyEvent.VK_S) :
 				directionYAxis = Direction.DOWN;
+				down = true;
 				break;
 			case (KeyEvent.VK_Q) :
 				directionXAxis = Direction.LEFT;
+				left = true;
 				break;
 			case (KeyEvent.VK_D) :
 				directionXAxis = Direction.RIGHT;
+				right = true;
 				break;
 		}
 	}
@@ -83,7 +93,6 @@ public class MouvementKeyListener implements KeyListener, Runnable {
 			} else if (directionXAxis == Direction.RIGHT) {
 //				jeu.moveChar(Direction.UP_RIGHT);
 			} else {
-				System.out.println("up");
 //				jeu.moveChar(Direction.UP);
 			}
 		} else if (directionYAxis == Direction.DOWN) {

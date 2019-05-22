@@ -1,4 +1,4 @@
-package ProjetMenu;
+package nonActiveClasses;
 
 public enum Scroll {
 	

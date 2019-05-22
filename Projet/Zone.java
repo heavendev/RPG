@@ -1,5 +1,8 @@
 package Projet;
 
+import nonActiveClasses.Direction;
+import nonActiveClasses.Elements;
+
 public class Zone {
 	
 	Elements[][] zone;
