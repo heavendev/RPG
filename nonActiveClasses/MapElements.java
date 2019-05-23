@@ -1,6 +1,6 @@
 	package nonActiveClasses;
 
-public enum Elements{
+public enum MapElements{
 	
 	TREE,
 	ROCK,

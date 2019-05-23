@@ -6,6 +6,7 @@ public enum Scroll {
 	DOWN,
 	RIGHT,
 	LEFT,
+	ESCAPE,
 	CONFIRM;
 	
 }

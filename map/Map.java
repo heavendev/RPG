@@ -2,14 +2,15 @@ package map;
 
 import Projet.Jeu;
 import nonActiveClasses.Direction;
-import nonActiveClasses.Elements;
+import nonActiveClasses.MapElements;
+import nonActiveClasses.Scroll;
 
 public class Map {
 	
 	Jeu jeu;
 	DisplayMap display;
 	
-	Elements[][] map;
+	MapElements[][] map;
 	
 	int cx;
 	int cy;
@@ -20,17 +21,24 @@ public class Map {
 		// on recupere normallement les coordonnes du personnage
 		// et sur quel carte il est en ce moment
 		// et on genere la carte approprie
-		map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\WorldMap.txt");
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[0].length; j++) {
-				System.out.print(map[i][j]);
-			}
-		}
 		this.jeu = jeu;
+		resetMap();
+	}
+	
+	public void resetMap() {
+		map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\WorldMap.txt");
 		cx = 62; 
 		cy = 13;
 		display = new DisplayMap(map,cx,cy);
 	}
+	
+	
+	public void scroll(Scroll scroll) {
+		 if (scroll == Scroll.ESCAPE) {
+			 jeu.goToGameMenu();
+		 }
+	}
+	
 	
 	public void move(Direction dir) {
 		switch (dir) {
@@ -120,14 +128,17 @@ public class Map {
 				break;
 		}
 		display.showMap(cx, cy);
-		if (map[cy][cx] == Elements.ENTRANCE) {
-			
-		}
+//		if (map[cy][cx] == MapElements.ENTRANCE) {
+//			
+//		}
+//		if ((int)(Math.random()*1000) == 0) {
+//			jeu.startRandomCombat();
+//		}
 	}
 	
 	public boolean isClear(int x, int y) {
 		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length) {
-			if (map[y][x] == Elements.CLEAR || map[y][x] == Elements.ENTRANCE) {
+			if (map[y][x] == MapElements.CLEAR || map[y][x] == MapElements.ENTRANCE) {
 				return true;
 			}
 		}

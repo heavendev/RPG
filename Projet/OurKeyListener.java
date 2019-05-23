@@ -35,6 +35,9 @@ public class OurKeyListener implements KeyListener, Runnable {
 			case (KeyEvent.VK_D) :
 				action = Scroll.RIGHT;
 			break;
+			case (KeyEvent.VK_ESCAPE) :
+				action = Scroll.ESCAPE;
+			break;
 		}
 	}
 	

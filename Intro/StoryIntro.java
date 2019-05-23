@@ -9,6 +9,9 @@ public class StoryIntro implements ScrollInterface{
 	private Jeu jeu;
 	DisplayStoryIntro display;
 	
+	public void resetStoryIntro() {
+		display.showStoryIntro();
+	}
 	
 	public StoryIntro(Jeu jeu) {
 		display = new DisplayStoryIntro();
@@ -19,10 +22,9 @@ public class StoryIntro implements ScrollInterface{
 	public void scroll(Scroll scroll) {
 		switch (scroll) {
 			case CONFIRM :
-				jeu.initiateNewGame();
+				jeu.initiateMap();
 				break;
 		}
 	}
-	
 	
 }

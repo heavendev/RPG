@@ -31,8 +31,12 @@ public class Jeu extends JFrame{
 	
 	
 	public void init() {
-		game.put("MainMenu", new MainMenu(this));
 		onDisplay = Displaying.MAIN_MENU;
+		try {
+			((MainMenu) game.get("MainMenu")).resetMainMenu();
+		} catch (NullPointerException e) {
+			game.put("MainMenu", new MainMenu(this));
+		}
 	}
 	
 	
@@ -51,7 +55,7 @@ public class Jeu extends JFrame{
 				((MainMenu) game.get("MainMenu")).scroll(scroll);
 				break;
 			case GAME_MENU :
-				
+				((GameMenu) game.get("GameMenu")).scroll(scroll);
 				break;
 			case DIALOGUE :
 				
@@ -62,7 +66,11 @@ public class Jeu extends JFrame{
 			case INTRO_STORY :
 				((StoryIntro) game.get("StoryIntro")).scroll(scroll);
 				break;
+			case MAP :
+				((Map) game.get("Map")).scroll(scroll);
+				break;
 			default:
+				
 				break;
 		}
 	}
@@ -70,34 +78,58 @@ public class Jeu extends JFrame{
 	public void moveChar(Direction direction) {
 		switch (onDisplay) {
 			case MAP :
-			((Map) game.get("Map")).move(direction);
+				((Map) game.get("Map")).move(direction);
 			break;
 		}
 	}
 	
 	
+	public void goToMainMenu() {
+		onDisplay = Displaying.MAIN_MENU;
+		try {
+			((MainMenu) game.get("MainMenu")).resetMainMenu();
+		} catch (NullPointerException e) {
+			game.put("MainMenu", new MainMenu(this));
+		}
+	}
 	
 	
-	
-	
-	
-	
+	public void goToGameMenu() {
+		onDisplay = Displaying.GAME_MENU;
+		try {
+			((GameMenu) game.get("GameMenu")).resetGameMenu();
+		} catch (NullPointerException e) {
+			game.put("GameMenu", new GameMenu(this));
+		}
+	}
 	
 	
 	public void startNewGame() {
 		onDisplay = Displaying.INTRO_GAMEPLAY;
-		game.put("GameplayIntro", new GameplayIntro(this));
+		try {
+			((GameplayIntro) game.get("GameplayIntro")).resetGameplayIntro();
+		} catch (NullPointerException e) {
+			game.put("GameplayIntro", new GameplayIntro(this));
+		}
 	}
 	
 	
 	public void goToStoryIntro() {
 		onDisplay = Displaying.INTRO_STORY;
-		game.put("StoryIntro", new StoryIntro(this));
+		try {
+			((StoryIntro) game.get("StoryIntro")).resetStoryIntro();
+		} catch (NullPointerException e) {
+			game.put("StoryIntro", new StoryIntro(this));
+		}
 	}
 	
-	public void initiateNewGame() {
+	public void initiateMap() {
 		onDisplay = Displaying.MAP;
-		game.put("Map", new Map(this));
+		try {
+			((Map) game.get("Map")).resetMap();
+		} catch (NullPointerException e) {
+			game.put("Map", new Map(this));
+		}
 	}
 	
 	

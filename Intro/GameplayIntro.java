@@ -6,6 +6,7 @@ import nonActiveClasses.ScrollInterface;
 
 public class GameplayIntro implements ScrollInterface{
 	
+	
 	private Jeu jeu;
 	private int page;
 	private int selection;
