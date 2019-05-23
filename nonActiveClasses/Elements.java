@@ -1,4 +1,4 @@
-package nonActiveClasses;
+	package nonActiveClasses;
 
 public enum Elements{
 	
@@ -6,6 +6,10 @@ public enum Elements{
 	ROCK,
 	WATER,
 	ENTRANCE,
-	CLEAR;
+	CLEAR,
+	HOUSE_WALL,
+	HOUSE_ROOF,
+	HOUSE_LEFT_WALL,
+	HOUSE_RIGHT_WALL;
 	
 }

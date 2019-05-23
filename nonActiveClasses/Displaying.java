@@ -1,14 +1,16 @@
-package Projet;
+package nonActiveClasses;
 
 public enum Displaying {
 	
 	MAIN_MENU,
 	GAME_MENU,
 	MAP,
+	DUNGEON,
 	DIALOGUE,
 	COMBAT,
 	SAVE_GAME,
 	LOAD_GAME,
+	SQUAD,
 	INVENTORY,
 	QUESTS,
 	INTRO_STORY,

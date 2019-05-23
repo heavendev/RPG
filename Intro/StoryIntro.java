@@ -13,12 +13,13 @@ public class StoryIntro implements ScrollInterface{
 	public StoryIntro(Jeu jeu) {
 		display = new DisplayStoryIntro();
 		this.jeu = jeu;
+		display.showStoryIntro();
 	}
 	
 	public void scroll(Scroll scroll) {
 		switch (scroll) {
 			case CONFIRM :
-				
+				jeu.initiateNewGame();
 				break;
 		}
 	}

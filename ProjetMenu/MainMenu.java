@@ -4,7 +4,6 @@ import Projet.Jeu;
 import nonActiveClasses.Scroll;
 import nonActiveClasses.ScrollInterface;
 
-
 public class MainMenu implements ScrollInterface{
 	
 	private Jeu jeu;
@@ -16,7 +15,6 @@ public class MainMenu implements ScrollInterface{
 		this.display = new DisplayMainMenu();
 		display.showMenu();
 	}
-	
 	
 	public void scroll (Scroll scroll) {
 		switch (scroll) {
@@ -46,7 +44,6 @@ public class MainMenu implements ScrollInterface{
 				}
 				break;
 		}
-		
 	}
 	
 }

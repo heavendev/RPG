@@ -31,11 +31,15 @@ public class GameplayIntro implements ScrollInterface{
 				if (selection == 2 && page != 1) {
 					selection--;
 				}
+				display.setPage(page);
+				display.setSelection(selection);
 				break;
 			case RIGHT :
 				if (selection == 1) {
 					selection++;
 				}
+				display.setPage(page);
+				display.setSelection(selection);
 				break;
 			case CONFIRM :
 				switch (page) {
@@ -77,8 +81,6 @@ public class GameplayIntro implements ScrollInterface{
 				}
 				break;
 		}
-		display.setPage(page);
-		display.setSelection(selection);
 	}
 	
 	

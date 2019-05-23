@@ -51,23 +51,43 @@ public class MouvementKeyListener implements KeyListener, Runnable {
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case (KeyEvent.VK_Z) :
+				up = false;
 				if (directionYAxis == Direction.UP) {
-					directionYAxis = null;
+					if (down) {
+						directionYAxis = Direction.DOWN;;
+					} else {
+						directionYAxis = null;
+					}
 				}
 				break;
 			case (KeyEvent.VK_S) :
+				down = false;
 				if (directionYAxis == Direction.DOWN) {
-					directionYAxis = null;
+					if (up) {
+						directionYAxis = Direction.UP;;
+					} else {
+						directionYAxis = null;
+					}
 				}
 				break;
 			case (KeyEvent.VK_Q) :
+				left = false;
 				if (directionXAxis == Direction.LEFT) {
-					directionXAxis = null;
+					if (right) {
+						directionXAxis = Direction.RIGHT;
+					} else {
+						directionXAxis = null;
+					}
 				}
 				break;
 			case (KeyEvent.VK_D) :
+				right = false;
 				if (directionXAxis == Direction.RIGHT) {
-					directionXAxis = null;
+					if (left) {
+						directionXAxis = Direction.LEFT;
+					} else {
+						directionXAxis = null;
+					}
 				}
 				break;
 		}
@@ -86,32 +106,29 @@ public class MouvementKeyListener implements KeyListener, Runnable {
 	}
 	
 	private void move() {
-		
 		if (directionYAxis == Direction.UP) {
 			if (directionXAxis == Direction.LEFT) {
-//				jeu.moveChar(Direction.UP_LEFT);
+				jeu.moveChar(Direction.UP_LEFT);
 			} else if (directionXAxis == Direction.RIGHT) {
-//				jeu.moveChar(Direction.UP_RIGHT);
+				jeu.moveChar(Direction.UP_RIGHT);
 			} else {
-//				jeu.moveChar(Direction.UP);
+				jeu.moveChar(Direction.UP);
 			}
 		} else if (directionYAxis == Direction.DOWN) {
 			if (directionXAxis == Direction.LEFT) {
-//				jeu.moveChar(Direction.DOWN_LEFT);
+				jeu.moveChar(Direction.DOWN_LEFT);
 			} else if (directionXAxis == Direction.RIGHT) {
-//				jeu.moveChar(Direction.DOWN_RIGHT);
+				jeu.moveChar(Direction.DOWN_RIGHT);
 			} else {
-				System.out.println("down");
-//				jeu.moveChar(Direction.DOWN);
+				jeu.moveChar(Direction.DOWN);
 			}
 		} else {
 			if (directionXAxis == Direction.LEFT) {
-//				jeu.moveChar(Direction.LEFT);
+				jeu.moveChar(Direction.LEFT);
 			} else if (directionXAxis == Direction.RIGHT) {
-//				jeu.moveChar(Direction.RIGHT);
+				jeu.moveChar(Direction.RIGHT);
 			}
 		}
-		
 	}
 	
 }

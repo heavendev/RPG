@@ -3,10 +3,10 @@ package Projet;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
-import Intro.GameplayIntro;
-import Intro.StoryIntro;
+import Intro.*;
 import ProjetMenu.*;
-import nonActiveClasses.Scroll;
+import map.*;
+import nonActiveClasses.*;
 
 public class Jeu extends JFrame{
 	
@@ -60,14 +60,20 @@ public class Jeu extends JFrame{
 				((GameplayIntro) game.get("GameplayIntro")).scroll(scroll);
 				break;
 			case INTRO_STORY :
-				
+				((StoryIntro) game.get("StoryIntro")).scroll(scroll);
 				break;
 			default:
 				break;
 		}
 	}
 	
-	
+	public void moveChar(Direction direction) {
+		switch (onDisplay) {
+			case MAP :
+			((Map) game.get("Map")).move(direction);
+			break;
+		}
+	}
 	
 	
 	
@@ -89,7 +95,10 @@ public class Jeu extends JFrame{
 		game.put("StoryIntro", new StoryIntro(this));
 	}
 	
-	
+	public void initiateNewGame() {
+		onDisplay = Displaying.MAP;
+		game.put("Map", new Map(this));
+	}
 	
 	
 	

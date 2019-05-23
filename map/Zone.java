@@ -1,4 +1,4 @@
-package Projet;
+package map;
 
 import nonActiveClasses.Direction;
 import nonActiveClasses.Elements;
@@ -10,8 +10,6 @@ public class Zone {
 	int cX;
 	int cY;
 	
-	
-	
 	public void setZone(Elements[][] zone) {
 		this.zone = zone;
 	}
@@ -20,7 +18,6 @@ public class Zone {
 		cY = y;
 		cX = x;
 	}
-	
 	
 	public void showMap() {
 		for (int i = cY - 10; i < cY + 10; i++) {
@@ -41,7 +38,6 @@ public class Zone {
 					}
 				}
 			}
-			System.out.println();
 		}
 	}
 	
