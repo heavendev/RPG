@@ -136,17 +136,22 @@ public class Jeu extends JFrame{
 	
 	
 	
-	
+	// PLACEHOLDERS
 	
 	public void loadGame() {
 		System.out.println("loading game!");
+		System.exit(0);
+	}
+	
+	public void saveGame() {
+		System.out.println("saving game!");
+		System.exit(0);
 	}
 	
 	public void quitGame() {
 		gameOver = true;
 		System.exit(0);
 	}
-	
 	
 	
 	

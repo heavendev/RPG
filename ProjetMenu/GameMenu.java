@@ -40,7 +40,7 @@ public class GameMenu {
 						jeu.initiateMap();
 						break;
 					case (1) :
-//						jeu.saveGame();
+						jeu.saveGame();
 						break;
 					case (2) :
 						jeu.goToMainMenu();

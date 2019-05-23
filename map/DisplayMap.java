@@ -26,11 +26,12 @@ public class DisplayMap{
 				System.out.print(" ");
 			}
 		} System.out.println();
+		
 		for (int i = 0; i < 80; i++) {
 			if (i >= 0 && i < map[0].length) {
-				if (x >= 100) {
-					if ((int)(((x-41+i)-100)/10) >= 0) {
-						System.out.print((int)(((x-41+i)-100)/10));
+				if ((x-41+i) >= 100) {
+					if ((int)((x-141+i)/10) >= 0) {
+						System.out.print((int)((x-141+i)/10));
 					} else {
 						System.out.print(" ");
 					}
@@ -45,6 +46,7 @@ public class DisplayMap{
 				System.out.print(" ");
 			}
 		} System.out.println();
+		
 		for (int i = 0; i < 80; i++) {
 			if (i >= 0 && i < map[0].length) {
 				if ((x-41+i)%10 >= 0) {
@@ -65,8 +67,6 @@ public class DisplayMap{
 		
 		
 		for (int i = (y - 7); i < (y+7); i++) {
-			
-			
 			//affichage des coordonnees en y
 			if (i >= 0 && i < map.length) {
 				if (i < 10) {
@@ -76,8 +76,6 @@ public class DisplayMap{
 					System.out.print(i);
 				}
 			}
-			
-			
 			System.out.print("*");
 			for (int j = (x - 38); j < (x + 38); j++) {
 				if (i >= 0 && i < map.length && j >= 0 && j < map[i].length) {

@@ -66,9 +66,7 @@ public class FileToMap {
 				} else if (file.get(i).charAt(j) == '~') {
 					elems[i][j] = MapElements.WATER;
 				}
-				System.out.print(elems[i][j]);
 			}
-			System.out.println();
 		}
 		file = new ArrayList<String>();
 		return (elems);
