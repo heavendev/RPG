@@ -8,12 +8,12 @@ public class MainMenu implements ScrollInterface{
 	
 	private Jeu jeu;
 	private  int selection = 0;
-	private DisplayMainMenu display;
+	private MainMenuDisplay display;
 	
 	public MainMenu(Jeu jeu) {
 		this.jeu = jeu;
-		this.display = new DisplayMainMenu();
-		display.showMenu();
+		this.display = new MainMenuDisplay();
+		display.display();
 	}
 	
 	public void resetMainMenu() {
@@ -38,7 +38,7 @@ public class MainMenu implements ScrollInterface{
 			case CONFIRM :
 				switch (selection) {
 					case (0) :
-						jeu.startNewGame();
+						jeu.goToGameplayIntro();
 						break;
 					case (1) :
 						jeu.loadGame();

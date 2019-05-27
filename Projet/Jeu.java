@@ -1,5 +1,6 @@
 package Projet;
 
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
@@ -7,17 +8,18 @@ import Intro.*;
 import ProjetMenu.*;
 import map.*;
 import nonActiveClasses.*;
+import connection.*;
 
 public class Jeu extends JFrame{
 	
 	private boolean gameOver = false;
 	
-	private Displaying onDisplay;
-	HashMap<String,Object> game = new HashMap<String,Object>();
+	private Displaying onDisplay = null;
+	private HashMap<String,Object> game = new HashMap<String,Object>();
 	
 	private MouvementKeyListener mouvementListener = new MouvementKeyListener(this);
-	private OurKeyListener keyListener = new OurKeyListener(this);
-	
+	private ScrollKeyListener keyListener = new ScrollKeyListener(this);
+	private TypingKeyListener typingListener = new TypingKeyListener(this);
 	
 	
 	public Jeu() {
@@ -26,17 +28,14 @@ public class Jeu extends JFrame{
 		this.setVisible(true);
 		this.addKeyListener(mouvementListener);
 		this.addKeyListener(keyListener);
+		this.addKeyListener(typingListener);
 		init();
 	}
 	
 	
 	public void init() {
-		onDisplay = Displaying.MAIN_MENU;
-		try {
-			((MainMenu) game.get("MainMenu")).resetMainMenu();
-		} catch (NullPointerException e) {
-			game.put("MainMenu", new MainMenu(this));
-		}
+		goToMainMenu();
+//		goToWelcome();
 	}
 	
 	
@@ -44,10 +43,9 @@ public class Jeu extends JFrame{
 	
 	
 	
-	// Le ScrollActionListener appele cette fonction pour se deplacer dans les menus
-	// Menu principal, menu de jeu, inventaire, etc...
-	// Affecte uniquement le menu actuellement utilise par la classe de jeu
-	// Si aucune classe (carte,...) adequate n'est utilise actuellement, ignore la commande
+//	 Le ScrollActionListener appelle cette fonction pour se deplacer dans les menus
+//	 (soit partout sauf la carte)
+//	 Affecte uniquement le menu actuellement utilise par la classe de jeu (var onDisplay)
 	
 	public void scroll(Scroll scroll) {
 		switch (onDisplay) {
@@ -69,11 +67,23 @@ public class Jeu extends JFrame{
 			case MAP :
 				((Map) game.get("Map")).scroll(scroll);
 				break;
+			case WELCOME_PAGE :
+				((Welcome) game.get("Welcome")).scroll(scroll);
+				break;
+			case CONNECTION_PAGE :
+				((Connection) game.get("Connection")).scroll(scroll);
+				break;
+			case LOGIN_PAGE :
+				((Login) game.get("Login")).scroll(scroll);
+				break;
 			default:
 				
 				break;
 		}
 	}
+	
+//	Le MouvementKeyListener appelle	cette fonction pour se deplacer sur la carte
+//	Ne fait rien si la carte n'est pas la classe actuelle utilise par le jeu
 	
 	public void moveChar(Direction direction) {
 		switch (onDisplay) {
@@ -82,6 +92,19 @@ public class Jeu extends JFrame{
 			break;
 		}
 	}
+	
+	
+	public void type(String str) {
+		switch (onDisplay) {
+			case LOGIN_PAGE :
+				((Login) game.get("Login")).type(str);
+				break;
+			default :
+				break;
+		}
+	}
+	
+	
 	
 	
 	public void goToMainMenu() {
@@ -93,7 +116,6 @@ public class Jeu extends JFrame{
 		}
 	}
 	
-	
 	public void goToGameMenu() {
 		onDisplay = Displaying.GAME_MENU;
 		try {
@@ -103,8 +125,7 @@ public class Jeu extends JFrame{
 		}
 	}
 	
-	
-	public void startNewGame() {
+	public void goToGameplayIntro() {
 		onDisplay = Displaying.INTRO_GAMEPLAY;
 		try {
 			((GameplayIntro) game.get("GameplayIntro")).resetGameplayIntro();
@@ -112,7 +133,6 @@ public class Jeu extends JFrame{
 			game.put("GameplayIntro", new GameplayIntro(this));
 		}
 	}
-	
 	
 	public void goToStoryIntro() {
 		onDisplay = Displaying.INTRO_STORY;
@@ -123,7 +143,7 @@ public class Jeu extends JFrame{
 		}
 	}
 	
-	public void initiateMap() {
+	public void goToMap() {
 		onDisplay = Displaying.MAP;
 		try {
 			((Map) game.get("Map")).resetMap();
@@ -132,6 +152,41 @@ public class Jeu extends JFrame{
 		}
 	}
 	
+	public void goToWelcome() {
+		onDisplay = Displaying.WELCOME_PAGE;
+		try {
+			((Welcome) game.get("Welcome")).reset();
+		} catch (NullPointerException e) {
+			game.put("Welcome", new Welcome(this));
+		}
+	}
+	
+	public void goToConnection() {
+		onDisplay = Displaying.CONNECTION_PAGE;
+		try {
+			((Connection) game.get("Connection")).reset();
+		} catch (NullPointerException e) {
+			game.put("Connection", new Connection(this));
+		}
+	}
+	
+	public void goToLoginPage() {
+		onDisplay = Displaying.LOGIN_PAGE;
+		try {
+			((Login) game.get("Login")).resetLogin();
+		} catch (NullPointerException e) {
+			game.put("Login", new Login(this));
+		}
+	}
+	
+	public void goToRegistrationPage() {
+		onDisplay = Displaying.REGISTRATION_PAGE;
+		try {
+			((Registration) game.get("Registration")).resetRegistration();
+		} catch (NullPointerException e) {
+			game.put("Registration", new Registration(this));
+		}
+	}
 	
 	
 	
@@ -161,6 +216,9 @@ public class Jeu extends JFrame{
 	
 	public void setOnDisplay(Displaying onDisplay) {
 		this.onDisplay = onDisplay;
+	}
+	public Displaying getOnDisplay() {
+		return onDisplay;
 	}
 	public boolean isGameOver() {
 		return gameOver;

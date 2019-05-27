@@ -8,7 +8,7 @@ import nonActiveClasses.Scroll;
 public class Map {
 	
 	Jeu jeu;
-	DisplayMap display;
+	MapDisplay display;
 	
 	MapElements[][] map;
 	
@@ -29,7 +29,7 @@ public class Map {
 		map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\WorldMap.txt");
 		cx = 62; 
 		cy = 13;
-		display = new DisplayMap(map,cx,cy);
+		display = new MapDisplay(map,cx,cy);
 	}
 	
 	
@@ -127,7 +127,7 @@ public class Map {
 				}
 				break;
 		}
-		display.showMap(cx, cy);
+		display.display(cx, cy);
 //		if (map[cy][cx] == MapElements.ENTRANCE) {
 //			
 //		}

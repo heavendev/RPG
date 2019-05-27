@@ -1,17 +1,18 @@
 package map;
 
+import nonActiveClasses.Display;
 import nonActiveClasses.MapElements;
 
-public class DisplayMap{
+public class MapDisplay implements Display{
 	
 	MapElements[][] map;
 	
-	public DisplayMap(MapElements[][] map, int x, int y) {
+	public MapDisplay(MapElements[][] map, int x, int y) {
 		this.map = map;
-		showMap(x,y);
+		display(x,y);
 	}
 	
-	public void showMap(int x, int y) {
+	public void display(int x, int y) {
 		
 		
 		// affichage des coordonnes sur l'axe des X
@@ -30,7 +31,7 @@ public class DisplayMap{
 		for (int i = 0; i < 80; i++) {
 			if (i >= 0 && i < map[0].length) {
 				if ((x-41+i) >= 100) {
-					if ((int)((x-141+i)/10) >= 0) {
+					if ((int)((x-41+i)/10) >= 0) {
 						System.out.print((int)((x-141+i)/10));
 					} else {
 						System.out.print(" ");
@@ -67,7 +68,7 @@ public class DisplayMap{
 		
 		
 		for (int i = (y - 7); i < (y+7); i++) {
-			//affichage des coordonnees en y
+			//affichage des coordonnees sur l'axe des Y
 			if (i >= 0 && i < map.length) {
 				if (i < 10) {
 					System.out.print(" ");
@@ -75,7 +76,10 @@ public class DisplayMap{
 				} else {
 					System.out.print(i);
 				}
+			} else {
+				System.out.print("  ");
 			}
+			
 			System.out.print("*");
 			for (int j = (x - 38); j < (x + 38); j++) {
 				if (i >= 0 && i < map.length && j >= 0 && j < map[i].length) {
@@ -110,6 +114,12 @@ public class DisplayMap{
 			System.out.print("*");
 		} System.out.println();
 		System.out.println("* z,q,s,f = se deplacer, i = menu d'equipe, esc = menu, e = interagir          *");
+	}
+
+	@Override
+	public void display() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

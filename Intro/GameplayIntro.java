@@ -10,11 +10,11 @@ public class GameplayIntro implements ScrollInterface{
 	private Jeu jeu;
 	private int page;
 	private int selection;
-	DisplayGameplayIntro display;
+	GameplayIntroDisplay display;
 	
 	
 	public GameplayIntro(Jeu jeu) {
-		display = new DisplayGameplayIntro();
+		display = new GameplayIntroDisplay();
 		this.jeu = jeu;
 		resetGameplayIntro();
 	}

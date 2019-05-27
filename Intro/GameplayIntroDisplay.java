@@ -1,6 +1,8 @@
 package Intro;
 
-public class DisplayGameplayIntro {
+import nonActiveClasses.Display;
+
+public class GameplayIntroDisplay implements Display{
 	
 	private int page = 1;
 	private int selection = 2;
@@ -68,7 +70,7 @@ public class DisplayGameplayIntro {
 			"********************************************************************************",
 			"q = selection precedente, d = selection suivante, entrer = valider              "};
 	
-	public void showGameplayIntro() {
+	public void display() {
 		switch (page) {
 			case 1 : 
 				pageOne[16] = change(pageOne[16], 59);
@@ -116,7 +118,7 @@ public class DisplayGameplayIntro {
 	
 	public void setSelection(int select) {
 		this.selection = select;
-		showGameplayIntro();
+		display();
 	}
 	
 	public void setPage(int page) {

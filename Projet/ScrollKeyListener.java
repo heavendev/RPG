@@ -5,14 +5,14 @@ import java.awt.event.KeyListener;
 
 import nonActiveClasses.Scroll;
 
-public class OurKeyListener implements KeyListener, Runnable {
+public class ScrollKeyListener implements KeyListener, Runnable {
 
 	private Jeu jeu;
 	private Thread t;
 	
 	Scroll action = null;
 	
-	public OurKeyListener(Jeu jeu) {
+	public ScrollKeyListener(Jeu jeu) {
 		this.jeu = jeu;
 		t = new Thread(this);
 		t.start();

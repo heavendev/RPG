@@ -1,6 +1,8 @@
 package Intro;
 
-public class DisplayStoryIntro {
+import nonActiveClasses.Display;
+
+public class StoryIntroDisplay implements Display{
 	
 	private String[] intro = {"********************************************************************************",
 			"*                                                                              *",
@@ -23,7 +25,7 @@ public class DisplayStoryIntro {
 			"********************************************************************************",
 			"q = selection precedente, d = selection suivante, entrer = valider              "};
 	
-	public void showStoryIntro() {
+	public void display() {
 		for (int i = 0; i < intro.length; i++) {
 			System.out.println(intro[i]);
 		}

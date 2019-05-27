@@ -1,6 +1,8 @@
 package ProjetMenu;
 
-public class DisplayGameMenu {
+import nonActiveClasses.Display;
+
+public class GameMenuDisplay implements Display{
 	
 	private static int selection = 0;
 	private String[] menu = {"********************************************************************************",
@@ -25,7 +27,7 @@ public class DisplayGameMenu {
 			"z = monter, s = descendre, entrer = valider                                     "};	
 	
 	
-	public void showMenu() {
+	public void display() {
 		switch (selection) {
 			case (0) :
 				menu[1] = change(menu[1], 6);
@@ -97,7 +99,7 @@ public class DisplayGameMenu {
 		if (s >= 0 && s <= 3) {
 			selection = s;
 		}
-		showMenu();
+		display();
 	}
 	
 }

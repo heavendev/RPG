@@ -7,22 +7,22 @@ import nonActiveClasses.ScrollInterface;
 public class StoryIntro implements ScrollInterface{
 	
 	private Jeu jeu;
-	DisplayStoryIntro display;
+	StoryIntroDisplay display;
 	
 	public void resetStoryIntro() {
-		display.showStoryIntro();
+		display.display();
 	}
 	
 	public StoryIntro(Jeu jeu) {
-		display = new DisplayStoryIntro();
+		display = new StoryIntroDisplay();
 		this.jeu = jeu;
-		display.showStoryIntro();
+		display.display();
 	}
 	
 	public void scroll(Scroll scroll) {
 		switch (scroll) {
 			case CONFIRM :
-				jeu.initiateMap();
+				jeu.goToMap();
 				break;
 		}
 	}

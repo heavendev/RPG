@@ -2,17 +2,18 @@ package ProjetMenu;
 
 import Projet.Jeu;
 import nonActiveClasses.Scroll;
+import nonActiveClasses.ScrollInterface;
 
-public class GameMenu {
+public class GameMenu implements ScrollInterface{
 	
 	private Jeu jeu;
 	private int selection = 0;
-	private DisplayGameMenu display;
+	private GameMenuDisplay display;
 	
 	public GameMenu(Jeu jeu) {
 		this.jeu = jeu;
-		display = new DisplayGameMenu();
-		display.showMenu();
+		display = new GameMenuDisplay();
+		display.display();
 	}
 	
 	public void resetGameMenu() {
@@ -37,7 +38,7 @@ public class GameMenu {
 			case CONFIRM :
 				switch (selection) {
 					case (0) :
-						jeu.initiateMap();
+						jeu.goToMap();
 						break;
 					case (1) :
 						jeu.saveGame();
