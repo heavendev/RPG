@@ -76,6 +76,8 @@ public class Jeu extends JFrame{
 			case LOGIN_PAGE :
 				((Login) gameElements.get("Login")).scroll(scroll);
 				break;
+			case REGISTRATION_PAGE :
+				((Registration) gameElements.get("Registration")).scroll(scroll);
 			default:
 				
 				break;
@@ -99,7 +101,8 @@ public class Jeu extends JFrame{
 			case LOGIN_PAGE :
 				((Login) gameElements.get("Login")).type(str);
 				break;
-			default :
+			case REGISTRATION_PAGE :
+				((Registration) gameElements.get("Registration")).type(str);
 				break;
 		}
 	}
@@ -214,6 +217,10 @@ public class Jeu extends JFrame{
 	
 	public boolean isGameOver() {
 		return gameOver;
+	}
+	
+	public Displaying getOnDisplay() {
+		return onDisplay;
 	}
 	
 	public static void main(String[] args) {

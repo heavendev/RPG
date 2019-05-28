@@ -21,13 +21,12 @@ public class Login{
 	public Login(Jeu jeu) {
 		this.jeu = jeu;
 		display = new LoginDisplay();
-		selection = 1;
-		display.setSelection(1);
+		resetLogin();
 	}
 	
 	public void resetLogin() {
 		selection = 1;
-		display.setSelection(1);
+		display.setSelection(selection);
 		username = "";
 		password = "";
 		inName = false;
@@ -73,7 +72,7 @@ public class Login{
 						try {
 							HashMap check = DatabaseConnector.getDatabaseConnector().checkCredentials(username, password);
 							if ((boolean) check.get("isValid")) {
-								userData.getUserData().setUserID((int) check.get("user_id"));
+								userData.getUserData().setUserID(Integer.parseInt((String) check.get("user_id")));
 								jeu.goToMainMenu();
 							} else {
 								jeu.goToLogin();

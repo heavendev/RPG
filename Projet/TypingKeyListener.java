@@ -241,7 +241,17 @@ public class TypingKeyListener implements KeyListener, Runnable{
 		case (KeyEvent.VK_0) :
 			typed = typed + "0";
 		break;
-	}
+		case (KeyEvent.VK_DECIMAL) :
+			if (jeu.getOnDisplay() == Displaying.REGISTRATION_PAGE) {
+				typed = typed + ".";
+			}
+		break;
+		case (KeyEvent.VK_AT) :
+			if (jeu.getOnDisplay() == Displaying.REGISTRATION_PAGE) {
+				typed = typed + "@";
+			}
+		break;
+		}
 	}
 	
 	public void keyReleased(KeyEvent e) {
