@@ -29,7 +29,7 @@ public class DatabaseConnector {
 	private DatabaseConnector() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/"+ database + "?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost/tp?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
 			String user = "root";
 			String pwd = "Win311*";
 			try {

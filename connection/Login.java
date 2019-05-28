@@ -6,9 +6,8 @@ import java.util.HashMap;
 import Projet.Jeu;
 import data.userData;
 import nonActiveClasses.Scroll;
-import nonActiveClasses.ScrollInterface;
 
-public class Login implements ScrollInterface{
+public class Login{
 	
 	private Jeu jeu;
 	private LoginDisplay display;
@@ -77,11 +76,11 @@ public class Login implements ScrollInterface{
 								userData.getUserData().setUserID((int) check.get("user_id"));
 								jeu.goToMainMenu();
 							} else {
-								jeu.goToLoginPage();
+								jeu.goToLogin();
 							}
 						} catch (SQLException e) {
 							e.printStackTrace();
-							jeu.goToLoginPage();
+							jeu.goToLogin();
 						}
 						break;
 				}

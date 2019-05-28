@@ -2,9 +2,8 @@ package ProjetMenu;
 
 import Projet.Jeu;
 import nonActiveClasses.Scroll;
-import nonActiveClasses.ScrollInterface;
 
-public class MainMenu implements ScrollInterface{
+public class MainMenu{
 	
 	private Jeu jeu;
 	private  int selection = 0;
@@ -41,10 +40,10 @@ public class MainMenu implements ScrollInterface{
 						jeu.goToGameplayIntro();
 						break;
 					case (1) :
-						jeu.loadGame();
+						jeu.goToLoadGame();
 						break;
 					case (2) :
-						jeu.quitGame();
+						jeu.goToQuitGame();
 						break;
 				}
 				break;

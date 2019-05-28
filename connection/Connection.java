@@ -2,9 +2,8 @@ package connection;
 
 import Projet.Jeu;
 import nonActiveClasses.Scroll;
-import nonActiveClasses.ScrollInterface;
 
-public class Connection implements ScrollInterface{
+public class Connection{
 	
 	Jeu jeu;
 	ConnectionDisplay display;
@@ -37,9 +36,9 @@ public class Connection implements ScrollInterface{
 			break;
 		case CONFIRM :
 			if (selection == 1) {
-				jeu.goToLoginPage();
+				jeu.goToLogin();
 			} else if (selection == 2) {
-				jeu.goToRegistrationPage();
+				jeu.goToRegistration();
 			}
 			break;
 		}

@@ -2,9 +2,8 @@ package connection;
 
 import Projet.Jeu;
 import nonActiveClasses.Scroll;
-import nonActiveClasses.ScrollInterface;
 
-public class Welcome implements ScrollInterface{
+public class Welcome{
 	
 	Jeu jeu;
 	WelcomeDisplay display;
@@ -24,7 +23,5 @@ public class Welcome implements ScrollInterface{
 			jeu.goToConnection();
 		}
 	}
-	
-	
 	
 }

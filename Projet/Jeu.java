@@ -15,10 +15,10 @@ public class Jeu extends JFrame{
 	private boolean gameOver = false;
 	
 	private Displaying onDisplay = null;
-	private HashMap<String,Object> game = new HashMap<String,Object>();
+	private HashMap<String,Object> gameElements = new HashMap<String,Object>();
 	
-	private MouvementKeyListener mouvementListener = new MouvementKeyListener(this);
-	private ScrollKeyListener keyListener = new ScrollKeyListener(this);
+	private MovementKeyListener movementListener = new MovementKeyListener(this);
+	private ScrollKeyListener scrollListener = new ScrollKeyListener(this);
 	private TypingKeyListener typingListener = new TypingKeyListener(this);
 	
 	
@@ -26,16 +26,16 @@ public class Jeu extends JFrame{
 		this.setSize(50, 20);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.addKeyListener(mouvementListener);
-		this.addKeyListener(keyListener);
+		this.addKeyListener(movementListener);
+		this.addKeyListener(scrollListener);
 		this.addKeyListener(typingListener);
 		init();
 	}
 	
 	
 	public void init() {
-		goToMainMenu();
-//		goToWelcome();
+//		goToMainMenu();
+		goToWelcome();
 	}
 	
 	
@@ -50,31 +50,31 @@ public class Jeu extends JFrame{
 	public void scroll(Scroll scroll) {
 		switch (onDisplay) {
 			case MAIN_MENU :
-				((MainMenu) game.get("MainMenu")).scroll(scroll);
+				((MainMenu) gameElements.get("MainMenu")).scroll(scroll);
 				break;
 			case GAME_MENU :
-				((GameMenu) game.get("GameMenu")).scroll(scroll);
+				((GameMenu) gameElements.get("GameMenu")).scroll(scroll);
 				break;
 			case DIALOGUE :
 				
 				break;
 			case INTRO_GAMEPLAY :
-				((GameplayIntro) game.get("GameplayIntro")).scroll(scroll);
+				((GameplayIntro) gameElements.get("GameplayIntro")).scroll(scroll);
 				break;
 			case INTRO_STORY :
-				((StoryIntro) game.get("StoryIntro")).scroll(scroll);
+				((StoryIntro) gameElements.get("StoryIntro")).scroll(scroll);
 				break;
 			case MAP :
-				((Map) game.get("Map")).scroll(scroll);
+				((Map) gameElements.get("Map")).scroll(scroll);
 				break;
 			case WELCOME_PAGE :
-				((Welcome) game.get("Welcome")).scroll(scroll);
+				((Welcome) gameElements.get("Welcome")).scroll(scroll);
 				break;
 			case CONNECTION_PAGE :
-				((Connection) game.get("Connection")).scroll(scroll);
+				((Connection) gameElements.get("Connection")).scroll(scroll);
 				break;
 			case LOGIN_PAGE :
-				((Login) game.get("Login")).scroll(scroll);
+				((Login) gameElements.get("Login")).scroll(scroll);
 				break;
 			default:
 				
@@ -88,7 +88,7 @@ public class Jeu extends JFrame{
 	public void moveChar(Direction direction) {
 		switch (onDisplay) {
 			case MAP :
-				((Map) game.get("Map")).move(direction);
+				((Map) gameElements.get("Map")).move(direction);
 			break;
 		}
 	}
@@ -97,7 +97,7 @@ public class Jeu extends JFrame{
 	public void type(String str) {
 		switch (onDisplay) {
 			case LOGIN_PAGE :
-				((Login) game.get("Login")).type(str);
+				((Login) gameElements.get("Login")).type(str);
 				break;
 			default :
 				break;
@@ -110,81 +110,81 @@ public class Jeu extends JFrame{
 	public void goToMainMenu() {
 		onDisplay = Displaying.MAIN_MENU;
 		try {
-			((MainMenu) game.get("MainMenu")).resetMainMenu();
+			((MainMenu) gameElements.get("MainMenu")).resetMainMenu();
 		} catch (NullPointerException e) {
-			game.put("MainMenu", new MainMenu(this));
+			gameElements.put("MainMenu", new MainMenu(this));
 		}
 	}
 	
 	public void goToGameMenu() {
 		onDisplay = Displaying.GAME_MENU;
 		try {
-			((GameMenu) game.get("GameMenu")).resetGameMenu();
+			((GameMenu) gameElements.get("GameMenu")).resetGameMenu();
 		} catch (NullPointerException e) {
-			game.put("GameMenu", new GameMenu(this));
+			gameElements.put("GameMenu", new GameMenu(this));
 		}
 	}
 	
 	public void goToGameplayIntro() {
 		onDisplay = Displaying.INTRO_GAMEPLAY;
 		try {
-			((GameplayIntro) game.get("GameplayIntro")).resetGameplayIntro();
+			((GameplayIntro) gameElements.get("GameplayIntro")).resetGameplayIntro();
 		} catch (NullPointerException e) {
-			game.put("GameplayIntro", new GameplayIntro(this));
+			gameElements.put("GameplayIntro", new GameplayIntro(this));
 		}
 	}
 	
 	public void goToStoryIntro() {
 		onDisplay = Displaying.INTRO_STORY;
 		try {
-			((StoryIntro) game.get("StoryIntro")).resetStoryIntro();
+			((StoryIntro) gameElements.get("StoryIntro")).resetStoryIntro();
 		} catch (NullPointerException e) {
-			game.put("StoryIntro", new StoryIntro(this));
+			gameElements.put("StoryIntro", new StoryIntro(this));
 		}
 	}
 	
 	public void goToMap() {
 		onDisplay = Displaying.MAP;
 		try {
-			((Map) game.get("Map")).resetMap();
+			((Map) gameElements.get("Map")).resetMap();
 		} catch (NullPointerException e) {
-			game.put("Map", new Map(this));
+			gameElements.put("Map", new Map(this));
 		}
 	}
 	
 	public void goToWelcome() {
 		onDisplay = Displaying.WELCOME_PAGE;
 		try {
-			((Welcome) game.get("Welcome")).reset();
+			((Welcome) gameElements.get("Welcome")).reset();
 		} catch (NullPointerException e) {
-			game.put("Welcome", new Welcome(this));
+			gameElements.put("Welcome", new Welcome(this));
 		}
 	}
 	
 	public void goToConnection() {
 		onDisplay = Displaying.CONNECTION_PAGE;
 		try {
-			((Connection) game.get("Connection")).reset();
+			((Connection) gameElements.get("Connection")).reset();
 		} catch (NullPointerException e) {
-			game.put("Connection", new Connection(this));
+			gameElements.put("Connection", new Connection(this));
 		}
 	}
 	
-	public void goToLoginPage() {
+	public void goToLogin() {
 		onDisplay = Displaying.LOGIN_PAGE;
 		try {
-			((Login) game.get("Login")).resetLogin();
+			((Login) gameElements.get("Login")).resetLogin();
 		} catch (NullPointerException e) {
-			game.put("Login", new Login(this));
+			gameElements.put("Login", new Login(this));
 		}
 	}
 	
-	public void goToRegistrationPage() {
+	public void goToRegistration() {
 		onDisplay = Displaying.REGISTRATION_PAGE;
 		try {
-			((Registration) game.get("Registration")).resetRegistration();
+			((Registration) gameElements.get("Registration")).resetRegistration();
 		} catch (NullPointerException e) {
-			game.put("Registration", new Registration(this));
+			gameElements.put("Registration", new Registration(this));
 		}
 	}
 	
@@ -193,17 +193,17 @@ public class Jeu extends JFrame{
 	
 	// PLACEHOLDERS
 	
-	public void loadGame() {
+	public void goToLoadGame() {
 		System.out.println("loading game!");
 		System.exit(0);
 	}
 	
-	public void saveGame() {
+	public void goToSaveGame() {
 		System.out.println("saving game!");
 		System.exit(0);
 	}
 	
-	public void quitGame() {
+	public void goToQuitGame() {
 		gameOver = true;
 		System.exit(0);
 	}
@@ -212,14 +212,6 @@ public class Jeu extends JFrame{
 	
 	
 	
-	
-	
-	public void setOnDisplay(Displaying onDisplay) {
-		this.onDisplay = onDisplay;
-	}
-	public Displaying getOnDisplay() {
-		return onDisplay;
-	}
 	public boolean isGameOver() {
 		return gameOver;
 	}

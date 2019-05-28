@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 import nonActiveClasses.Direction;
 
-public class MouvementKeyListener implements KeyListener, Runnable {
+public class MovementKeyListener implements KeyListener, Runnable {
 
 	private Jeu jeu;
 	private Thread t;
@@ -17,7 +17,7 @@ public class MouvementKeyListener implements KeyListener, Runnable {
 	boolean right = false;
 	boolean left = false;
 	
-	public MouvementKeyListener(Jeu jeu) {
+	public MovementKeyListener(Jeu jeu) {
 		this.jeu = jeu;
 		t = new Thread(this);
 		t.start();
