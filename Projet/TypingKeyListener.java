@@ -215,7 +215,12 @@ public class TypingKeyListener implements KeyListener, Runnable{
 			typed = typed + "1";
 		break;
 		case (KeyEvent.VK_2) :
-			typed = typed + "2";
+			if (uppercase) {
+				typed = typed + "@";
+			} else {
+				typed = typed + "2";
+			}
+			
 		break;
 		case (KeyEvent.VK_3) :
 			typed = typed + "3";
@@ -251,6 +256,9 @@ public class TypingKeyListener implements KeyListener, Runnable{
 				typed = typed + "@";
 			}
 		break;
+		case (KeyEvent.VK_DELETE) :
+			typed = typed + ".";
+			break;
 		}
 	}
 	
