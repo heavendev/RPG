@@ -26,11 +26,13 @@ public class Login{
 	
 	public void resetLogin() {
 		selection = 1;
-		display.setSelection(selection);
 		username = "";
 		password = "";
 		inName = false;
 		inPassword = false;
+		display.setUsername(username);
+		display.setPassword(password.length());
+		display.setSelection(selection);
 	}
 	
 	public void scroll(Scroll scroll) {
