@@ -1,0 +1,27 @@
+package nonActiveClasses;
+
+public enum Displaying {
+	
+	MAIN_MENU,
+	GAME_MENU,
+	
+	INTRO_STORY,
+	INTRO_GAMEPLAY,
+	
+	MAP,
+	DUNGEON,
+	DIALOGUE,
+	COMBAT,
+	SQUAD,
+	INVENTORY,
+	QUESTS,
+	
+	SAVE_GAME,
+	LOAD_GAME,
+	
+	WELCOME_PAGE,
+	CONNECTION_PAGE,
+	LOGIN_PAGE,
+	REGISTRATION_PAGE;
+	
+}
