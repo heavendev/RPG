@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author stagiaire
+ *
+ */
+module RpgFileRouge {
+}
