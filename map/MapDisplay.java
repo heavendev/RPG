@@ -1,19 +1,27 @@
 package map;
 
 import nonActiveClasses.Display;
+import nonActiveClasses.MapBackground;
 import nonActiveClasses.MapElements;
 
 public class MapDisplay implements Display{
 	
-	MapElements[][] map;
+	private MapElements[][] map;
+	private int x;
+	private int y;
+	private MapBackground mapBorder;
 	
-	public MapDisplay(MapElements[][] map, int x, int y) {
+	public MapDisplay() {}
+	
+	public void resetMapDisplay(MapElements[][] map, int x, int y, MapBackground mapBorder) {
 		this.map = map;
-		display(x,y);
+		this.x = x;
+		this.y = y;
+		this.mapBorder = mapBorder;
+		display();
 	}
 	
-	public void display(int x, int y) {
-		
+	public void display() {
 		
 		// affichage des coordonnes sur l'axe des X
 		for (int i = 0; i < 80; i++) {
@@ -60,14 +68,12 @@ public class MapDisplay implements Display{
 			}
 		} System.out.println();
 		
-		
-		
 		for (int i = 0; i < 80; i++) {
 			System.out.print("*");
 		} System.out.println();
 		
-		
 		for (int i = (y - 7); i < (y+7); i++) {
+			
 			//affichage des coordonnees sur l'axe des Y
 			if (i >= 0 && i < map.length) {
 				if (i < 10) {
@@ -105,7 +111,23 @@ public class MapDisplay implements Display{
 						System.out.print("\\");
 					}
 				} else {
-					System.out.print("*");
+					switch (mapBorder) {
+						case FOREST :
+							System.out.print("T");
+							break;
+						case DUNGEON :
+							System.out.print("*");
+							break;
+						case HOUSE :
+							System.out.print("|");
+							break;
+						case TOWER :
+							System.out.print("+");
+							break;
+						case VILLAGE :
+							System.out.print("T");
+							break;
+					}
 				}
 			}
 			System.out.println("*");
@@ -115,12 +137,11 @@ public class MapDisplay implements Display{
 		} System.out.println();
 		System.out.println("* z,q,s,f = se deplacer, i = menu d'equipe, esc = menu, e = interagir          *");
 	}
-
-	@Override
-	public void display() {
-		// TODO Auto-generated method stub
-		
-	}
 	
+	public void setCoors(int x, int y) {
+		this.x = x;
+		this.y = y;
+		display();
+	}
 	
 }

@@ -31,12 +31,15 @@ public class LoginDisplay implements Display{
 	
 	
 	public void display() {
+		
 		for (int i = 0; i < username.length(); i++) {
 			log[6] = changeCharAt(log[6], i+30, username.charAt(i));
 		}
+		
 		for (int i = 0; i < password.length(); i++) {
 			log[8] = changeCharAt(log[8], i+30, '*');
 		}
+		
 		switch (selection) {
 			case 1 :
 				log[3] = changeCharAt(log[3], 10, '-');
@@ -55,13 +58,16 @@ public class LoginDisplay implements Display{
 				log[11] = changeCharAt(log[11], 11, '>');
 				break;
 		}
+		
 		for (int i = 0; i < log.length; i++) {
 			System.out.println(log[i]);
 		}
+		
 		log[3] = "*              |BACK|                                                          *";
 		log[6] = "*              Username :                                                      *";
 		log[8] = "*              Password :                                                      *";
 		log[11] = "*              | CONFIRM |                                                     *";
+		
 	}
 	
 	private String changeCharAt(String str, int charAt, char replaceBy) {
