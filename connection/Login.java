@@ -3,8 +3,8 @@ package connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import Projet.Jeu;
 import data.userData;
+import game.Jeu;
 import nonActiveClasses.Scroll;
 
 public class Login{

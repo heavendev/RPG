@@ -1,13 +1,16 @@
 package map;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import Projet.Jeu;
-import Projet.Squad;
+import data.Squad;
+import game.Jeu;
 import nonActiveClasses.Direction;
 import nonActiveClasses.MapBackground;
 import nonActiveClasses.MapElements;
+import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
+import quest.Quest;
 
 public class Map {
 	
@@ -18,6 +21,7 @@ public class Map {
 	
 	int cx;
 	int cy;
+	String squadCurrentMap;
 	
 	
 	public Map(Jeu jeu) {
@@ -28,51 +32,55 @@ public class Map {
 	
 	public void resetMap() {
 		
+		Squad.getInstance().addQuest(new Quest("test", QuestStatus.ONGOING, 136, 13, "main", "placeholderType",
+				0, 0, null, null, null, null));
+		
 		HashMap tmp = Squad.getInstance().getCoordinates();
+		squadCurrentMap = (String) tmp.get("map");
 		cx = (int) tmp.get("x");
 		cy = (int) tmp.get("y");
-		if (tmp.get("map") == "main") {
-			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\WorldMap.txt");
+		if (squadCurrentMap == "main") {
+			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\WorldMap.txt");
 			mapBorder = MapBackground.FOREST;
-		} else if (tmp.get("map") == "House"){
-			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
+		} else if (squadCurrentMap == "House"){
+			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
 			mapBorder = MapBackground.HOUSE;
 		}
 		
 		//  PLACEHOLDER FOR DUNGEONS/VILLAGES/HOUSES
-//		else if (tmp.get("map") == "SouthWest Dungeon"){
+//		else if (squadCurrentMap == "SouthWest Dungeon"){
 //			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
 //			mapBorder = MapBackground.DUNGEON;
-//		} else if (tmp.get("map") == "Tower"){
+//		} else if (squadCurrentMap == "Tower"){
 //			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
 //			mapBorder = MapBackground.TOWER;
-//		} else if (tmp.get("map") == "NorthCenter Dungeon"){
+//		} else if (squadCurrentMap == "NorthCenter Dungeon"){
 //			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
 //			mapBorder = MapBackground.DUNGEON;
-//		} else if (tmp.get("map") == "SouthCenter Dungeon"){
+//		} else if (squadCurrentMap == "SouthCenter Dungeon"){
 //			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
 //			mapBorder = MapBackground.DUNGEON;
-//		} else if (tmp.get("map") == "NorthEast Dungeon"){
+//		} else if (squadCurrentMap == "NorthEast Dungeon"){
 //			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
 //			mapBorder = MapBackground.DUNGEON;
-//		} else if (tmp.get("map") == "Village"){
+//		} else if (squadCurrentMap == "Village"){
 //			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
 //			mapBorder = MapBackground.VILLAGE;
-//		} else if (tmp.get("map") == "SouthEast Dungeon"){
+//		} else if (squadCurrentMap == "SouthEast Dungeon"){
 //		map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
 //		mapBorder = MapBackground.DUNGEON;
 //	}
 		
 		
-		//  coors quests
-		
-		display.resetMapDisplay(map, cx, cy, mapBorder);
+		display.resetMapDisplay(map, cx, cy, mapBorder,  getQuestsLocations(squadCurrentMap));
 	}
 	
 	
 	public void scroll(Scroll scroll) {
 		 if (scroll == Scroll.ESCAPE) {
 			 jeu.goToGameMenu();
+		 } else if (scroll == Scroll.CONFIRM) {
+			 checkForChars();
 		 }
 	}
 	
@@ -167,16 +175,20 @@ public class Map {
 		display.setCoors(cx, cy);
 		
 		Squad.getInstance().setCoordinates(cx, cy);
+		Quest quest;
 		
 		if (map[cy][cx] == MapElements.ENTRANCE) {
 			teleportTo(cx,cy);
 			resetMap();
+		} else if ((quest = checkForQuestLocation()) != null) {
+			System.out.println("IZ VORKINNNGG!!");
 		} /*else if ((int)(Math.random()*1000) == 0) {
 			jeu.startRandomCombat();
 		}*/
+		
 	}
 	
-	public boolean isClear(int x, int y) {
+	private boolean isClear(int x, int y) {
 		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length) {
 			if (map[y][x] == MapElements.CLEAR || map[y][x] == MapElements.ENTRANCE) {
 				return true;
@@ -187,7 +199,7 @@ public class Map {
 	
 	
 	
-	public void teleportTo(int x, int y) {
+	private void teleportTo(int x, int y) {
 		
 		if (Squad.getInstance().getCurrentMap() == "main") {
 			
@@ -229,5 +241,37 @@ public class Map {
 		
 	}
 	
+	// placeholder
+	private void checkForChars() {
+		
+	}
+	
+	
+	
+	
+	private Quest checkForQuestLocation() {
+		ArrayList<Quest> quests = Squad.getInstance().getQuests();
+		for (int i = 0; i < quests.size(); i++) {
+			if (quests.get(i).isAtQuestionLocation(cy, cx, squadCurrentMap)) {
+				return quests.get(i);
+			}
+		}
+		return null;
+	}
+	
+	
+	
+	private ArrayList<int[]> getQuestsLocations (String currentMap) {
+		ArrayList<int[]> questLocations = new ArrayList<int[]>();
+		ArrayList<Quest> quests = Squad.getInstance().getQuests();
+		for (Quest quest : quests) {
+			HashMap tmp = quest.getQuestLocation();
+			if (tmp.get("map").equals(currentMap) && quest.getStatus() == QuestStatus.ONGOING) {
+				int[] coors = {(int) tmp.get("y"),(int) tmp.get("x")};
+				questLocations.add(coors);
+			}
+		}
+		return questLocations;
+	}
 	
 }

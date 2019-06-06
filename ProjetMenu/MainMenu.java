@@ -1,7 +1,10 @@
 package ProjetMenu;
 
-import Projet.Jeu;
+import data.Squad;
+import game.Jeu;
+import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
+import quest.Quest;
 
 public class MainMenu{
 	

@@ -1,6 +1,6 @@
 package ProjetMenu;
 
-import Projet.Jeu;
+import game.Jeu;
 import nonActiveClasses.Scroll;
 
 public class GameMenu{

@@ -1,5 +1,7 @@
 package map;
 
+import java.util.ArrayList;
+
 import nonActiveClasses.Display;
 import nonActiveClasses.MapBackground;
 import nonActiveClasses.MapElements;
@@ -10,18 +12,22 @@ public class MapDisplay implements Display{
 	private int x;
 	private int y;
 	private MapBackground mapBorder;
+	private ArrayList<int[]> questLocations;
 	
 	public MapDisplay() {}
 	
-	public void resetMapDisplay(MapElements[][] map, int x, int y, MapBackground mapBorder) {
+	public void resetMapDisplay(MapElements[][] map, int x, int y, MapBackground mapBorder, ArrayList<int[]> questLocations) {
 		this.map = map;
 		this.x = x;
 		this.y = y;
 		this.mapBorder = mapBorder;
+		this.questLocations = questLocations;
 		display();
 	}
 	
 	public void display() {
+		
+		System.out.println(questLocations.size());
 		
 		// affichage des coordonnes sur l'axe des X
 		for (int i = 0; i < 80; i++) {
@@ -91,6 +97,8 @@ public class MapDisplay implements Display{
 				if (i >= 0 && i < map.length && j >= 0 && j < map[i].length) {
 					if (j == x && i == y) {
 						System.out.print("@");
+					} else if (isQuestHere(i,j)) {
+						System.out.print("X");
 					} else if (map[i][j] == MapElements.TREE) {
 						System.out.print("T");
 					} else if (map[i][j] == MapElements.ROCK) {
@@ -135,13 +143,22 @@ public class MapDisplay implements Display{
 		for (int i = 0; i < 80; i++) {
 			System.out.print("*");
 		} System.out.println();
-		System.out.println("* z,q,s,f = se deplacer, i = menu d'equipe, esc = menu, e = interagir          *");
+		System.out.println("* z,q,s,f = se deplacer, i = menu d'equipe, esc = menu, entrer = interagir     *");
 	}
 	
 	public void setCoors(int x, int y) {
 		this.x = x;
 		this.y = y;
 		display();
+	}
+	
+	private boolean isQuestHere(int y, int x) {
+		for (int i = 0; i < questLocations.size(); i++) {
+			if (questLocations.get(i)[0] == y && questLocations.get(i)[1] == x) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

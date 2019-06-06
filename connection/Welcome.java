@@ -1,6 +1,6 @@
 package connection;
 
-import Projet.Jeu;
+import game.Jeu;
 import nonActiveClasses.Scroll;
 
 public class Welcome{
@@ -11,7 +11,7 @@ public class Welcome{
 	public Welcome(Jeu jeu) {
 		this.jeu = jeu;
 		display = new WelcomeDisplay();
-		display.display();
+		reset();
 	}
 	
 	public void reset() {

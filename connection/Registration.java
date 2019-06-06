@@ -4,7 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import Projet.Jeu;
+import game.Jeu;
 import nonActiveClasses.Scroll;
 
 public class Registration{
