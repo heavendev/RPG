@@ -42,20 +42,39 @@ public class NpcDialogueController {
 				display.setSelection(selection);
 				break;
 			case DOWN :
-				if (selection < (4)) {
+				if (selection < (4 - (questAvailable ? 0 : 1) - (turnInAvailable ? 0 : 1))) {
 					selection++;
 				}
 				display.setSelection(selection);
 				break;
 			case CONFIRM :
-				
+				switch (selection) {
+				case 1 :
+					// PLACEHOLDER     jeu.goToNpcLife(?)
+					break;
+				case 2 :
+					if (questAvailable) {
+						// PLACEHOLDER jeu.goToNpcQuestList(?)
+					} else if (turnInAvailable) {
+						// PLACEHOLDER jeu.goToQuestTurnIn(?)
+					} else {
+						jeu.goToMap();
+					}
+					break;
+				case 3 :
+					if (turnInAvailable) {
+						// PLACEHOLDER jeu.goToQuestTurnIn(?)
+					} else {
+						jeu.goToMap();
+					}
+					break;
+				case 4 :
+					jeu.goToMap();
+					break;
+				}
 				break;
 		}
 	}
-	
-	
-	
-	
 	
 	private boolean isTurnInAvailable() {
 		ArrayList<Quest> quests = Squad.getInstance().getQuests();
