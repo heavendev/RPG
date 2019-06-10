@@ -8,6 +8,8 @@ import Intro.*;
 import ProjetMenu.*;
 import map.*;
 import nonActiveClasses.*;
+import quest.Quest;
+import quest.QuestPageController;
 import connection.*;
 import data.Squad;
 
@@ -53,34 +55,38 @@ public class Jeu extends JFrame{
 	public void scroll(Scroll scroll) {
 		switch (onDisplay) {
 			case MAIN_MENU :
-				((MainMenu) gameElements.get("MainMenu")).scroll(scroll);
+				((MainMenuController) gameElements.get("MainMenu")).scroll(scroll);
 				break;
 			case GAME_MENU :
-				((GameMenu) gameElements.get("GameMenu")).scroll(scroll);
+				((GameMenuController) gameElements.get("GameMenu")).scroll(scroll);
 				break;
 			case DIALOGUE :
 				
 				break;
 			case INTRO_GAMEPLAY :
-				((GameplayIntro) gameElements.get("GameplayIntro")).scroll(scroll);
+				((GameplayIntroController) gameElements.get("GameplayIntro")).scroll(scroll);
 				break;
 			case INTRO_STORY :
-				((StoryIntro) gameElements.get("StoryIntro")).scroll(scroll);
+				((StoryIntroController) gameElements.get("StoryIntro")).scroll(scroll);
 				break;
 			case MAP :
-				((Map) gameElements.get("Map")).scroll(scroll);
+				((MapController) gameElements.get("Map")).scroll(scroll);
 				break;
 			case WELCOME_PAGE :
-				((Welcome) gameElements.get("Welcome")).scroll(scroll);
+				((WelcomeController) gameElements.get("Welcome")).scroll(scroll);
 				break;
 			case CONNECTION_PAGE :
-				((Connection) gameElements.get("Connection")).scroll(scroll);
+				((ConnectionController) gameElements.get("Connection")).scroll(scroll);
 				break;
 			case LOGIN_PAGE :
-				((Login) gameElements.get("Login")).scroll(scroll);
+				((LoginController) gameElements.get("Login")).scroll(scroll);
 				break;
 			case REGISTRATION_PAGE :
-				((Registration) gameElements.get("Registration")).scroll(scroll);
+				((RegistrationController) gameElements.get("Registration")).scroll(scroll);
+				break;
+			case QUEST_PAGE :
+				((QuestPageController) gameElements.get("QuestActionResolver")).scroll(scroll);
+				break;
 			default:
 				
 				break;
@@ -93,7 +99,7 @@ public class Jeu extends JFrame{
 	public void moveChar(Direction direction) {
 		switch (onDisplay) {
 			case MAP :
-				((Map) gameElements.get("Map")).move(direction);
+				((MapController) gameElements.get("Map")).move(direction);
 			break;
 		}
 	}
@@ -102,10 +108,10 @@ public class Jeu extends JFrame{
 	public void type(String str) {
 		switch (onDisplay) {
 			case LOGIN_PAGE :
-				((Login) gameElements.get("Login")).type(str);
+				((LoginController) gameElements.get("Login")).type(str);
 				break;
 			case REGISTRATION_PAGE :
-				((Registration) gameElements.get("Registration")).type(str);
+				((RegistrationController) gameElements.get("Registration")).type(str);
 				break;
 		}
 	}
@@ -116,83 +122,93 @@ public class Jeu extends JFrame{
 	public void goToMainMenu() {
 		onDisplay = Displaying.MAIN_MENU;
 		try {
-			((MainMenu) gameElements.get("MainMenu")).resetMainMenu();
+			((MainMenuController) gameElements.get("MainMenu")).resetMainMenu();
 		} catch (NullPointerException e) {
-			gameElements.put("MainMenu", new MainMenu(this));
+			gameElements.put("MainMenu", new MainMenuController(this));
 		}
 	}
 	
 	public void goToGameMenu() {
 		onDisplay = Displaying.GAME_MENU;
 		try {
-			((GameMenu) gameElements.get("GameMenu")).resetGameMenu();
+			((GameMenuController) gameElements.get("GameMenu")).resetGameMenu();
 		} catch (NullPointerException e) {
-			gameElements.put("GameMenu", new GameMenu(this));
+			gameElements.put("GameMenu", new GameMenuController(this));
 		}
 	}
 	
 	public void goToGameplayIntro() {
 		onDisplay = Displaying.INTRO_GAMEPLAY;
 		try {
-			((GameplayIntro) gameElements.get("GameplayIntro")).resetGameplayIntro();
+			((GameplayIntroController) gameElements.get("GameplayIntro")).resetGameplayIntro();
 		} catch (NullPointerException e) {
-			gameElements.put("GameplayIntro", new GameplayIntro(this));
+			gameElements.put("GameplayIntro", new GameplayIntroController(this));
 		}
 	}
 	
 	public void goToStoryIntro() {
 		onDisplay = Displaying.INTRO_STORY;
 		try {
-			((StoryIntro) gameElements.get("StoryIntro")).resetStoryIntro();
+			((StoryIntroController) gameElements.get("StoryIntro")).resetStoryIntro();
 		} catch (NullPointerException e) {
-			gameElements.put("StoryIntro", new StoryIntro(this));
+			gameElements.put("StoryIntro", new StoryIntroController(this));
 		}
 	}
 	
 	public void goToMap() {
 		onDisplay = Displaying.MAP;
 		try {
-			((Map) gameElements.get("Map")).resetMap();
+			((MapController) gameElements.get("Map")).resetMap();
 		} catch (NullPointerException e) {
-			gameElements.put("Map", new Map(this));
+			gameElements.put("Map", new MapController(this));
 		}
 	}
 	
 	public void goToWelcome() {
 		onDisplay = Displaying.WELCOME_PAGE;
 		try {
-			((Welcome) gameElements.get("Welcome")).reset();
+			((WelcomeController) gameElements.get("Welcome")).reset();
 		} catch (NullPointerException e) {
-			gameElements.put("Welcome", new Welcome(this));
+			gameElements.put("Welcome", new WelcomeController(this));
 		}
 	}
 	
 	public void goToConnection() {
 		onDisplay = Displaying.CONNECTION_PAGE;
 		try {
-			((Connection) gameElements.get("Connection")).reset();
+			((ConnectionController) gameElements.get("Connection")).reset();
 		} catch (NullPointerException e) {
-			gameElements.put("Connection", new Connection(this));
+			gameElements.put("Connection", new ConnectionController(this));
 		}
 	}
 	
 	public void goToLogin() {
 		onDisplay = Displaying.LOGIN_PAGE;
 		try {
-			((Login) gameElements.get("Login")).resetLogin();
+			((LoginController) gameElements.get("Login")).resetLogin();
 		} catch (NullPointerException e) {
-			gameElements.put("Login", new Login(this));
+			gameElements.put("Login", new LoginController(this));
 		}
 	}
 	
 	public void goToRegistration() {
 		onDisplay = Displaying.REGISTRATION_PAGE;
 		try {
-			((Registration) gameElements.get("Registration")).resetRegistration();
+			((RegistrationController) gameElements.get("Registration")).resetRegistration();
 		} catch (NullPointerException e) {
-			gameElements.put("Registration", new Registration(this));
+			gameElements.put("Registration", new RegistrationController(this));
 		}
 	}
+	
+	public void goToQuestPage(Quest quest) {
+		onDisplay = null;
+		try {
+			((QuestPageController) gameElements.get("QuestPage")).reset(quest);
+		} catch (NullPointerException e) {
+			gameElements.put("QuestPage", new QuestPageController(this, quest));
+		}
+	}
+	
 	
 	
 	

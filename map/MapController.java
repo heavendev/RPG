@@ -12,7 +12,7 @@ import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
 import quest.Quest;
 
-public class Map {
+public class MapController {
 	
 	Jeu jeu;
 	MapDisplay display;
@@ -24,7 +24,7 @@ public class Map {
 	String squadCurrentMap;
 	
 	
-	public Map(Jeu jeu) {
+	public MapController(Jeu jeu) {
 		this.jeu = jeu;
 		display = new MapDisplay();
 		resetMap();
@@ -33,7 +33,7 @@ public class Map {
 	public void resetMap() {
 		
 		Squad.getInstance().addQuest(new Quest("test", QuestStatus.ONGOING, 136, 13, "main", "placeholderType",
-				0, 0, null, null, null, null));
+				0, 0, null, null, null, null, null));
 		
 		HashMap tmp = Squad.getInstance().getCoordinates();
 		squadCurrentMap = (String) tmp.get("map");

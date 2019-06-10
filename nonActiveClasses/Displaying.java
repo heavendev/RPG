@@ -8,6 +8,8 @@ public enum Displaying {
 	INTRO_STORY,
 	INTRO_GAMEPLAY,
 	
+	QUEST_PAGE,
+	
 	MAP,
 	DUNGEON,
 	DIALOGUE,

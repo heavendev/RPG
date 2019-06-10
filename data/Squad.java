@@ -12,8 +12,7 @@ public class Squad {
 	private int coorY;
 	private String currentMap;
 	private ArrayList<Quest> quests;
-	
-	
+	private int mainQuestStage;
 	
 	
 	
@@ -75,6 +74,9 @@ public class Squad {
 	}
 	public void setCurrentMap(String map) {
 		this.currentMap = map;
+	}
+	public int getMainQuestStage() {
+		return mainQuestStage;
 	}
 	
 }

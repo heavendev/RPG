@@ -3,6 +3,7 @@ package quest;
 import java.util.HashMap;
 
 import nonActiveClasses.QuestStatus;
+import npcs.NPC;
 
 public class Quest {
 	
@@ -10,6 +11,7 @@ public class Quest {
 	QuestStatus status;
 	int coorX;
 	int coorY;
+	int mainQuestNumber = 0;
 	String map;
 	String type;
 	int xpReward;
@@ -18,13 +20,34 @@ public class Quest {
 	String[] questPresentation;
 	String[] questObjectiveReached;
 	String[] questTurnIn;
+	NPC questGiver;
 	
 	
 	
 
-	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map, String type, int xpReward,
-			int goldReward, String[] questDescription, String[] questPresentation, String[] questObjectiveReached,
-			String[] questTurnIn) {
+	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map, String type, int mainQuestNumber,
+			int xpReward, int goldReward, String[] questDescription, String[] questPresentation, 
+			String[] questObjectiveReached, String[] questTurnIn, NPC questGiver) {
+		super();
+		this.questName = questName;
+		this.status = status;
+		this.coorX = coorX;
+		this.coorY = coorY;
+		this.mainQuestNumber = mainQuestNumber;
+		this.map = map;
+		this.type = type;
+		this.xpReward = xpReward;
+		this.goldReward = goldReward;
+		this.questDescription = questDescription;
+		this.questPresentation = questPresentation;
+		this.questObjectiveReached = questObjectiveReached;
+		this.questTurnIn = questTurnIn;
+		this.questGiver = questGiver;
+	}
+	
+	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map, String type,
+			int xpReward, int goldReward, String[] questDescription, String[] questPresentation, 
+			String[] questObjectiveReached, String[] questTurnIn, NPC questGiver) {
 		super();
 		this.questName = questName;
 		this.status = status;
@@ -38,6 +61,7 @@ public class Quest {
 		this.questPresentation = questPresentation;
 		this.questObjectiveReached = questObjectiveReached;
 		this.questTurnIn = questTurnIn;
+		this.questGiver = questGiver;
 	}
 
 
@@ -82,5 +106,16 @@ public class Quest {
 	public String[] getQuestTurnIn() {
 		return questTurnIn;
 	}
-	
+	public int getMainQuestNumber() {
+		return mainQuestNumber;
+	}
+	public int getXPReward() {
+		return xpReward;
+	}
+	public int getGoldReward() {
+		return goldReward;
+	}
+	public NPC getQuestGiver() {
+		return questGiver;
+	}
 }

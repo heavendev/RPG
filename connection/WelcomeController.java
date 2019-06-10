@@ -3,12 +3,12 @@ package connection;
 import game.Jeu;
 import nonActiveClasses.Scroll;
 
-public class Welcome{
+public class WelcomeController{
 	
 	Jeu jeu;
 	WelcomeDisplay display;
 	
-	public Welcome(Jeu jeu) {
+	public WelcomeController(Jeu jeu) {
 		this.jeu = jeu;
 		display = new WelcomeDisplay();
 		reset();

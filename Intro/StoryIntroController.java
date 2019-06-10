@@ -3,7 +3,7 @@ package Intro;
 import game.Jeu;
 import nonActiveClasses.Scroll;
 
-public class StoryIntro{
+public class StoryIntroController{
 	
 	private Jeu jeu;
 	StoryIntroDisplay display;
@@ -12,7 +12,7 @@ public class StoryIntro{
 		display.display();
 	}
 	
-	public StoryIntro(Jeu jeu) {
+	public StoryIntroController(Jeu jeu) {
 		display = new StoryIntroDisplay();
 		this.jeu = jeu;
 		display.display();

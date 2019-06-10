@@ -7,7 +7,7 @@ import data.userData;
 import game.Jeu;
 import nonActiveClasses.Scroll;
 
-public class Login{
+public class LoginController{
 	
 	private Jeu jeu;
 	private LoginDisplay display;
@@ -18,7 +18,7 @@ public class Login{
 	private String password = ""; 
 	
 	
-	public Login(Jeu jeu) {
+	public LoginController(Jeu jeu) {
 		this.jeu = jeu;
 		display = new LoginDisplay();
 		resetLogin();
