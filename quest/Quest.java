@@ -28,7 +28,6 @@ public class Quest {
 	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map, String type, int mainQuestNumber,
 			int xpReward, int goldReward, String[] questDescription, String[] questPresentation, 
 			String[] questObjectiveReached, String[] questTurnIn, NPC questGiver) {
-		super();
 		this.questName = questName;
 		this.status = status;
 		this.coorX = coorX;
@@ -48,7 +47,6 @@ public class Quest {
 	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map, String type,
 			int xpReward, int goldReward, String[] questDescription, String[] questPresentation, 
 			String[] questObjectiveReached, String[] questTurnIn, NPC questGiver) {
-		super();
 		this.questName = questName;
 		this.status = status;
 		this.coorX = coorX;

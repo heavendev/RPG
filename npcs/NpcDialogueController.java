@@ -25,7 +25,7 @@ public class NpcDialogueController {
 	}
 	
 	public void reset(NPC npc) {
-		selection = 0;
+		selection = 1;
 		this.npc = npc;
 		questAvailable = isQuestAvailable();
 		turnInAvailable = isTurnInAvailable();
@@ -36,7 +36,7 @@ public class NpcDialogueController {
 	public void scroll(Scroll scroll) {
 		switch (scroll) {
 			case UP :
-				if (selection != 0) {
+				if (selection != 1) {
 					selection--;
 				}
 				display.setSelection(selection);
@@ -50,20 +50,20 @@ public class NpcDialogueController {
 			case CONFIRM :
 				switch (selection) {
 				case 1 :
-					// PLACEHOLDER     jeu.goToNpcLife(?)
+					// PLACEHOLDER     jeu.goToNpcLife(npc)
 					break;
 				case 2 :
 					if (questAvailable) {
-						// PLACEHOLDER jeu.goToNpcQuestList(?)
+						// PLACEHOLDER jeu.goToNpcQuestList(npc)
 					} else if (turnInAvailable) {
-						// PLACEHOLDER jeu.goToQuestTurnIn(?)
+						// PLACEHOLDER jeu.goToQuestTurnIn(npc)
 					} else {
 						jeu.goToMap();
 					}
 					break;
 				case 3 :
 					if (turnInAvailable) {
-						// PLACEHOLDER jeu.goToQuestTurnIn(?)
+						// PLACEHOLDER jeu.goToQuestTurnIn(npc)
 					} else {
 						jeu.goToMap();
 					}

@@ -13,7 +13,6 @@ public class NPC {
 	
 	
 	public NPC(String name, ArrayList<Quest> quests, String[] portrait) {
-		super();
 		this.name = name;
 		this.quests = quests;
 		this.portrait = portrait;

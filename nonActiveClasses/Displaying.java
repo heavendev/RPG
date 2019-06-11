@@ -12,7 +12,12 @@ public enum Displaying {
 	
 	MAP,
 	DUNGEON,
-	DIALOGUE,
+	
+	
+	NPC_DIALOGUE,
+	NPC_QUESTS,
+	
+	
 	COMBAT,
 	SQUAD,
 	INVENTORY,

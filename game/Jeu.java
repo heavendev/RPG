@@ -8,6 +8,9 @@ import Intro.*;
 import ProjetMenu.*;
 import map.*;
 import nonActiveClasses.*;
+import npcs.NPC;
+import npcs.NpcDialogueController;
+import npcs.NpcQuestListController;
 import quest.Quest;
 import quest.QuestPageController;
 import connection.*;
@@ -85,7 +88,10 @@ public class Jeu extends JFrame{
 				((RegistrationController) gameElements.get("Registration")).scroll(scroll);
 				break;
 			case QUEST_PAGE :
-				((QuestPageController) gameElements.get("QuestActionResolver")).scroll(scroll);
+				((QuestPageController) gameElements.get("QuestPage")).scroll(scroll);
+				break;
+			case NPC_DIALOGUE :
+				((NpcDialogueController) gameElements.get("NpcDialoguePage")).scroll(scroll);
 				break;
 			default:
 				
@@ -127,7 +133,6 @@ public class Jeu extends JFrame{
 			gameElements.put("MainMenu", new MainMenuController(this));
 		}
 	}
-	
 	public void goToGameMenu() {
 		onDisplay = Displaying.GAME_MENU;
 		try {
@@ -136,7 +141,6 @@ public class Jeu extends JFrame{
 			gameElements.put("GameMenu", new GameMenuController(this));
 		}
 	}
-	
 	public void goToGameplayIntro() {
 		onDisplay = Displaying.INTRO_GAMEPLAY;
 		try {
@@ -145,7 +149,6 @@ public class Jeu extends JFrame{
 			gameElements.put("GameplayIntro", new GameplayIntroController(this));
 		}
 	}
-	
 	public void goToStoryIntro() {
 		onDisplay = Displaying.INTRO_STORY;
 		try {
@@ -154,7 +157,6 @@ public class Jeu extends JFrame{
 			gameElements.put("StoryIntro", new StoryIntroController(this));
 		}
 	}
-	
 	public void goToMap() {
 		onDisplay = Displaying.MAP;
 		try {
@@ -163,7 +165,6 @@ public class Jeu extends JFrame{
 			gameElements.put("Map", new MapController(this));
 		}
 	}
-	
 	public void goToWelcome() {
 		onDisplay = Displaying.WELCOME_PAGE;
 		try {
@@ -172,7 +173,6 @@ public class Jeu extends JFrame{
 			gameElements.put("Welcome", new WelcomeController(this));
 		}
 	}
-	
 	public void goToConnection() {
 		onDisplay = Displaying.CONNECTION_PAGE;
 		try {
@@ -181,7 +181,6 @@ public class Jeu extends JFrame{
 			gameElements.put("Connection", new ConnectionController(this));
 		}
 	}
-	
 	public void goToLogin() {
 		onDisplay = Displaying.LOGIN_PAGE;
 		try {
@@ -190,7 +189,6 @@ public class Jeu extends JFrame{
 			gameElements.put("Login", new LoginController(this));
 		}
 	}
-	
 	public void goToRegistration() {
 		onDisplay = Displaying.REGISTRATION_PAGE;
 		try {
@@ -199,16 +197,30 @@ public class Jeu extends JFrame{
 			gameElements.put("Registration", new RegistrationController(this));
 		}
 	}
-	
 	public void goToQuestPage(Quest quest) {
-		onDisplay = null;
+		onDisplay = Displaying.QUEST_PAGE;
 		try {
 			((QuestPageController) gameElements.get("QuestPage")).reset(quest);
 		} catch (NullPointerException e) {
 			gameElements.put("QuestPage", new QuestPageController(this, quest));
 		}
 	}
-	
+	public void goToNpcDialoguePage(NPC npc) {
+		onDisplay = Displaying.NPC_DIALOGUE;
+		try {
+			((NpcDialogueController) gameElements.get("NpcDialoguePage")).reset(npc);
+		} catch (NullPointerException e) {
+			gameElements.put("NpcDialoguePage", new NpcDialogueController(this,npc));
+		}
+	}
+	public void goToNpcQuestListPage(NPC npc) {
+		onDisplay = Displaying.NPC_QUESTS;
+		try {
+			
+		} catch (NullPointerException e) {
+			gameElements.put("NpcQuestListPage", new NpcQuestListController(this,npc));
+		}
+	}
 	
 	
 	
