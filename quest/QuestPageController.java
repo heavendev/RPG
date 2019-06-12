@@ -23,11 +23,6 @@ public class QuestPageController {
 	public void reset(Quest quest) {
 		this.currentQuest = quest;
 		switch (quest.getStatus()) {
-			case NOT_TAKEN :
-				quest.setStatus(QuestStatus.ACCEPTED);
-				currentQuestName = currentQuest.getQuestName();
-				questText = currentQuest.getQuestPresentation();
-				break;
 			case ACCEPTED :
 				quest.setStatus(QuestStatus.ONGOING);
 				currentQuestName = currentQuest.getQuestName();
@@ -49,7 +44,7 @@ public class QuestPageController {
 	public void scroll(Scroll scroll) {
 		switch (scroll) {
 		case CONFIRM :
-			
+			jeu.goToMap();
 			break;
 		}
 	}

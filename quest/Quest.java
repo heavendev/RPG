@@ -14,6 +14,7 @@ public class Quest {
 	int mainQuestNumber = 0;
 	String map;
 	String type;
+//	Mob boss;
 	int xpReward;
 	int goldReward;
 	String[] questDescription;

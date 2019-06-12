@@ -50,20 +50,20 @@ public class NpcDialogueController {
 			case CONFIRM :
 				switch (selection) {
 				case 1 :
-					// PLACEHOLDER     jeu.goToNpcLife(npc)
+					jeu.goToNpcLife(npc);
 					break;
 				case 2 :
 					if (questAvailable) {
-						// PLACEHOLDER jeu.goToNpcQuestList(npc)
+						jeu.goToNpcQuestList(npc);
 					} else if (turnInAvailable) {
-						// PLACEHOLDER jeu.goToQuestTurnIn(npc)
+						jeu.goToNpcQuestTurnIn(npc);
 					} else {
 						jeu.goToMap();
 					}
 					break;
 				case 3 :
 					if (turnInAvailable) {
-						// PLACEHOLDER jeu.goToQuestTurnIn(npc)
+						jeu.goToNpcQuestTurnIn(npc);
 					} else {
 						jeu.goToMap();
 					}

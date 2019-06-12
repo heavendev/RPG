@@ -10,7 +10,10 @@ import map.*;
 import nonActiveClasses.*;
 import npcs.NPC;
 import npcs.NpcDialogueController;
-import npcs.NpcQuestListController;
+import npcs.NpcLifeController;
+import npcs.NpcNewQuestListController;
+import npcs.NpcQuestPresentationController;
+import npcs.NpcQuestTurnInListController;
 import quest.Quest;
 import quest.QuestPageController;
 import connection.*;
@@ -32,6 +35,7 @@ public class Jeu extends JFrame{
 		this.setSize(50, 20);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+//		this.setFocusable(true);
 		this.addKeyListener(movementListener);
 		this.addKeyListener(scrollListener);
 		this.addKeyListener(typingListener);
@@ -41,19 +45,20 @@ public class Jeu extends JFrame{
 	
 	
 	public void init() {
-		goToMainMenu();
+//		goToMainMenu();
 //		goToWelcome();
-//		goToMap();
+		goToMap();
 	}
 	
 	
 	
 	
 	
-	
-//	 Le ScrollActionListener appelle cette fonction pour se deplacer dans les menus
-//	 (soit partout sauf la carte)
-//	 Affecte uniquement le menu actuellement utilise par la classe de jeu (var onDisplay)
+	/*
+	 *	Le ScrollActionListener appelle cette fonction pour se deplacer dans les menus
+	 *	(soit partout sauf la carte)
+	 *	Affecte uniquement le menu actuellement utilise par la classe de jeu
+	 */
 	
 	public void scroll(Scroll scroll) {
 		switch (onDisplay) {
@@ -62,9 +67,6 @@ public class Jeu extends JFrame{
 				break;
 			case GAME_MENU :
 				((GameMenuController) gameElements.get("GameMenu")).scroll(scroll);
-				break;
-			case DIALOGUE :
-				
 				break;
 			case INTRO_GAMEPLAY :
 				((GameplayIntroController) gameElements.get("GameplayIntro")).scroll(scroll);
@@ -93,14 +95,29 @@ public class Jeu extends JFrame{
 			case NPC_DIALOGUE :
 				((NpcDialogueController) gameElements.get("NpcDialoguePage")).scroll(scroll);
 				break;
+			case NPC_LIFE :
+				((NpcLifeController) gameElements.get("NpcLifePage")).scroll(scroll);
+				break;
+			case NPC_NEW_QUESTS :
+				((NpcNewQuestListController) gameElements.get("NpcNewQuestListPage")).scroll(scroll);
+				break;
+			case NPC_PRESENTING_QUEST :
+				((NpcQuestPresentationController) gameElements.get("NpcQuestPresentationPage")).scroll(scroll);
+				break;
+			case NPC_QUEST_TURN_IN :
+				((NpcQuestTurnInListController) gameElements.get("NpcQuestTurnInListPage")).scroll(scroll);															
+				break;
 			default:
 				
 				break;
 		}
 	}
 	
-//	Le MouvementKeyListener appelle	cette fonction pour se deplacer sur la carte
-//	Ne fait rien si la carte n'est pas la classe actuelle utilise par le jeu
+	/* 
+	 *	Le MouvementKeyListener appelle	cette fonction pour se deplacer sur la carte
+	 *
+	 *	Ne fait rien si la carte n'est pas la classe actuelle utilise par le jeu
+	*/
 	
 	public void moveChar(Direction direction) {
 		switch (onDisplay) {
@@ -109,6 +126,14 @@ public class Jeu extends JFrame{
 			break;
 		}
 	}
+	
+	
+	/*
+	 * 	Le TypingKeyListener appelle cette fonction pour rentrer des caracteres
+	 * 
+	 * 	N'envoie rien si la classe actuelle utilise n'est pas la page de login
+	 * 	ou la page d'enregistrement
+	 */
 	
 	
 	public void type(String str) {
@@ -122,8 +147,18 @@ public class Jeu extends JFrame{
 		}
 	}
 	
-	
-	
+	/*
+	 *    fonctions pour recuperer la classe demande
+	 *    nom de fonctions "goTo" suivi du nom de la classe
+	 *    
+	 *    mets l'attribut "onDisplay" a l'equivalent de l'enum "Displaying"
+	 *    pour que les keyListeners sachent ou reorienter les commandes
+	 *    
+	 *    essaye d'abord de recuperer l'instance dans la HashMap d'elements du jeu
+	 *    si elle existe, la reset
+	 *    sinon, la creer et la met dans la HashMap 
+	 *    (elle se reset elle meme dans le constructeur directement)
+	 */
 	
 	public void goToMainMenu() {
 		onDisplay = Displaying.MAIN_MENU;
@@ -197,7 +232,7 @@ public class Jeu extends JFrame{
 			gameElements.put("Registration", new RegistrationController(this));
 		}
 	}
-	public void goToQuestPage(Quest quest) {
+	public void goToQuest(Quest quest) {
 		onDisplay = Displaying.QUEST_PAGE;
 		try {
 			((QuestPageController) gameElements.get("QuestPage")).reset(quest);
@@ -205,7 +240,7 @@ public class Jeu extends JFrame{
 			gameElements.put("QuestPage", new QuestPageController(this, quest));
 		}
 	}
-	public void goToNpcDialoguePage(NPC npc) {
+	public void goToNpcDialogue(NPC npc) {
 		onDisplay = Displaying.NPC_DIALOGUE;
 		try {
 			((NpcDialogueController) gameElements.get("NpcDialoguePage")).reset(npc);
@@ -213,15 +248,38 @@ public class Jeu extends JFrame{
 			gameElements.put("NpcDialoguePage", new NpcDialogueController(this,npc));
 		}
 	}
-	public void goToNpcQuestListPage(NPC npc) {
-		onDisplay = Displaying.NPC_QUESTS;
+	public void goToNpcLife(NPC npc) {
+		onDisplay = Displaying.NPC_LIFE;
 		try {
-			
+			((NpcLifeController) gameElements.get("NpcLifePage")).reset(npc);
 		} catch (NullPointerException e) {
-			gameElements.put("NpcQuestListPage", new NpcQuestListController(this,npc));
+			gameElements.put("NpcLifePage", new NpcLifeController(this,npc));
 		}
 	}
-	
+	public void goToNpcQuestList(NPC npc) {
+		onDisplay = Displaying.NPC_NEW_QUESTS;
+		try {
+			((NpcNewQuestListController) gameElements.get("NpcNewQuestListPage")).reset(npc);
+		} catch (NullPointerException e) {
+			gameElements.put("NpcNewQuestListPage", new NpcNewQuestListController(this,npc));
+		}
+	}
+	public void goToNpcQuestPresentation(NPC npc, Quest quest) {
+		onDisplay = Displaying.NPC_PRESENTING_QUEST;
+		try {
+			((NpcQuestPresentationController) gameElements.get("NpcQuestPresentationPage")).reset(quest, npc);
+		} catch (NullPointerException e) {
+			gameElements.put("NpcQuestPresentationPage", new NpcQuestPresentationController(this, quest, npc));
+		}
+	}
+	public void goToNpcQuestTurnIn(NPC npc) {
+		onDisplay = Displaying.NPC_QUEST_TURN_IN;
+		try {
+			((NpcQuestTurnInListController) gameElements.get("NpcQuestTurnInListPage")).reset(npc);
+		} catch (NullPointerException e) {
+			gameElements.put("NpcQuestTurnInListPage", new NpcQuestTurnInListController(this,npc));
+		}
+	}
 	
 	
 	

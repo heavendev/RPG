@@ -23,11 +23,11 @@ public class QuestPageDisplay implements Display{
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                                              *",
+			"*                                                                              *",
 			"*                                                  -> Continuer                *",
 			"*                                                                              *",
-			"*                                                                              *",
 			"********************************************************************************",
-			"* entrer = continuer                                                           *"};
+			"* entrer = valider                                                             *"};
 	
 	
 	
@@ -41,7 +41,7 @@ public class QuestPageDisplay implements Display{
 		for (int i = 0; i < screen.length; i++) {
 			System.out.println(screen[i]);
 		}
-		screen[14] = insertStringAt(screen[14], "Completing this quest will grant you " + xpReward + "XP and " + goldReward + " gold", 10);
+		screen[14] = insertStringAt(screen[14], "Completing this quest will grant you " + xpReward + "XP and " + goldReward + " gold", 5);
 		for (int i = 0; i < questText.length; i++) {
 			screen[i+4] = "*                                                                              *";
 		}

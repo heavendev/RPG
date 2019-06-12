@@ -7,19 +7,19 @@ import game.Jeu;
 import nonActiveClasses.Scroll;
 import quest.Quest;
 
-public class NpcQuestListController {
+public class NpcNewQuestListController {
 	
 	private Jeu jeu;
 	private NPC npc;
-	private NpcQuestListDisplay display;
+	private NpcNewQuestListDisplay display;
 	private int selection;
 	private ArrayList<Quest> quests;
 	private ArrayList<String> questNames;
 	
 	
-	public NpcQuestListController(Jeu jeu, NPC npc) {
+	public NpcNewQuestListController(Jeu jeu, NPC npc) {
 		this.jeu = jeu;
-		display = new NpcQuestListDisplay();
+		display = new NpcNewQuestListDisplay();
 		reset(npc);
 	}
 	
@@ -33,23 +33,25 @@ public class NpcQuestListController {
 	
 	public void scroll(Scroll scroll) {
 		switch (scroll) {
-		case UP :
-			if (selection != 1) {
-				selection--;
-			}
-			display.setSelection(selection);
-			break;
-		case DOWN :
-			if (selection < quests.size()) {
-				selection++;
-			}
-			display.setSelection(selection);
-			break;
-		case CONFIRM :
-			if (selection == (quests.size() + 1)) {
-				
-			}
-			break;
+			case UP :
+				if (selection != 1) {
+					selection--;
+				}
+				display.setSelection(selection);
+				break;
+			case DOWN :
+				if (selection <= quests.size()) {
+					selection++;
+				}
+				display.setSelection(selection);
+				break;
+			case CONFIRM :
+				if (selection == (quests.size() + 1)) {
+					jeu.goToNpcDialogue(npc);
+				} else {
+					 jeu.goToNpcQuestPresentation(npc, quests.get(selection-1));
+				}
+				break;
 		}
 	}
 	
