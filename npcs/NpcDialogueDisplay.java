@@ -37,6 +37,7 @@ public class NpcDialogueDisplay implements Display{
 		this.selection = selection;
 		this.questTurnIn = turnInAvailable;
 		this.newQuestAvailable = questAvailable;
+		display();
 	}
 	
 	
@@ -54,9 +55,9 @@ public class NpcDialogueDisplay implements Display{
 			screen[5] = insertStringAt(screen[5], "Turn in quest", 50);
 		}
 		if (newQuestAvailable && questTurnIn) {
-			screen[9] = insertStringAt(screen[5], "Retour", 50);
+			screen[9] = insertStringAt(screen[9], "Retour", 50);
 		} else if (newQuestAvailable || questTurnIn) {
-			screen[7] = insertStringAt(screen[5], "Retour", 50);
+			screen[7] = insertStringAt(screen[7], "Retour", 50);
 		} else {
 			screen[5] = insertStringAt(screen[5], "Retour", 50);
 		}

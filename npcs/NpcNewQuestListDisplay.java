@@ -38,19 +38,12 @@ public class NpcNewQuestListDisplay implements Display{
 	
 	public void display() {
 		for (int i = 0; i < questNames.size(); i++) {
-			if (selection == (i+1)) {
-				screen[2+(2*i)] = insertStringAt(screen[2+(2*i)], "-> " + questNames.get(i), 7);
-			} else {
 				screen[2+(2*i)] = insertStringAt(screen[2+(2*i)], questNames.get(i), 10);
-			}
 			if (i == questNames.size()-1) {
-				if (selection == (i+1)) {
-					screen[4+(2*i)] = insertStringAt(screen[4+(4*i)], " -> back", 7);
-				} else {
-					screen[4+(2*i)] = insertStringAt(screen[4+(4*i)], "back", 10);
-				}
+				screen[4+(2*i)] = insertStringAt(screen[4+(4*i)], "back", 10);
 			}
 		}
+		screen[(selection*2)] = insertStringAt(screen[(selection*2)], "->", 7);
 		for (int i = 0; i < screen.length; i++) {
 			System.out.println(screen[i]);
 		}

@@ -60,8 +60,9 @@ public class NpcQuestTurnInListController {
 	
 	
 	private ArrayList<Quest> getQuestList() {
+		System.out.println("fetching quest list....");
 		ArrayList<Quest> toReturn = new ArrayList<Quest>();
-		ArrayList<Quest> npcQuests = npc.getQuests();
+		ArrayList<Quest> npcQuests = Squad.getInstance().getQuests();
 		for (Quest quest : npcQuests) {
 			if (quest.getQuestGiver().equals(npc) && quest.getStatus() == QuestStatus.COMPLETED) {
 				toReturn.add(quest);
@@ -74,6 +75,7 @@ public class NpcQuestTurnInListController {
 		questNames = new ArrayList<String>();
 		for (Quest quest : quests) {
 			questNames.add(quest.getQuestName());
+			System.out.println(quest.getQuestName());
 		}
 	}
 	

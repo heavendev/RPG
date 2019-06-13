@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
@@ -8,16 +9,10 @@ import Intro.*;
 import ProjetMenu.*;
 import map.*;
 import nonActiveClasses.*;
-import npcs.NPC;
-import npcs.NpcDialogueController;
-import npcs.NpcLifeController;
-import npcs.NpcNewQuestListController;
-import npcs.NpcQuestPresentationController;
-import npcs.NpcQuestTurnInListController;
-import quest.Quest;
-import quest.QuestPageController;
+import npcs.*;
+import quest.*;
 import connection.*;
-import data.Squad;
+import data.*;
 
 public class Jeu extends JFrame{
 	
@@ -35,7 +30,6 @@ public class Jeu extends JFrame{
 		this.setSize(50, 20);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-//		this.setFocusable(true);
 		this.addKeyListener(movementListener);
 		this.addKeyListener(scrollListener);
 		this.addKeyListener(typingListener);
@@ -45,9 +39,49 @@ public class Jeu extends JFrame{
 	
 	
 	public void init() {
+		
+		/*
+		 *		PLACEHOLDER quest and NPC for tests
+		 *		creating a custom quest, giving it to a custom NPC
+		 */
+		
+		String[] portrait = {"       rqP.                            ",
+				" :Jr.iSBQQBBBQgXv.                     ",
+				"rRQQgggY7JjPgMgRMQD7.                  ",
+				" :Q5XUd:rI1:77ug  gMBBv                ",
+				" jdS2qbri5R7vvr1i.vi7B5                ",
+				" sg2DP1rL77vv777SdL77S:                ",
+				" .BUgI1LvYLsvvrvvjdBX             .    ",
+				"  QdgXI7L7Lsj77v7rP1:           :K:    ",
+				".jP.EM5j77rv7ri772.      .qr  iPBY.PBB.",
+				"BBB. .Y2JY577uuI15        iQdgBMddBBBQ.",
+				"RgQB5.  .:XMr:iirBBdi     rgXK5bPEMQEr ",
+				"QEQQBBQ5virgB5.:.7BQBQZ.iBBQIYu2q5L.   ",
+				"BggQRQBBBBBBRgu::.7BBBBBBBQQgdXBB      ",
+				"QgMgRRR             BQBRQRQMQQBBg      ",
+				"RQgQRRM PERE CASTOR BRQQgRgMRBQB       ",
+				"BZgZgDg             BDgQMZgZgB5        "};
+		String[] life = {"blabla","blubliblou","blabla"};
+		NPC npc = new NPC("Pere Castor",null,portrait,life,"main",41,33);
+		String[] description = {"blabla","blubliblou","blabla"};
+		String[] presentation = {"blabla","blubliblou","blabluig"};
+		String[] objectiveReached = {"blabla","blubliblou"};
+		String[] turnIn = {"blabla","blubliblou","FFIIIINNNIIIII"};
+		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", "get", 50, 10,
+				description, presentation, objectiveReached, turnIn, npc);
+		npc.addQuest(questOne);
+		ArrayList<NPC> npcs = new ArrayList<NPC>();
+		npcs.add(npc);
+		NpcLocations.getNpcLocations(npcs);
+		
+		
+		
+		
+		
 //		goToMainMenu();
 //		goToWelcome();
 		goToMap();
+		
 	}
 	
 	
@@ -278,6 +312,13 @@ public class Jeu extends JFrame{
 			((NpcQuestTurnInListController) gameElements.get("NpcQuestTurnInListPage")).reset(npc);
 		} catch (NullPointerException e) {
 			gameElements.put("NpcQuestTurnInListPage", new NpcQuestTurnInListController(this,npc));
+		}
+	}
+	public void goToQuestEvent(Quest quest) {
+		try {
+			((QuestEventController) gameElements.get("QuestEvent")).reset(quest);
+		} catch (NullPointerException e) {
+			gameElements.put("QuestEvent", new QuestEventController(this,quest));
 		}
 	}
 	

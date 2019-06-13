@@ -117,4 +117,7 @@ public class Quest {
 	public NPC getQuestGiver() {
 		return questGiver;
 	}
+	public String getType() {
+		return type;
+	}
 }

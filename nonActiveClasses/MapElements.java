@@ -2,6 +2,7 @@
 
 public enum MapElements{
 	
+	NPC,
 	TREE,
 	ROCK,
 	WATER,
