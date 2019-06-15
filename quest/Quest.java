@@ -81,6 +81,12 @@ public class Quest {
 		return coors;
 	}
 	
+	
+	public void removeGiver() {
+		questGiver = null;
+	}
+	
+	
 	public String getQuestName() {
 		return questName;
 	}

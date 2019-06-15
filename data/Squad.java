@@ -51,7 +51,6 @@ public class Squad {
 	
 	
 	
-	
 	public void addQuest(Quest quest) {
 		quests.add(quest);
 	}
@@ -77,6 +76,9 @@ public class Squad {
 	}
 	public int getMainQuestStage() {
 		return mainQuestStage;
+	}
+	public void setMainQuestStage(int stage) {
+		this.mainQuestStage = stage;
 	}
 	
 }

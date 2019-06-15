@@ -8,16 +8,16 @@ public class GameplayIntroController{
 	private Jeu jeu;
 	private int page;
 	private int selection;
-	GameplayIntroDisplay display;
+	private GameplayIntroDisplay display;
 	
 	
 	public GameplayIntroController(Jeu jeu) {
 		display = new GameplayIntroDisplay();
 		this.jeu = jeu;
-		resetGameplayIntro();
+		reset();
 	}
 	
-	public void resetGameplayIntro() {
+	public void reset() {
 		page = 1;
 		selection = 2;
 		display.setPage(page);

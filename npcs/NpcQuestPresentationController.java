@@ -49,6 +49,7 @@ public class NpcQuestPresentationController {
 					quest.setStatus(QuestStatus.ACCEPTED);
 					Squad.getInstance().addQuest(quest);
 					npc.removeQuest(quest);
+					quest.removeGiver();
 					jeu.goToQuest(quest);
 				}
 				break;

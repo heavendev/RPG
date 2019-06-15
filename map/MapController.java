@@ -18,6 +18,7 @@ public class MapController {
 	
 	Jeu jeu;
 	MapDisplay display;
+	MapStorage mapStorage;
 	MapBackground mapBorder;
 	MapElements[][] map;
 	ArrayList<NPC> npcsInMap;
@@ -29,6 +30,7 @@ public class MapController {
 	public MapController(Jeu jeu) {
 		this.jeu = jeu;
 		display = new MapDisplay();
+		mapStorage = new MapStorage();
 		resetMap();
 	}
 	

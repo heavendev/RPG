@@ -1,5 +1,6 @@
 package quest;
 
+import data.Squad;
 import game.Jeu;
 import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
@@ -38,6 +39,9 @@ public class QuestPageController {
 				quest.setStatus(QuestStatus.TURNED_IN);
 				currentQuestName = currentQuest.getQuestName();
 				questText = currentQuest.getQuestTurnIn();
+				if (quest.getMainQuestNumber() > 0) {
+					Squad.getInstance().setMainQuestStage(Squad.getInstance().getMainQuestStage() + 1);
+				}
 				break;
 		}
 		display.resetDisplay(currentQuestName, questText, quest.getXPReward(), quest.getGoldReward());

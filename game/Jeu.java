@@ -46,21 +46,21 @@ public class Jeu extends JFrame{
 		 */
 		
 		String[] portrait = {"       rqP.                            ",
-				" :Jr.iSBQQBBBQgXv.                     ",
-				"rRQQgggY7JjPgMgRMQD7.                  ",
-				" :Q5XUd:rI1:77ug  gMBBv                ",
-				" jdS2qbri5R7vvr1i.vi7B5                ",
-				" sg2DP1rL77vv777SdL77S:                ",
-				" .BUgI1LvYLsvvrvvjdBX             .    ",
-				"  QdgXI7L7Lsj77v7rP1:           :K:    ",
-				".jP.EM5j77rv7ri772.      .qr  iPBY.PBB.",
-				"BBB. .Y2JY577uuI15        iQdgBMddBBBQ.",
-				"RgQB5.  .:XMr:iirBBdi     rgXK5bPEMQEr ",
-				"QEQQBBQ5virgB5.:.7BQBQZ.iBBQIYu2q5L.   ",
-				"BggQRQBBBBBBRgu::.7BBBBBBBQQgdXBB      ",
-				"QgMgRRR             BQBRQRQMQQBBg      ",
-				"RQgQRRM PERE CASTOR BRQQgRgMRBQB       ",
-				"BZgZgDg             BDgQMZgZgB5        "};
+							 " :Jr.iSBQQBBBQgXv.                     ",
+							 "rRQQgggY7JjPgMgRMQD7.                  ",
+							 " :Q5XUd:rI1:77ug  gMBBv                ",
+							 " jdS2qbri5R7vvr1i.vi7B5                ",
+							 " sg2DP1rL77vv777SdL77S:                ",
+							 " .BUgI1LvYLsvvrvvjdBX             .    ",
+							 "  QdgXI7L7Lsj77v7rP1:           :K:    ",
+							 ".jP.EM5j77rv7ri772.      .qr  iPBY.PBB.",
+							 "BBB. .Y2JY577uuI15        iQdgBMddBBBQ.",
+							 "RgQB5.  .:XMr:iirBBdi     rgXK5bPEMQEr ",
+							 "QEQQBBQ5virgB5.:.7BQBQZ.iBBQIYu2q5L.   ",
+							 "BggQRQBBBBBBRgu::.7BBBBBBBQQgdXBB      ",
+							 "QgMgRRR             BQBRQRQMQQBBg      ",
+							 "RQgQRRM PERE CASTOR BRQQgRgMRBQB       ",
+							 "BZgZgDg             BDgQMZgZgB5        "};
 		String[] life = {"blabla","blubliblou","blabla"};
 		NPC npc = new NPC("Pere Castor",null,portrait,life,"main",41,33);
 		String[] description = {"blabla","blubliblou","blabla"};
@@ -73,8 +73,6 @@ public class Jeu extends JFrame{
 		ArrayList<NPC> npcs = new ArrayList<NPC>();
 		npcs.add(npc);
 		NpcLocations.getNpcLocations(npcs);
-		
-		
 		
 		
 		
@@ -213,7 +211,7 @@ public class Jeu extends JFrame{
 	public void goToGameplayIntro() {
 		onDisplay = Displaying.INTRO_GAMEPLAY;
 		try {
-			((GameplayIntroController) gameElements.get("GameplayIntro")).resetGameplayIntro();
+			((GameplayIntroController) gameElements.get("GameplayIntro")).reset();
 		} catch (NullPointerException e) {
 			gameElements.put("GameplayIntro", new GameplayIntroController(this));
 		}
