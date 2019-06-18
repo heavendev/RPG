@@ -25,6 +25,7 @@ public class Squad {
 	
 	private Squad() {
 		quests = new ArrayList<Quest>();
+		mainQuestStage = 1;
 	}
 	
 	

@@ -188,11 +188,9 @@ public class MapController {
 		} else if ((quest = checkForQuestLocation()) != null) {
 			jeu.goToQuestEvent(quest);
 		}
-		
 		/*else if ((int)(Math.random()*1000) == 0) {
 			jeu.startRandomCombat();
 		}*/
-		
 	}
 	
 	private boolean isClear(int x, int y) {
@@ -207,7 +205,6 @@ public class MapController {
 	private void teleportTo(int x, int y) {
 		
 		if (Squad.getInstance().getCurrentMap() == "main") {
-			
 			if (x == 6 && y == 3) {
 				Squad.getInstance().setCoordinates(4, 22, "House");
 			} else if (x == 16 && y == 43) {
@@ -225,7 +222,6 @@ public class MapController {
 			} else if (x == 151 && y == 48) {
 				Squad.getInstance().setCoordinates(1, 1, "SouthEast Dungeon");
 			}
-			
 		} else if (Squad.getInstance().getCurrentMap() == "House") {
 			Squad.getInstance().setCoordinates(6, 4, "main");
 		} else if (Squad.getInstance().getCurrentMap() == "SouthWest Dungeon") {

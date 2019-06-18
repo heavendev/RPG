@@ -89,7 +89,7 @@ public class NpcDialogueController {
 	private boolean isQuestAvailable() {
 		ArrayList<Quest> quests = npc.getQuests();
 		for (Quest quest : quests) {
-			if (quest.getMainQuestNumber() == 0 || quest.getMainQuestNumber() == Squad.getInstance().getMainQuestStage()) {
+			if (quest.getMainQuestNumber() <= Squad.getInstance().getMainQuestStage()) {
 				return true;
 			}
 		}

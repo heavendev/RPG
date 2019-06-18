@@ -1,6 +1,8 @@
 package game;
 
 import java.awt.event.KeyEvent;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
@@ -45,36 +47,34 @@ public class Jeu extends JFrame{
 		 *		creating a custom quest, giving it to a custom NPC
 		 */
 		
-		String[] portrait = {"       rqP.                            ",
-							 " :Jr.iSBQQBBBQgXv.                     ",
-							 "rRQQgggY7JjPgMgRMQD7.                  ",
-							 " :Q5XUd:rI1:77ug  gMBBv                ",
-							 " jdS2qbri5R7vvr1i.vi7B5                ",
-							 " sg2DP1rL77vv777SdL77S:                ",
-							 " .BUgI1LvYLsvvrvvjdBX             .    ",
-							 "  QdgXI7L7Lsj77v7rP1:           :K:    ",
-							 ".jP.EM5j77rv7ri772.      .qr  iPBY.PBB.",
-							 "BBB. .Y2JY577uuI15        iQdgBMddBBBQ.",
-							 "RgQB5.  .:XMr:iirBBdi     rgXK5bPEMQEr ",
-							 "QEQQBBQ5virgB5.:.7BQBQZ.iBBQIYu2q5L.   ",
-							 "BggQRQBBBBBBRgu::.7BBBBBBBQQgdXBB      ",
-							 "QgMgRRR             BQBRQRQMQQBBg      ",
-							 "RQgQRRM PERE CASTOR BRQQgRgMRBQB       ",
-							 "BZgZgDg             BDgQMZgZgB5        "};
+		String[] portrait = {"      rqP.                            ",
+							 ":Jr.iSBQQBBBQgXv.                     ",
+							 "RQQgggY7JjPgMgRMQD7.                  ",
+							 ":Q5XUd:rI1:77ug  gMBBv                ",
+							 "jdS2qbri5R7vvr1i.vi7B5                ",
+							 "sg2DP1rL77vv777SdL77S:                ",
+							 ".BUgI1LvYLsvvrvvjdBX             .    ",
+							 " QdgXI7L7Lsj77v7rP1:           :K:    ",
+							 "jP.EM5j77rv7ri772.      .qr  iPBY.PBB.",
+							 "BB. .Y2JY577uuI15        iQdgBMddBBBQ.",
+							 "gQB5.  .:XMr:iirBBdi     rgXK5bPEMQEr ",
+							 "EQQBBQ5virgB5.:.7BQBQZ.iBBQIYu2q5L.   ",
+							 "ggQRQBBBBBBRgu::.7BBBBBBBQQgdXBB      ",
+							 "gMgRRR             BQBRQRQMQQBBg      ",
+							 "QgQRRM PERE CASTOR BRQQgRgMRBQB       ",
+							 "ZgZgDg             BDgQMZgZgB5        "};
 		String[] life = {"blabla","blubliblou","blabla"};
 		NPC npc = new NPC("Pere Castor",null,portrait,life,"main",41,33);
 		String[] description = {"blabla","blubliblou","blabla"};
 		String[] presentation = {"blabla","blubliblou","blabluig"};
 		String[] objectiveReached = {"blabla","blubliblou"};
 		String[] turnIn = {"blabla","blubliblou","FFIIIINNNIIIII"};
-		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", "get", 50, 10,
+		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", "get", 1, true, 50, 10,
 				description, presentation, objectiveReached, turnIn, npc);
 		npc.addQuest(questOne);
 		ArrayList<NPC> npcs = new ArrayList<NPC>();
 		npcs.add(npc);
 		NpcLocations.getNpcLocations(npcs);
-		
-		
 		
 //		goToMainMenu();
 //		goToWelcome();
@@ -353,6 +353,13 @@ public class Jeu extends JFrame{
 	
 	public static void main(String[] args) {
 		Jeu jeu = new Jeu();
+		
+//		try {
+//			DatabaseTest.getDatabaseTest().test();
+//		} catch (NoSuchAlgorithmException | SQLException e) {
+//			e.printStackTrace();
+//		}
+		
 	}
 
 }

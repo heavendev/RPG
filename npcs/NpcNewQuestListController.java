@@ -62,7 +62,7 @@ public class NpcNewQuestListController {
 		ArrayList<Quest> toReturn = new ArrayList<Quest>();
 		ArrayList<Quest> npcQuests = npc.getQuests();
 		for (Quest quest : npcQuests) {
-			if (quest.getMainQuestNumber() == 0 || quest.getMainQuestNumber() == Squad.getInstance().getMainQuestStage()) {
+			if (quest.getMainQuestNumber() <= Squad.getInstance().getMainQuestStage()) {
 				toReturn.add(quest);
 			}
 		}

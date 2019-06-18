@@ -43,7 +43,7 @@ public class NpcQuestPresentationDisplay implements Display {
 			"                                       *",
 			"                                       *",
 			"                                       *",
-			"               refuser      acceper    *",
+			"               refuser      accepter   *",
 			"                                       *",
 			"****************************************",
 			"ente, d = selection suivante           *"};
@@ -60,7 +60,7 @@ public class NpcQuestPresentationDisplay implements Display {
 	
 	public void display() {
 		for (int i = 0; i < npcPortrait.length; i++) {
-			leftScreen[i+1] = insertStringAt(leftScreen[i+1], npcPortrait[i],2);
+			leftScreen[i+1] = insertStringAt(leftScreen[i+1], npcPortrait[i],1);
 		}
 		for (int i = 0; i < questPresentation.length; i++) {
 			rightScreen[i+2] = insertStringAt(rightScreen[i+2], questPresentation[i], 2);
@@ -88,22 +88,14 @@ public class NpcQuestPresentationDisplay implements Display {
 	}
 	
 	private String insertStringAt(String baseString, String newString, int at) {
-		for (int i = 0; i < newString.length(); i++) {
-			baseString = changeCharAt(baseString, at + i, newString.charAt(i));
+		try {
+			return (baseString.substring(0, at) + newString + baseString.substring(newString.length()+at));
+		} catch (StringIndexOutOfBoundsException e) {
+			System.out.println("baseString : " + baseString);
+			System.out.println("newString : " + newString);
+			System.out.println("at : " + at);
+			return null;
 		}
-		return baseString;
-	}
-	
-	private String changeCharAt(String str, int charAt, char replaceBy) {
-		String toReturn = "";
-		for (int i = 0; i < str.length(); i++) {
-			if (i == charAt-1) {
-				toReturn = toReturn + replaceBy;
-			} else {
-				toReturn = toReturn + str.charAt(i);
-			}
-		}
-		return toReturn;
 	}
 	
 }

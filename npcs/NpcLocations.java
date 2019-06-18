@@ -27,16 +27,9 @@ public class NpcLocations {
 		this.npcs = npcs;
 	}
 	
-	
-	
-	
 	public void resetNpcLocations(ArrayList<NPC> np) {
 		npcs = np;
 	}
-	
-	
-	
-	
 	
 	public ArrayList<NPC> getNpcListInMap(String map) {
 		ArrayList<NPC> toReturn = new ArrayList<NPC>();

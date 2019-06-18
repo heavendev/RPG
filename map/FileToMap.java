@@ -66,6 +66,8 @@ public class FileToMap {
 					elems[i][j] = MapElements.HOUSE_RIGHT_WALL;
 				} else if (file.get(i).charAt(j) == '~') {
 					elems[i][j] = MapElements.WATER;
+				} else if (file.get(i).charAt(j) == '-') {
+					elems[i][j] = MapElements.HOUSE_WALL_2;
 				}
 			}
 		}

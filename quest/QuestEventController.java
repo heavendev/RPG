@@ -15,7 +15,6 @@ public class QuestEventController {
 		if (quest.getType() == "get") {
 			jeu.goToQuest(quest);
 		} else {
-			System.out.println("AAHHHH");
 			jeu.goToQuest(quest);
 		}
 	}

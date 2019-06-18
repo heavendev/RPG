@@ -13,7 +13,8 @@ public class StoryIntroController{
 	}
 	
 	public StoryIntroController(Jeu jeu) {
-		display = new StoryIntroDisplay();
+		String[] page = {"blablibloublublebllaaa"};
+		display = new StoryIntroDisplay(page);
 		this.jeu = jeu;
 		display.display();
 	}

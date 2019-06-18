@@ -49,7 +49,6 @@ public class QuestPageDisplay implements Display{
 		screen[14] = "*                                                                              *";
 	}
 	
-	
 	public void resetDisplay(String questName, String[] questText, int xpReward, int goldReward) {
 		this.questName = questName;
 		this.questText = questText;
@@ -59,22 +58,7 @@ public class QuestPageDisplay implements Display{
 	}
 	
 	private String insertStringAt(String baseString, String newString, int at) {
-		for (int i = 0; i < newString.length(); i++) {
-			baseString = changeCharAt(baseString, at + i, newString.charAt(i));
-		}
-		return baseString;
-	}
-	
-	private String changeCharAt(String str, int charAt, char replaceBy) {
-		String toReturn = "";
-		for (int i = 0; i < str.length(); i++) {
-			if (i == charAt-1) {
-				toReturn = toReturn + replaceBy;
-			} else {
-				toReturn = toReturn + str.charAt(i);
-			}
-		}
-		return toReturn;
+		return (baseString.substring(0, at) + newString + baseString.substring(newString.length()+at));
 	}
 	
 	

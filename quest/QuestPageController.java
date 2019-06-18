@@ -39,7 +39,7 @@ public class QuestPageController {
 				quest.setStatus(QuestStatus.TURNED_IN);
 				currentQuestName = currentQuest.getQuestName();
 				questText = currentQuest.getQuestTurnIn();
-				if (quest.getMainQuestNumber() > 0) {
+				if (quest.isMainQuestChain()) {
 					Squad.getInstance().setMainQuestStage(Squad.getInstance().getMainQuestStage() + 1);
 				}
 				break;

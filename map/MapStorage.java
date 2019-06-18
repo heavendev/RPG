@@ -19,8 +19,12 @@ public class MapStorage {
 		try {
 			return (maps.get(map));
 		} catch (NullPointerException e) {
-			
+			maps.put(map, null);
 		}
+		return (maps.get(map));
 	}
+	
+	
+	
 	
 }

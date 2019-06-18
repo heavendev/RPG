@@ -30,37 +30,25 @@ public class GameMenuDisplay implements Display{
 	public void display() {
 		switch (selection) {
 			case (0) :
-				menu[1] = change(menu[1], 6);
-				menu[2] = change(menu[2], 6);
-				menu[2] = change(menu[2], 7);
-				menu[3] = change(menu[3], 6);
-				menu[3] = change(menu[3], 7);
-				menu[3] = change(menu[3], 8);
-				menu[4] = change(menu[4], 6);
-				menu[4] = change(menu[4], 7);
-				menu[5] = change(menu[5], 6);
+				menu[1] = insertStringAt(menu[1], "@", 6);
+				menu[2] = insertStringAt(menu[2], "@@", 6);
+				menu[3] = insertStringAt(menu[3], "@@@", 6);
+				menu[4] = insertStringAt(menu[4], "@@", 6);
+				menu[5] = insertStringAt(menu[5], "@", 6);
 				break;
 			case (1) :
-				menu[7] = change(menu[7], 6);
-				menu[8] = change(menu[8], 6);
-				menu[8] = change(menu[8], 7);
-				menu[9] = change(menu[9], 6);
-				menu[9] = change(menu[9], 7);
-				menu[9] = change(menu[9], 8);
-				menu[10] = change(menu[10], 6);
-				menu[10] = change(menu[10], 7);
-				menu[11] = change(menu[11], 6);
+				menu[7] = insertStringAt(menu[7], "@", 6);
+				menu[8] = insertStringAt(menu[8], "@@", 6);
+				menu[9] = insertStringAt(menu[9], "@@@", 6);
+				menu[10] = insertStringAt(menu[10], "@@", 6);
+				menu[11] = insertStringAt(menu[11], "@", 6);
 				break;
 			case (2) :
-				menu[13] = change(menu[13], 6);
-				menu[14] = change(menu[14], 6);
-				menu[14] = change(menu[14], 7);
-				menu[15] = change(menu[15], 6);
-				menu[15] = change(menu[15], 7);
-				menu[15] = change(menu[15], 8);
-				menu[16] = change(menu[16], 6);
-				menu[16] = change(menu[16], 7);
-				menu[17] = change(menu[17], 6);
+				menu[13] = insertStringAt(menu[13], "@", 6);
+				menu[14] = insertStringAt(menu[14], "@@", 6);
+				menu[15] = insertStringAt(menu[15], "@@@", 6);
+				menu[16] = insertStringAt(menu[16], "@@", 6);
+				menu[17] = insertStringAt(menu[17], "@", 6);
 				break;
 		}
 		for (int i = 0; i < menu.length; i++) {
@@ -82,17 +70,9 @@ public class GameMenuDisplay implements Display{
 		menu[16] = "*          @   @   @ @   @     @     @    @    @  @                            *";
 		menu[17] = "*           @@@ @  @@@  @@@    @     @    @@@  @  @                            *";
 	}
-		
-	public String change(String str, int pos) {
-		String tmp = "";
-		for (int i = 0; i < pos; i++) {
-			tmp = tmp + str.charAt(i);
-		}
-		tmp = tmp + '@';
-		for (int i = (pos+1); i < str.length(); i++) {
-			tmp = tmp + str.charAt(i);
-		}
-		return (tmp);
+	
+	private String insertStringAt(String baseString, String newString, int at) {
+		return (baseString.substring(0, at) + newString + baseString.substring(newString.length()+at));
 	}
 	
 	public void setSelection(int s) {

@@ -28,7 +28,7 @@ public class NpcDialogueDisplay implements Display{
 			"*                                                                              *",
 			"*                                                                              *",
 			"********************************************************************************",
-			"* entrer = valider                                                             *"};
+			"* z = monter, s = descrendre, entrer = valider                                 *"};
 	
 	
 	
@@ -43,7 +43,7 @@ public class NpcDialogueDisplay implements Display{
 	
 	public void display() {
 		for (int i = 0; i < npcPortrait.length; i++) {
-			screen[i+1] = insertStringAt(screen[i+1], npcPortrait[i], 2);
+			screen[i+1] = insertStringAt(screen[i+1], npcPortrait[i], 1);
 		}
 		screen[3] = insertStringAt(screen[3], "Bonjour!", 50);
 		if (newQuestAvailable) {
@@ -70,29 +70,13 @@ public class NpcDialogueDisplay implements Display{
 		}
 	}
 	
-	
 	public void setSelection(int selection) {
 		this.selection = selection;
 		display();
 	}
 	
-	private String insertStringAt(String baseString, String newString, int at) {
-		for (int i = 0; i < newString.length(); i++) {
-			baseString = changeCharAt(baseString, at + i, newString.charAt(i));
-		}
-		return baseString;
-	}
-	
-	private String changeCharAt(String str, int charAt, char replaceBy) {
-		String toReturn = "";
-		for (int i = 0; i < str.length(); i++) {
-			if (i == charAt-1) {
-				toReturn = toReturn + replaceBy;
-			} else {
-				toReturn = toReturn + str.charAt(i);
-			}
-		}
-		return toReturn;
+	private static String insertStringAt(String baseString, String newString, int at) {
+		return (baseString.substring(0, at) + newString + baseString.substring(newString.length()+at));
 	}
 	
 }

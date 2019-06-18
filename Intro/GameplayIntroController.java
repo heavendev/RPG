@@ -12,7 +12,12 @@ public class GameplayIntroController{
 	
 	
 	public GameplayIntroController(Jeu jeu) {
-		display = new GameplayIntroDisplay();
+		
+		// NULL string[] content for all 3 pages, temporary placeholder
+		String[] pageOne = {"Page 1"};
+		String[] pageTwo = {"Page 2"};
+		String[] pageThree = {"Page 3"};
+		display = new GameplayIntroDisplay(pageOne,pageTwo,pageThree);
 		this.jeu = jeu;
 		reset();
 	}
