@@ -54,7 +54,7 @@ public class DatabaseConnector {
 				+ "FROM users "
 				+ "WHERE pseudo = ?;";
 		PreparedStatement s = con.prepareStatement(query);
-		s = con.prepareStatement(query);
+//		s = con.prepareStatement(query);
 		s.setString(1, nickname);
 		ResultSet rs = s.executeQuery();
 		while (rs.next()) {

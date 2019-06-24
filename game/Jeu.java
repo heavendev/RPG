@@ -69,16 +69,16 @@ public class Jeu extends JFrame{
 		String[] presentation = {"blabla","blubliblou","blabluig"};
 		String[] objectiveReached = {"blabla","blubliblou"};
 		String[] turnIn = {"blabla","blubliblou","FFIIIINNNIIIII"};
-		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", "get", 1, true, 50, 10,
+		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", null, "get", 1, true, 50, 10,
 				description, presentation, objectiveReached, turnIn, npc);
 		npc.addQuest(questOne);
 		ArrayList<NPC> npcs = new ArrayList<NPC>();
 		npcs.add(npc);
 		NpcLocations.getNpcLocations(npcs);
 		
-//		goToMainMenu();
+		goToMainMenu();
 //		goToWelcome();
-		goToMap();
+//		goToMap();
 		
 	}
 	
@@ -352,13 +352,19 @@ public class Jeu extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		Jeu jeu = new Jeu();
+//		Jeu jeu = new Jeu();
 		
 //		try {
 //			DatabaseTest.getDatabaseTest().test();
 //		} catch (NoSuchAlgorithmException | SQLException e) {
 //			e.printStackTrace();
 //		}
+		
+		try {
+			DatabaseTest.getDatabaseTest().t();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

@@ -82,9 +82,17 @@ public class DatabaseTest {
 				+ "(map) VALUES"
 				+ "(?)";
 		PreparedStatement s = con.prepareStatement(addUser);
-		s = con.prepareStatement(addUser);
 		s.setString(1, test);
 		s.execute();
+	}
+	
+	public void t() throws SQLException {
+		String query = "SELECT * FROM test";
+		PreparedStatement s = con.prepareStatement(query);
+		ResultSet rs = s.executeQuery();
+		while (rs.next()) {
+			System.out.println(rs.getInt("blyn"));
+		}
 	}
 	
 	

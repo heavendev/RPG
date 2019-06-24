@@ -15,7 +15,7 @@ public class Quest {
 	boolean mainQuestChain;
 	String map;
 	String type;
-//	Mob boss;
+	String boss;
 	int xpReward;
 	int goldReward;
 	String[] questDescription;
@@ -27,8 +27,9 @@ public class Quest {
 	
 	
 
-	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map, String type, int mainQuestNumber,
-			boolean mainQuestChain, int xpReward, int goldReward, String[] questDescription, String[] questPresentation, 
+	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map,
+			String type, String boss, int mainQuestNumber,boolean mainQuestChain, int xpReward,
+			int goldReward, String[] questDescription, String[] questPresentation, 
 			String[] questObjectiveReached, String[] questTurnIn, NPC questGiver) {
 		this.questName = questName;
 		this.status = status;
@@ -38,6 +39,7 @@ public class Quest {
 		this.mainQuestChain = mainQuestChain;
 		this.map = map;
 		this.type = type;
+		this.boss = boss;
 		this.xpReward = xpReward;
 		this.goldReward = goldReward;
 		this.questDescription = questDescription;
