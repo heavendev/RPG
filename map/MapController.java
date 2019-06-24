@@ -10,31 +10,31 @@ import nonActiveClasses.MapBackground;
 import nonActiveClasses.MapElements;
 import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
+import npcs.NPC;
+import npcs.NpcLocations;
 import quest.Quest;
 
-public class Map {
+public class MapController {
 	
 	Jeu jeu;
 	MapDisplay display;
+	MapStorage mapStorage;
 	MapBackground mapBorder;
 	MapElements[][] map;
-	
+	ArrayList<NPC> npcsInMap;
 	int cx;
 	int cy;
 	String squadCurrentMap;
 	
 	
-	public Map(Jeu jeu) {
+	public MapController(Jeu jeu) {
 		this.jeu = jeu;
 		display = new MapDisplay();
+		mapStorage = new MapStorage();
 		resetMap();
 	}
 	
 	public void resetMap() {
-		
-		Squad.getInstance().addQuest(new Quest("test", QuestStatus.ONGOING, 136, 13, "main", "placeholderType",
-				0, 0, null, null, null, null));
-		
 		HashMap tmp = Squad.getInstance().getCoordinates();
 		squadCurrentMap = (String) tmp.get("map");
 		cx = (int) tmp.get("x");
@@ -70,18 +70,23 @@ public class Map {
 //		map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
 //		mapBorder = MapBackground.DUNGEON;
 //	}
-		
-		
+		putNpcsInMap();
 		display.resetMapDisplay(map, cx, cy, mapBorder,  getQuestsLocations(squadCurrentMap));
 	}
 	
 	
 	public void scroll(Scroll scroll) {
-		 if (scroll == Scroll.ESCAPE) {
-			 jeu.goToGameMenu();
-		 } else if (scroll == Scroll.CONFIRM) {
-			 checkForChars();
-		 }
+		switch (scroll) {
+		case ESCAPE :
+			jeu.goToGameMenu();
+			break;
+		case CONFIRM :
+			NPC npc = checkForChars();
+			if (npc != null) {
+				jeu.goToNpcDialogue(npc);
+			}
+			break;
+		}
 	}
 	
 	public void move(Direction dir) {
@@ -181,11 +186,11 @@ public class Map {
 			teleportTo(cx,cy);
 			resetMap();
 		} else if ((quest = checkForQuestLocation()) != null) {
-			System.out.println("IZ VORKINNNGG!!");
-		} /*else if ((int)(Math.random()*1000) == 0) {
+			jeu.goToQuestEvent(quest);
+		}
+		/*else if ((int)(Math.random()*1000) == 0) {
 			jeu.startRandomCombat();
 		}*/
-		
 	}
 	
 	private boolean isClear(int x, int y) {
@@ -197,12 +202,9 @@ public class Map {
 		return false;
 	}
 	
-	
-	
 	private void teleportTo(int x, int y) {
 		
 		if (Squad.getInstance().getCurrentMap() == "main") {
-			
 			if (x == 6 && y == 3) {
 				Squad.getInstance().setCoordinates(4, 22, "House");
 			} else if (x == 16 && y == 43) {
@@ -220,7 +222,6 @@ public class Map {
 			} else if (x == 151 && y == 48) {
 				Squad.getInstance().setCoordinates(1, 1, "SouthEast Dungeon");
 			}
-			
 		} else if (Squad.getInstance().getCurrentMap() == "House") {
 			Squad.getInstance().setCoordinates(6, 4, "main");
 		} else if (Squad.getInstance().getCurrentMap() == "SouthWest Dungeon") {
@@ -241,25 +242,33 @@ public class Map {
 		
 	}
 	
-	// placeholder
-	private void checkForChars() {
-		
+	private void putNpcsInMap() {
+		npcsInMap = NpcLocations.getNpcLocations().getNpcListInMap(squadCurrentMap);
+		for (int i = 0; i < npcsInMap.size(); i++) {
+			map[npcsInMap.get(i).getY()][npcsInMap.get(i).getX()] = MapElements.NPC;
+		}
 	}
 	
-	
-	
-	
-	private Quest checkForQuestLocation() {
-		ArrayList<Quest> quests = Squad.getInstance().getQuests();
-		for (int i = 0; i < quests.size(); i++) {
-			if (quests.get(i).isAtQuestionLocation(cy, cx, squadCurrentMap)) {
-				return quests.get(i);
+	private NPC checkForChars() {
+		for (int i = 0; i < npcsInMap.size(); i++) {
+			NPC npc = npcsInMap.get(i);
+			if (cx <= npc.getX()+1 && cx>= npc.getX()-1 && cy <= npc.getY()+1 && cy >= npc.getY()-1) {
+				return npc;
 			}
 		}
 		return null;
 	}
 	
 	
+	private Quest checkForQuestLocation() {
+		ArrayList<Quest> quests = Squad.getInstance().getQuests();
+		for (int i = 0; i < quests.size(); i++) {
+			if (quests.get(i).isAtQuestionLocation(cy, cx, squadCurrentMap) && quests.get(i).getStatus() == QuestStatus.ONGOING) {
+				return quests.get(i);
+			}
+		}
+		return null;
+	}
 	
 	private ArrayList<int[]> getQuestsLocations (String currentMap) {
 		ArrayList<int[]> questLocations = new ArrayList<int[]>();

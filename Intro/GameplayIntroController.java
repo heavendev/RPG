@@ -3,21 +3,26 @@ package Intro;
 import game.Jeu;
 import nonActiveClasses.Scroll;
 
-public class GameplayIntro{
+public class GameplayIntroController{
 	
 	private Jeu jeu;
 	private int page;
 	private int selection;
-	GameplayIntroDisplay display;
+	private GameplayIntroDisplay display;
 	
 	
-	public GameplayIntro(Jeu jeu) {
-		display = new GameplayIntroDisplay();
+	public GameplayIntroController(Jeu jeu) {
+		
+		// NULL string[] content for all 3 pages, temporary placeholder
+		String[] pageOne = {"Page 1"};
+		String[] pageTwo = {"Page 2"};
+		String[] pageThree = {"Page 3"};
+		display = new GameplayIntroDisplay(pageOne,pageTwo,pageThree);
 		this.jeu = jeu;
-		resetGameplayIntro();
+		reset();
 	}
 	
-	public void resetGameplayIntro() {
+	public void reset() {
 		page = 1;
 		selection = 2;
 		display.setPage(page);

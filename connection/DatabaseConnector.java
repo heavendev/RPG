@@ -54,7 +54,7 @@ public class DatabaseConnector {
 				+ "FROM users "
 				+ "WHERE pseudo = ?;";
 		PreparedStatement s = con.prepareStatement(query);
-		s = con.prepareStatement(query);
+//		s = con.prepareStatement(query);
 		s.setString(1, nickname);
 		ResultSet rs = s.executeQuery();
 		while (rs.next()) {
@@ -69,7 +69,8 @@ public class DatabaseConnector {
 			}
 			return (hm);
 		}
-		return null;
+		hm.put("isValid", false);
+		return hm;
 	}
 	
 	
@@ -85,7 +86,6 @@ public class DatabaseConnector {
 				+ "(firstname,lastname,email,password,salt,pseudo) VALUES"
 				+ "(?,?,?,?,?,?)";
 		PreparedStatement s = con.prepareStatement(addUser);
-		s = con.prepareStatement(addUser);
 		s.setString(1, u.get("firstName"));
 		s.setString(2, u.get("lastName"));
 		s.setString(3, u.get("email"));
@@ -103,7 +103,6 @@ public class DatabaseConnector {
 			+ "FROM users " 
 			+ "WHERE pseudo = ? AND email = ?;";
 		PreparedStatement s = con.prepareStatement(query);
-		s = con.prepareStatement(query);
 		s.setString(1, toCheck[0]);
 		s.setString(2, toCheck[1]);
 		ResultSet rs = s.executeQuery();
@@ -111,6 +110,30 @@ public class DatabaseConnector {
 			return true;
 		}
 		return false;
+	}
+	
+	
+	
+	/*
+	 * 	Returns a HashMap containing 
+	 * 		a String, representing the map, with "map" as key
+	 * 		an int, indicating the width of the map, with "width" as key
+	 */
+
+	public HashMap getMap(String map) throws SQLException {
+		String query = "SELECT * "
+				+ "FROM maps "
+				+ "WHERE name = ?";
+		PreparedStatement s = con.prepareStatement(query);
+		s.setString(1, map);
+		ResultSet rs = s.executeQuery();
+		while(rs.next()) {
+			HashMap toReturn = new HashMap();
+			toReturn.put("map", rs.getObject("map"));
+			toReturn.put("width", rs.getObject("width"));
+			return toReturn;
+		}
+		return null;
 	}
 	
 	

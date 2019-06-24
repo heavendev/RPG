@@ -1,26 +1,23 @@
 package ProjetMenu;
 
-import data.Squad;
 import game.Jeu;
-import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
-import quest.Quest;
 
-public class MainMenu{
+public class GameMenuController{
 	
 	private Jeu jeu;
-	private  int selection = 0;
-	private MainMenuDisplay display;
+	private int selection = 0;
+	private GameMenuDisplay display;
 	
-	public MainMenu(Jeu jeu) {
+	public GameMenuController(Jeu jeu) {
 		this.jeu = jeu;
-		this.display = new MainMenuDisplay();
+		display = new GameMenuDisplay();
 		display.display();
 	}
 	
-	public void resetMainMenu() {
+	public void resetGameMenu() {
 		selection = 0;
-		display.setSelection(this.selection);
+		display.setSelection(selection);
 	}
 	
 	public void scroll (Scroll scroll) {
@@ -40,17 +37,16 @@ public class MainMenu{
 			case CONFIRM :
 				switch (selection) {
 					case (0) :
-						jeu.goToGameplayIntro();
+						jeu.goToMap();
 						break;
 					case (1) :
-						jeu.goToLoadGame();
+						jeu.goToSaveGame();
 						break;
 					case (2) :
-						jeu.goToQuitGame();
+						jeu.goToMainMenu();
 						break;
 				}
 				break;
 		}
 	}
-	
 }

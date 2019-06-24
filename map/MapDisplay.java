@@ -99,6 +99,8 @@ public class MapDisplay implements Display{
 						System.out.print("@");
 					} else if (isQuestHere(i,j)) {
 						System.out.print("X");
+					} else if (map[i][j] == MapElements.NPC) {
+						System.out.print("&");
 					} else if (map[i][j] == MapElements.TREE) {
 						System.out.print("T");
 					} else if (map[i][j] == MapElements.ROCK) {

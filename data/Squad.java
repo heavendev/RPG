@@ -3,6 +3,7 @@ package data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import characters.Personnage;
 import quest.Quest;
 
 public class Squad {
@@ -12,9 +13,8 @@ public class Squad {
 	private int coorY;
 	private String currentMap;
 	private ArrayList<Quest> quests;
-	
-	
-	
+	private int mainQuestStage;
+	private ArrayList<Personnage> personnages;
 	
 	
 	public static Squad getInstance() {
@@ -26,6 +26,7 @@ public class Squad {
 	
 	private Squad() {
 		quests = new ArrayList<Quest>();
+		mainQuestStage = 1;
 	}
 	
 	
@@ -52,7 +53,6 @@ public class Squad {
 	
 	
 	
-	
 	public void addQuest(Quest quest) {
 		quests.add(quest);
 	}
@@ -66,15 +66,23 @@ public class Squad {
 		return quests;
 	}
 	
-	
-	
-	
-	
+	public void setPersonnages(ArrayList<Personnage> personnages) {
+		this.personnages = personnages;
+	}
+	public ArrayList<Personnage> getPersonnages() {
+		return personnages;
+	}
 	public String getCurrentMap() {
 		return currentMap;
 	}
 	public void setCurrentMap(String map) {
 		this.currentMap = map;
+	}
+	public int getMainQuestStage() {
+		return mainQuestStage;
+	}
+	public void setMainQuestStage(int stage) {
+		this.mainQuestStage = stage;
 	}
 	
 }
