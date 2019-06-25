@@ -111,6 +111,13 @@ public class Personnage implements Combat{
 	public void setXp(int xp) {
 		this.xp = xp;
 	}
+	public boolean isAlive() {
+		if (lifePoints > 0 && willPoints > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
 

@@ -352,7 +352,7 @@ public class Jeu extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-//		Jeu jeu = new Jeu();
+		Jeu jeu = new Jeu();
 		
 //		try {
 //			DatabaseTest.getDatabaseTest().test();
@@ -360,11 +360,11 @@ public class Jeu extends JFrame{
 //			e.printStackTrace();
 //		}
 		
-		try {
-			DatabaseTest.getDatabaseTest().t();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			DatabaseTest.getDatabaseTest().t();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 		
 	}
 

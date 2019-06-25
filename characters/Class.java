@@ -42,6 +42,14 @@ public class Class {
 			perso.setMaxWillPoints(perso.getMaxWillPoints()+50);
 			perso.setWillPoints(perso.getWillPoints()+50);
 			perso.setResistance(perso.getResistance()+5);
+		case "Canaille" :
+			perso.setAttack(perso.getAttack()+2);
+			perso.setMaxLifePoints(perso.getMaxLifePoints() + 10);
+			perso.setLifePoints(perso.getLifePoints() + 10);
+			perso.setDefence(perso.getDefence() + 2);
+			perso.setSpeed(perso.getSpeed()+1);
+			perso.setMaxWillPoints(perso.getMaxWillPoints()-30);
+			perso.setWillPoints(perso.getMaxWillPoints()-30);
 		}
 	}
 	

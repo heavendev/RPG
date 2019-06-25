@@ -108,14 +108,13 @@ public class CombatDisplay{
 		for(int i= 0; i < screen.length; i++) {
 			System.out.println(zonePersoGentil[i] + zonePersoMechant[i] +screen[i]);
 		}
-		// Selectionner plusieurs joueurs 	
 		reset();
 	}
 	
 	// Résultat des dégâts d'une personne n sur un autre personnage
-	public void roundresult(String nom, int degats,ArrayList<Personnage> pGentil,ArrayList<Personnage> pMechant) {
+	public void roundresult(String nom, String nomMechant, int degats, ArrayList<Personnage> pGentil, ArrayList<Personnage> pMechant) {
 		getLeftScreenInfos(pGentil,pMechant);
-		screen[6] = insertStringAt(screen[6],nom +"inflige" + degats +"degats", 10);
+		screen[6] = insertStringAt(screen[6], nomMechant +"inflige" + degats +"degats", 10);
 		screen[8] = insertStringAt(screen[8], "à" + nom, 10);
 		for(int i= 0; i < screen.length; i++) {
 			System.out.println(zonePersoGentil[i] + zonePersoMechant[i] +screen[i]);
