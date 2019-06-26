@@ -52,14 +52,13 @@ public class Personnage implements Combat{
 		HashMap toReturn = new HashMap();
 		if (Math.random() > 0.9) {
 			if(attackType == AttackTypes.PSYCHOLOGICAL) {
-				p.setWillPoints(p.getWillPoints() - getAttack()*2);
+				p.setWillPoints(p.getWillPoints() - (getAttack()*2));
 				toReturn.put("text", criticalHit.get((int)(Math.random()*criticalHit.size())));
 				toReturn.put("damage", getAttack()*2);
 			} else {
-				int degats = getAttack()*2 - p.getDefence();
-				p.setLifePoints(p.getLifePoints() - degats);
+				p.setLifePoints(p.getLifePoints() - (getAttack()*2 - p.getDefence()));
 				toReturn.put("text", criticalHit.get((int)(Math.random()*criticalHit.size())));
-				toReturn.put("damage", degats);
+				toReturn.put("damage", getAttack()*2 - p.getDefence());
 			}
 		} else {
 			if(attackType == AttackTypes.PSYCHOLOGICAL) {
@@ -67,10 +66,9 @@ public class Personnage implements Combat{
 				toReturn.put("text", attacks.get((int)(Math.random()*attacks.size())));
 				toReturn.put("damage", getAttack());
 			} else {
-				int degats = getAttack() - p.getDefence();
-				p.setLifePoints(p.getLifePoints() - degats);
+				p.setLifePoints(p.getLifePoints() - (getAttack() - p.getDefence()));
 				toReturn.put("text", attacks.get((int)(Math.random()*attacks.size())));
-				toReturn.put("damage", degats);
+				toReturn.put("damage", getAttack() - p.getDefence());
 			}
 		}
 		return toReturn;

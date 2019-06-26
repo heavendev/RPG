@@ -198,6 +198,7 @@ public class CombatController {
 		}
 		private void scroll(Scroll scroll) {
 			if (scroll == Scroll.CONFIRM) {
+				status = null;
 				goToNextStep();
 			}
 		}
@@ -277,11 +278,20 @@ public class CombatController {
 	}
 	
 	private class ActionResolution {
-		private void reset(Personnage p, Ennemy ennemy, Action action) {
-			
+		private void reset(Personnage p, Ennemy ennemy, Action choice) {
+			HashMap action;
+			if (choice == Action.ATTACK) {
+				action = p.attaquer(ennemy);
+			} else {
+				action = p.utiliserPouvoir(ennemy);
+			}
+			display.playerActionResolver(p.getName(), ennemy.getName(), (Integer)(action.get("damage")), (String[])(action.get("text")), team, ennemies);
 		}
 		private void scroll(Scroll scroll) {
-			
+			if (scroll == Scroll.CONFIRM) {
+				status = null;
+				goToNextStep();
+			}
 		}
 	}
 	

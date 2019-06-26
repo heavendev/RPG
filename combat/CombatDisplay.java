@@ -85,12 +85,13 @@ public class CombatDisplay{
 	}
 	
 	// Selectionner actions en fonction du personnage mob 
-	public void playerActionResolver(String nom, String nomMob, int pntVie,
+	public void playerActionResolver(String nom, String nomMob, int pntVie, String[] actionText,
 			ArrayList<Personnage> pGentil,ArrayList<Ennemy> pMechant) {
 		getLeftScreenInfos(pGentil,pMechant);
 		screen[6] = insertStringAt(screen[6], nom +"inflige" + pntVie + "degats", 10);
 		screen[8] = insertStringAt(screen[8], "à" + nomMob, 10);
-		screen[10] = insertStringAt(screen[10],"-> Continuer", 25);
+		screen[16] = insertStringAt(screen[16],"-> Continuer", 25);
+		
 		for(int i= 0; i < screen.length; i++) {
 			System.out.println(zonePersoGentil[i] + zonePersoMechant[i] +screen[i]);
 		}
