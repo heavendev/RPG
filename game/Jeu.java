@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import Intro.*;
 import ProjetMenu.*;
+import characters.Ennemy;
 import map.*;
 import nonActiveClasses.*;
 import npcs.*;
@@ -352,7 +353,8 @@ public class Jeu extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		Jeu jeu = new Jeu();
+//		Jeu jeu = new Jeu();
+		
 		
 //		try {
 //			DatabaseTest.getDatabaseTest().test();

@@ -1,42 +1,98 @@
 package characters;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import combat.Combat;
+import nonActiveClasses.AttackTypes;
 
 public class Personnage implements Combat{
 	
-	private String name;
+	protected String name;
 	
-	private int maxLifePoints = 100;
-	private int lifePoints = 100;
-	private int maxWillPoints = 100;
-	private int willPoints = 100;
-	private int attack = 10;
-	private int magic = 5;
-	private int defence = 5;
-	private int resistance = 5;
-	private int speed = 5;
+	protected int maxLifePoints = 100;
+	protected int lifePoints = 100;
+	protected int maxWillPoints = 100;
+	protected int willPoints = 100;
+	protected int attack = 10;
+	protected int magic = 5;
+	protected int defence = 5;
+	protected int resistance = 5;
+	protected int speed = 5;
 	
-	private int level = 0;
-	private int xp = 0;
-	private Class charClass;
+	protected int level = 0;
+	protected int xp = 0;
+	protected Class charClass;
+	protected AttackTypes attackType = AttackTypes.PHYSICAL;
+	
+	protected ArrayList<String[]> attacks;
+	protected ArrayList<String[]> criticalHit;
+	protected ArrayList<String[]> magicAttack;
+	protected ArrayList<String[]> magicCriticalHit;
 	
 	
-	
-	public Personnage(String name, int level, int xp, String classe) {
+	public Personnage(String name, int level, int xp, String classe, ArrayList<String[]> attacks,
+			ArrayList<String[]> criticalHit, ArrayList<String[]> magicAttack, ArrayList<String[]> magicCriticalHit) {
+		this.attacks = attacks;
+		this.criticalHit = criticalHit;
+		this.magicAttack = magicAttack;
+		this.magicCriticalHit = magicCriticalHit;
 		this.name = name;
-		this.level = level;
 		this.xp = xp;
 		this.charClass = new Class(this,classe);
-		
-		
+		while (this.level < level) {
+			levelUp();
+			this.level++;
+		}
 	}
 	
 	
 	
+	public HashMap attaquer(Personnage p) {
+		HashMap toReturn = new HashMap();
+		if (Math.random() > 0.9) {
+			if(attackType == AttackTypes.PSYCHOLOGICAL) {
+				p.setWillPoints(p.getWillPoints() - getAttack()*2);
+				toReturn.put("text", criticalHit.get((int)(Math.random()*criticalHit.size())));
+				toReturn.put("damage", getAttack()*2);
+			} else {
+				int degats = getAttack()*2 - p.getDefence();
+				p.setLifePoints(p.getLifePoints() - degats);
+				toReturn.put("text", criticalHit.get((int)(Math.random()*criticalHit.size())));
+				toReturn.put("damage", degats);
+			}
+		} else {
+			if(attackType == AttackTypes.PSYCHOLOGICAL) {
+				p.setWillPoints(p.getWillPoints() - getAttack());
+				toReturn.put("text", attacks.get((int)(Math.random()*attacks.size())));
+				toReturn.put("damage", getAttack());
+			} else {
+				int degats = getAttack() - p.getDefence();
+				p.setLifePoints(p.getLifePoints() - degats);
+				toReturn.put("text", attacks.get((int)(Math.random()*attacks.size())));
+				toReturn.put("damage", degats);
+			}
+		}
+		return toReturn;
+	}
 	
+	public HashMap utiliserPouvoir(Personnage p) {
+		HashMap toReturn = new HashMap();
+		if (Math.random() > 0.9) {
+			p.setLifePoints(p.getLifePoints() - (getMagic()*2 - p.getResistance()));
+			toReturn.put("text", magicCriticalHit.get((int)(Math.random()*magicCriticalHit.size())));
+			toReturn.put("damage", getMagic()*2 - p.getResistance());
+		} else {
+			p.setLifePoints(p.getLifePoints() - (getMagic() - p.getResistance()));
+			toReturn.put("text", magicAttack.get((int)(Math.random()*magicAttack.size())));
+			toReturn.put("damage", getMagic() - p.getResistance());
+		}
+		return toReturn;
+	}
 	
-	
-	
+	protected void levelUp() {
+		
+	}
 	
 	
 	public int getMaxLifePoints() {
@@ -118,19 +174,41 @@ public class Personnage implements Combat{
 			return false;
 		}
 	}
-
-
-
-
-
-
-
-
-
-	@Override
-	public int attaquer(Personnage personnageCible) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Class getCharClass() {
+		return charClass;
+	}
+	public void setCharClass(Class charClass) {
+		this.charClass = charClass;
+	}
+	public AttackTypes getAttackType() {
+		return attackType;
+	}
+	public void setAttackType(AttackTypes attackType) {
+		this.attackType = attackType;
+	}
+	public ArrayList<String[]> getAttacks() {
+		return attacks;
+	}
+	public void setAttacks(ArrayList<String[]> attacks) {
+		this.attacks = attacks;
+	}
+	public ArrayList<String[]> getCriticalHit() {
+		return criticalHit;
+	}
+	public void setCriticalHit(ArrayList<String[]> criticalHit) {
+		this.criticalHit = criticalHit;
+	}
+	public ArrayList<String[]> getMagicAttack() {
+		return magicAttack;
+	}
+	public void setMagicAttack(ArrayList<String[]> magicAttack) {
+		this.magicAttack = magicAttack;
+	}
+	public ArrayList<String[]> getMagicCriticalHit() {
+		return magicCriticalHit;
+	}
+	public void setMagicCriticalHit(ArrayList<String[]> magicCriticalHit) {
+		this.magicCriticalHit = magicCriticalHit;
 	}
 
 
@@ -140,54 +218,7 @@ public class Personnage implements Combat{
 
 
 
-
-	@Override
-	public void utiliserObjet() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-
-
-
-
-	@Override
-	public int utiliserObjet(Personnage personnageCible) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-
-
-
-
-
-
-
-	@Override
-	public void utiliserPouvoir() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-
-
-
-
-	@Override
-	public int utiliserPouvoir(Personnage personnageCible) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	
 	
 }

@@ -118,10 +118,11 @@ public class CombatController {
 		Personnage p = combatOrder.get(step);
 		if (team.contains(p) && p.isAlive()) {
 			status = Status.ACTION_CHOICE;
-			
-		} else if (p.isAlive()) {
+			actionChoice.reset(p);
+		} else if (ennemies.contains(p) && p.isAlive()) {
+			Ennemy ennemy = ennemies.get(ennemies.indexOf(p));
 			status = Status.ENNEMY_TURN;
-			ennemyTurn.reset(p);
+			ennemyTurn.reset(ennemy);
 		}
 	}
 	
@@ -131,20 +132,41 @@ public class CombatController {
 			Personnage p = combatOrder.get(step);
 			if (team.contains(p) && p.isAlive()) {
 				status = Status.ACTION_CHOICE;
-				
-			} else if (p.isAlive()) {
+				actionChoice.reset(p);
+			} else if (ennemies.contains(p) && p.isAlive()) {
+				Ennemy ennemy = ennemies.get(ennemies.indexOf(p));
 				status = Status.ENNEMY_TURN;
-				ennemyTurn.reset(p);
+				ennemyTurn.reset(ennemy);
+			} else {
+				goToNextStep();
 			}
 		} catch (NullPointerException e) {
 			if (!isCombatEnded()) {
 				combatLoop();
+			} else {
+				
 			}
 		}
 	}
 	
-	///////////////////////////
-	private boolean isCombatEnded() {
+	public boolean isCombatEnded() {
+		boolean verif = true;
+		boolean verif2 = true;
+		for (Personnage p : team) {
+			if (p.getLifePoints()> 0 && p.getWillPoints() > 0) {
+				verif = false;
+				break;
+			}
+		}
+		for (Personnage p : ennemies) {
+			if (p.getLifePoints() > 0 && p.getWillPoints() > 0) {
+				verif2 = false;
+				break;
+			}
+		}
+		if (!verif && !verif2) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -166,8 +188,13 @@ public class CombatController {
 	
 	
 	private class EnnemyTurn {
-		private void reset(Personnage p) {
+		private void reset(Ennemy p) {
+			Personnage target = getRandomPerso();
+			p.attaquerPerso(null);
 			
+		}
+		private Personnage getRandomPerso() {
+			return team.get((int)(Math.random()*team.size()));
 		}
 		private void scroll(Scroll scroll) {
 			if (scroll == Scroll.CONFIRM) {
@@ -178,37 +205,79 @@ public class CombatController {
 	
 	private class ActionChoice {
 		Personnage p;
+		int selection;
 		private void reset(Personnage p) {
 			this.p = p;
-			
+			selection = 0;
+			display.combatPersoChoice(p.getName(), selection, team, ennemies);
 		}
 		private void scroll(Scroll scroll) {
 			switch (scroll) {
 			case UP :
-				
+				if (selection > 0) {
+					selection --;
+				}
+				display.combatPersoChoice(p.getName(), selection, team, ennemies);
 				break;
 			case DOWN :
-				
+				if (selection < 1) {
+					selection++;
+				}
+				display.combatPersoChoice(p.getName(), selection, team, ennemies);
 				break;
 			case CONFIRM :
 				status = Status.TARGET_CHOICE;
-				targetChoice.reset(p);
+				if (selection == 0) {
+					targetChoice.reset(p, Action.ATTACK);
+				} else if (selection == 1) {
+					targetChoice.reset(p, Action.SPELL);
+				}
 				break;
 			}
 		}
 	}
 	
 	private class TargetChoice {
-		private void reset(Personnage p) {
-			
+		Personnage p;
+		int selection;
+		Action action;
+		ArrayList<Ennemy> tmp;
+		private void reset(Personnage p, Action action) {
+			this.p = p;
+			this.action = action;
+			selection = 0;
+			tmp = new ArrayList<Ennemy>();
+			for (Ennemy e : ennemies) {
+				if (e.isAlive()) {
+					tmp.add(e);
+				}
+			}
+			display.targetChoice(p.getName(), selection, team, ennemies);
 		}
 		private void scroll(Scroll scroll) {
-			
+			switch (scroll) {
+			case UP :
+				if (selection > 0) {
+					selection--;
+				}
+				display.targetChoice(p.getName(), selection, team, ennemies);
+				break;
+			case DOWN :
+				if (selection < (tmp.size()-1)) {
+					selection++;
+				}
+				display.targetChoice(p.getName(), selection, team, ennemies);
+				break;
+			case CONFIRM :
+				status = Status.ACTION_COMPLETE;
+				actionResolution.reset(p, tmp.get(selection), action);
+				break;
+			}
 		}
 	}
 	
 	private class ActionResolution {
-		private void reset(Personnage p) {
+		private void reset(Personnage p, Ennemy ennemy, Action action) {
 			
 		}
 		private void scroll(Scroll scroll) {
@@ -224,6 +293,11 @@ public class CombatController {
 		ACTION_CHOICE,
 		TARGET_CHOICE,
 		ACTION_COMPLETE;
+	}
+	
+	private enum Action {
+		ATTACK,
+		SPELL;
 	}
 	
 }

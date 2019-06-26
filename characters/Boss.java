@@ -1,9 +1,12 @@
 package characters;
 
-public class Boss extends Personnage{
+import java.util.ArrayList;
 
-	public Boss(String name, int level, int xp, String classe) {
-		super(name, level, xp, classe);
+public class Boss extends Ennemy{
+
+	public Boss(String name, int level, int xp, String classe, ArrayList<String[]> attacks,
+			ArrayList<String[]> criticalHit, ArrayList<String[]> magicAttack, ArrayList<String[]> magicCriticalHit) {
+		super(name, level, xp, classe, attacks, criticalHit, magicAttack, magicCriticalHit);
 	}
 
 }
