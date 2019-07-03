@@ -88,10 +88,12 @@ public class CombatDisplay{
 	public void playerActionResolver(String nom, String nomMob, int pntVie, String[] actionText,
 			ArrayList<Personnage> pGentil,ArrayList<Ennemy> pMechant) {
 		getLeftScreenInfos(pGentil,pMechant);
-		screen[6] = insertStringAt(screen[6], nom +"inflige" + pntVie + "degats", 10);
-		screen[8] = insertStringAt(screen[8], "à" + nomMob, 10);
+		for (int i = 0; i < actionText.length; i++) {
+			screen[6+i] = insertStringAt(screen[6+i], actionText[i], 5);
+		}
+		screen[6 + actionText.length + 2] = insertStringAt(screen[6 + actionText.length + 2], nom + "inflige" + pntVie + "degats", 10);
+		screen[8 + actionText.length + 2] = insertStringAt(screen[8 + actionText.length + 2], "à" + nomMob, 10);
 		screen[16] = insertStringAt(screen[16],"-> Continuer", 25);
-		
 		for(int i= 0; i < screen.length; i++) {
 			System.out.println(zonePersoGentil[i] + zonePersoMechant[i] +screen[i]);
 		}
