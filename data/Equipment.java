@@ -1,11 +1,13 @@
 package data;
 
+import java.util.HashMap;
+
 import characters.Personnage;
 
 public class Equipment implements Cloneable{
 	
 	private Personnage owner;
-	
+	private String name;
 	private int attackBonus;
 	private int defenceBonus;
 	private int magicBonus;
@@ -13,11 +15,11 @@ public class Equipment implements Cloneable{
 	private int speedBonus;
 	private int lifePointsBonus;
 	private int willPointsBonus;
-	
 	private int value;
 
-	public Equipment(int attackBonus, int defenceBonus, int magicBonus, int resistanceBonus,
+	public Equipment(String name, int attackBonus, int defenceBonus, int magicBonus, int resistanceBonus,
 			int speedBonus, int lifePointsBonus, int willPointsBonus, int value) {
+		this.name = name;
 		this.attackBonus = attackBonus;
 		this.defenceBonus = defenceBonus;
 		this.magicBonus = magicBonus;
@@ -100,6 +102,23 @@ public class Equipment implements Cloneable{
 		}
 	}
 	
+	public HashMap<String,String> getEquipmentDetails() {
+		HashMap<String,String> h = new HashMap<String,String>();
+		h.put("name", name);
+		h.put("attackBonus", ""+attackBonus);
+		h.put("defenceBonus", ""+defenceBonus);
+		h.put("magicBonus", ""+magicBonus);
+		h.put("resistanceBonus", ""+resistanceBonus);
+		h.put("speedBonus", ""+speedBonus);
+		h.put("lifePointsBonus", ""+lifePointsBonus);
+		h.put("willPointsBonus", ""+willPointsBonus);
+		h.put("value", ""+value);
+		return h;
+	}
+	
+ 	public String getName() {
+		return name;
+	}
 	
 	
 	
