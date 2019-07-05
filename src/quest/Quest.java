@@ -68,6 +68,11 @@ public class Quest {
 	}
 	
 	
+//	public Boss quest.getBoss() {
+//		if (type == "boss") {
+//			return boss;
+//		}
+//	}
 	
 	public String getQuestName() {
 		return questName;

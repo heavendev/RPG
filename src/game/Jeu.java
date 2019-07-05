@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import Intro.*;
 import ProjetMenu.*;
+import characters.Ennemy;
 import map.*;
 import nonActiveClasses.*;
 import npcs.*;
@@ -64,7 +65,7 @@ public class Jeu extends JFrame{
 							 "QgQRRM PERE CASTOR BRQQgRgMRBQB       ",
 							 "ZgZgDg             BDgQMZgZgB5        "};
 		String[] life = {"blabla","blubliblou","blabla"};
-		NPC npc = new NPC("Pere Castor",null,portrait,life,"main",41,33);
+		NPC npc = new NPC("Pere Castor",false,null,portrait,life,"main",41,33);
 		String[] description = {"blabla","blubliblou","blabla"};
 		String[] presentation = {"blabla","blubliblou","blabluig"};
 		String[] objectiveReached = {"blabla","blubliblou"};
@@ -353,6 +354,10 @@ public class Jeu extends JFrame{
 	
 	public static void main(String[] args) {
 		Jeu jeu = new Jeu();
+<<<<<<< HEAD:src/game/Jeu.java
+=======
+		
+>>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:game/Jeu.java
 		
 //		try {
 //			DatabaseTest.getDatabaseTest().test();

@@ -7,6 +7,7 @@ import quest.Quest;
 public class NPC {
 	
 	private String name;
+	private boolean trader;
 	private ArrayList<Quest> quests;
 	private String[] portrait;
 	private String[] life;
@@ -16,8 +17,9 @@ public class NPC {
 	
 	
 	
-	public NPC(String name, ArrayList<Quest> quests, String[] portrait, String[] life, String map, int x, int y) {
+	public NPC(String name, boolean trader, ArrayList<Quest> quests, String[] portrait, String[] life, String map, int x, int y) {
 		this.name = name;
+		this.trader = trader;
 		this.quests = quests;
 		this.portrait = portrait;
 		this.life = life;
@@ -27,7 +29,9 @@ public class NPC {
 	}
 	
 	
-	
+	public boolean isTrader() {
+		return trader;
+	}
 	public String getMap() {
 		return map;
 	}

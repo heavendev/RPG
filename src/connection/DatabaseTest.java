@@ -91,6 +91,7 @@ public class DatabaseTest {
 		PreparedStatement s = con.prepareStatement(query);
 		ResultSet rs = s.executeQuery();
 		while (rs.next()) {
+			System.out.println(rs.getBoolean("blyn"));
 			System.out.println(rs.getInt("blyn"));
 		}
 	}
