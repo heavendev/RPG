@@ -116,6 +116,10 @@ public class Equipment implements Cloneable{
 		return h;
 	}
 	
+	public int getValue() {
+		return value;
+	}
+	
  	public String getName() {
 		return name;
 	}

@@ -1,6 +1,7 @@
 package npcs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import data.Equipment;
 import data.GameEquipmentList;
@@ -31,6 +32,8 @@ public class NpcController {
 	private QuestPresentationController questPresentation;
 	private MarketBuyController marketBuy;
 	private MarketSellController marketSell;
+	private ItemCheckController itemCheck;
+	private TransactionConfirmedController transactionConfirmed;
 	
 	
 	
@@ -79,6 +82,12 @@ public class NpcController {
 				break;
 			case MARKET_SELL :
 				marketSell.scroll(scroll);
+				break;
+			case ITEM_CHECK :
+				itemCheck.scroll(scroll);
+				break;
+			case TRANSACTION_CONFIRMED :
+				transactionConfirmed.scroll(scroll);
 				break;
 		}
 	}
@@ -268,9 +277,7 @@ public class NpcController {
 					break;
 				case CONFIRM :
 					if (selection == 0) {
-						quest.setStatus(QuestStatus.ACCEPTED);
-						Squad.getInstance().addQuest(quest);
-						npc.removeQuest(quest);
+						quest.acceptQuest(npc);
 						jeu.goToQuest(quest);
 					} else {
 						status = Status.QUEST_LIST;
@@ -303,27 +310,125 @@ public class NpcController {
 					display.displayTrade(portrait, itemNames, selection);
 					break;
 				case DOWN :
-					
+					if (selection < list.size()-1) {
+						selection++;
+					}
 					display.displayTrade(portrait, itemNames, selection);
 					break;
 				case CONFIRM :
-					
+					status = Status.ITEM_CHECK;
+					itemCheck.reset(list.get(selection), true);
+					break;
+				case ESCAPE :
+					status = Status.DIALOGUE;
+					dialogue.reset();
 					break;
 			}
 		}
 	}
 	
 	private class MarketSellController {
+		private int selection;
+		private ArrayList<Equipment> list;
+		private String[] itemNames;
 		private void reset() {
-			
+			selection = 0;
+			list = Squad.getInstance().getEquipment();
+			itemNames = new String[list.size()];
+			for (int i = 0; i < list.size(); i++) {
+				itemNames[i] = list.get(i).getName();
+			}
+			display.displayTrade(portrait, itemNames, selection);
 		}
 		private void scroll(Scroll scroll) {
-			
+			switch (scroll) {
+				case UP :
+					if (selection > 0) {
+						selection--;
+					}
+					display.displayTrade(portrait, itemNames, selection);
+					break;
+				case DOWN :
+					if (selection < list.size()-1) {
+						selection++;
+					}
+					display.displayTrade(portrait, itemNames, selection);
+					break;
+				case CONFIRM :
+					status = Status.ITEM_CHECK;
+					itemCheck.reset(list.get(selection), false);
+					break;
+				case ESCAPE :
+					status = Status.DIALOGUE;
+					dialogue.reset();
+					break;
+			}
 		}
 	}
 	
+	private class ItemCheckController {
+		private Equipment item;
+		private int selection;
+		private boolean buyingOrSelling;
+		private HashMap itemDetails;
+		private void reset(Equipment item, boolean buyingOrSelling) {
+			this.item = item;
+			selection = 0;
+			this.buyingOrSelling = buyingOrSelling;
+			itemDetails = item.getEquipmentDetails();
+			display.displayItemDetails(itemDetails, selection, buyingOrSelling);
+		}
+		private void scroll(Scroll scroll) {
+			switch (scroll) {
+			case UP :
+				if (selection > 0) {
+					selection--;
+				}
+				display.displayItemDetails(itemDetails, selection, buyingOrSelling);
+				break;
+			case DOWN :
+				if (selection < 1) {
+					selection++;
+				}
+				display.displayItemDetails(itemDetails, selection, buyingOrSelling);
+				break;
+			case CONFIRM :
+				if (selection == 0) {
+					status = Status.TRANSACTION_CONFIRMED;
+					boolean success = true;
+					if (buyingOrSelling && Squad.getInstance().getGold() >= item.getValue()) {
+						item.buy();
+					} else if (buyingOrSelling) {
+						success = false;
+					} else {
+						item.sell();
+					}
+					transactionConfirmed.reset(buyingOrSelling, success, item.getName());
+				} else {
+					if (buyingOrSelling) {
+						status = Status.MARKET_BUY;
+						marketBuy.reset();
+					} else {
+						status = Status.MARKET_SELL;
+						marketSell.reset();
+					}
+				}
+				break;
+			}
+		}
+	}
 	
-	
+	private class TransactionConfirmedController {
+		private void reset(boolean buyingOrSelling, boolean transactionSuccess, String itemName) {
+			display.displayItemTradeConfirmation(buyingOrSelling, transactionSuccess, itemName);
+		}
+		private void scroll(Scroll scroll) {
+			if (scroll == Scroll.CONFIRM) {
+				status = Status.DIALOGUE;
+				dialogue.reset();
+			}
+		}
+	}
 	
 	private enum Status {
 		DIALOGUE,
@@ -332,7 +437,9 @@ public class NpcController {
 		TURN_IN_LIST,
 		QUEST_PRESENTATION,
 		MARKET_BUY,
-		MARKET_SELL;
+		MARKET_SELL,
+		ITEM_CHECK,
+		TRANSACTION_CONFIRMED;
 	}
 	
 }
