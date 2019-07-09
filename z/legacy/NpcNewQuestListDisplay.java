@@ -1,10 +1,10 @@
-package npcs;
+package z.legacy;
 
 import java.util.ArrayList;
 
 import nonActiveClasses.Display;
 
-public class NpcQuestTurnInListDisplay implements Display{
+public class NpcNewQuestListDisplay implements Display{
 	
 	private int selection;
 	private ArrayList<String> questNames;
@@ -33,18 +33,17 @@ public class NpcQuestTurnInListDisplay implements Display{
 	public void reset(ArrayList<String> questNames, int selection) {
 		this.questNames = questNames;
 		this.selection = selection;
-		for (int i = 0; i < questNames.size(); i++) {
-			System.out.println(questNames.get(i));
-		}
 		display();
 	}
 	
 	public void display() {
 		for (int i = 0; i < questNames.size(); i++) {
-			screen[(i*2)+2] = insertStringAt(screen[(i*2)+2], questNames.get(i), 10);
+				screen[2+(2*i)] = insertStringAt(screen[2+(2*i)], questNames.get(i), 10);
+			if (i == questNames.size()-1) {
+				screen[4+(2*i)] = insertStringAt(screen[4+(4*i)], "back", 10);
+			}
 		}
-		screen[2+(2*questNames.size())] = insertStringAt(screen[2+(2*questNames.size())], "back", 10);
-		screen[selection*2] = insertStringAt(screen[selection*2], "->", 7);
+		screen[(selection*2)] = insertStringAt(screen[(selection*2)], "->", 7);
 		for (int i = 0; i < screen.length; i++) {
 			System.out.println(screen[i]);
 		}

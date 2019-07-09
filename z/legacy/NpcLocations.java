@@ -1,6 +1,8 @@
-package npcs;
+package z.legacy;
 
 import java.util.ArrayList;
+
+import npcs.NPC;
 
 public class NpcLocations {
 	
@@ -40,5 +42,6 @@ public class NpcLocations {
 		}
 		return toReturn;
 	}
+	
 	
 }

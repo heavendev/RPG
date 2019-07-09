@@ -59,7 +59,7 @@ public class NpcDisplay {
 		for (int i = 0; i < questNames.size(); i++) {
 			screen[2+(2*i)] = insertStringAt(screen[2+(2*i)], questNames.get(i), 50);
 		}
-		screen[2+(2*questNames.size())] = insertStringAt(screen[2+(2*selection)], "back", 50);
+		screen[2+(2*questNames.size())] = insertStringAt(screen[2+(2*questNames.size())], "back", 50);
 		screen[2+(2*selection)] = insertStringAt(screen[2+(2*selection)], "->", 47);
 		displayAndReset(portrait);
 	}

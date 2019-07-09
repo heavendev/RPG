@@ -1,4 +1,4 @@
-package npcs;
+package z.legacy;
 
 import nonActiveClasses.Display;
 

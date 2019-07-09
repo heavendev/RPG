@@ -145,27 +145,60 @@ public class NpcController {
 					display.displayDialogue(portrait, selection, questAvailable, turnInAvailable, isTrader);
 					break;
 				case CONFIRM :
-					selection = selection + (questAvailable? 0 : 1) + (turnInAvailable ? 0 : 1) + (isTrader ? 0 : 2);
 					switch (selection) {
 						case 0 :
 							status = Status.LIFE;
 							life.reset();
 							break;
 						case 1 :
-							status = Status.QUEST_LIST;
-							questList.reset();
+							if (questAvailable) {
+								status = Status.QUEST_LIST;
+								questList.reset();
+							} else if (turnInAvailable) {
+								status = Status.TURN_IN_LIST;
+								turnInList.reset();
+							} else if (isTrader) {
+								status = Status.MARKET_BUY;
+								marketBuy.reset();
+							} else {
+								jeu.goToMap();
+							}
 							break;
 						case 2 :
-							status = Status.TURN_IN_LIST;
-							turnInList.reset();
+							if (turnInAvailable && questAvailable) {
+								status = Status.TURN_IN_LIST;
+								turnInList.reset();
+							} else if (isTrader && questAvailable) {
+								status = Status.MARKET_BUY;
+								marketBuy.reset();
+							} else if (isTrader && turnInAvailable) {
+								status = Status.MARKET_BUY;
+								marketBuy.reset();
+							} else if (isTrader) {
+								status = Status.MARKET_SELL;
+								marketSell.reset();
+							} else {
+								jeu.goToMap();
+							}
 							break;
 						case 3 :
-							status = Status.MARKET_BUY;
-							marketBuy.reset();
+							if (isTrader && questAvailable && turnInAvailable) {
+								status = Status.MARKET_BUY;
+								marketBuy.reset();
+							} else if (isTrader && (questAvailable || turnInAvailable)) {
+								status = Status.MARKET_SELL;
+								marketSell.reset();
+							} else {
+								jeu.goToMap();
+							}
 							break;
 						case 4 :
-							status = Status.MARKET_SELL;
-							marketSell.reset();
+							if (isTrader && questAvailable && turnInAvailable) {
+								status = Status.MARKET_SELL;
+								marketSell.reset();
+							} else {
+								jeu.goToMap();
+							}
 							break;
 						case 5 :
 							jeu.goToMap();

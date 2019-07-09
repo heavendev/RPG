@@ -1,4 +1,4 @@
-package game;
+package z.legacy;
 
 import java.awt.event.KeyEvent;
 import java.security.NoSuchAlgorithmException;
@@ -7,29 +7,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
+import Intro.*;
+import ProjetMenu.*;
 import characters.Ennemy;
-import data.Squad;
-import nonActiveClasses.Direction;
-import nonActiveClasses.Displaying;
-import nonActiveClasses.QuestStatus;
-import nonActiveClasses.Scroll;
-import npcs.NPC;
-import npcs.NpcLocations;
-import quest.Quest;
-import ProjetMenu.GameMenuController;
-import ProjetMenu.MainMenuController;
-import Intro.GameplayIntroController;
-import Intro.StoryIntroController;
-import map.MapController;
-import connection.ConnectionController;
-import connection.DatabaseConnector;
-import connection.LoginController;
-import connection.RegistrationController;
-import connection.WelcomeController;
-import quest.QuestEventController;
-import quest.QuestPageController;
-import npcs.NpcController;
-import npcs.NpcLocations;
+import map.*;
+import nonActiveClasses.*;
+import npcs.*;
+import quest.*;
+import z.legacy.NpcDialogueController;
+import z.legacy.NpcLifeController;
+import z.legacy.NpcLocations;
+import z.legacy.NpcNewQuestListController;
+import z.legacy.NpcQuestPresentationController;
+import z.legacy.NpcQuestTurnInListController;
+import connection.*;
+import data.*;
 
 public class Jeu extends JFrame{
 	
@@ -91,9 +83,9 @@ public class Jeu extends JFrame{
 		npcs.add(npc);
 		NpcLocations.getNpcLocations(npcs);
 		
-//		goToMainMenu();
+		goToMainMenu();
 //		goToWelcome();
-		goToMap();
+//		goToMap();
 		
 	}
 	
@@ -140,7 +132,19 @@ public class Jeu extends JFrame{
 				((QuestPageController) gameElements.get("QuestPage")).scroll(scroll);
 				break;
 			case NPC_DIALOGUE :
-				((NpcController) gameElements.get("NpcPage")).scroll(scroll);
+				((NpcDialogueController) gameElements.get("NpcDialoguePage")).scroll(scroll);
+				break;
+			case NPC_LIFE :
+				((NpcLifeController) gameElements.get("NpcLifePage")).scroll(scroll);
+				break;
+			case NPC_NEW_QUESTS :
+				((NpcNewQuestListController) gameElements.get("NpcNewQuestListPage")).scroll(scroll);
+				break;
+			case NPC_PRESENTING_QUEST :
+				((NpcQuestPresentationController) gameElements.get("NpcQuestPresentationPage")).scroll(scroll);
+				break;
+			case NPC_QUEST_TURN_IN :
+				((NpcQuestTurnInListController) gameElements.get("NpcQuestTurnInListPage")).scroll(scroll);															
 				break;
 			default:
 				
@@ -278,9 +282,41 @@ public class Jeu extends JFrame{
 	public void goToNpcDialogue(NPC npc) {
 		onDisplay = Displaying.NPC_DIALOGUE;
 		try {
-			((NpcController) gameElements.get("NpcPage")).reset(npc);
+			((NpcDialogueController) gameElements.get("NpcDialoguePage")).reset(npc);
 		} catch (NullPointerException e) {
-			gameElements.put("NpcPage", new NpcController(this,npc));
+			gameElements.put("NpcDialoguePage", new NpcDialogueController(this,npc));
+		}
+	}
+	public void goToNpcLife(NPC npc) {
+		onDisplay = Displaying.NPC_LIFE;
+		try {
+			((NpcLifeController) gameElements.get("NpcLifePage")).reset(npc);
+		} catch (NullPointerException e) {
+			gameElements.put("NpcLifePage", new NpcLifeController(this,npc));
+		}
+	}
+	public void goToNpcQuestList(NPC npc) {
+		onDisplay = Displaying.NPC_NEW_QUESTS;
+		try {
+			((NpcNewQuestListController) gameElements.get("NpcNewQuestListPage")).reset(npc);
+		} catch (NullPointerException e) {
+			gameElements.put("NpcNewQuestListPage", new NpcNewQuestListController(this,npc));
+		}
+	}
+	public void goToNpcQuestPresentation(NPC npc, Quest quest) {
+		onDisplay = Displaying.NPC_PRESENTING_QUEST;
+		try {
+			((NpcQuestPresentationController) gameElements.get("NpcQuestPresentationPage")).reset(quest, npc);
+		} catch (NullPointerException e) {
+			gameElements.put("NpcQuestPresentationPage", new NpcQuestPresentationController(this, quest, npc));
+		}
+	}
+	public void goToNpcQuestTurnIn(NPC npc) {
+		onDisplay = Displaying.NPC_QUEST_TURN_IN;
+		try {
+			((NpcQuestTurnInListController) gameElements.get("NpcQuestTurnInListPage")).reset(npc);
+		} catch (NullPointerException e) {
+			gameElements.put("NpcQuestTurnInListPage", new NpcQuestTurnInListController(this,npc));
 		}
 	}
 	public void goToQuestEvent(Quest quest) {

@@ -1,11 +1,11 @@
-package npcs;
+package z.legacy;
 
 import java.util.ArrayList;
 
 import data.Squad;
-import game.Jeu;
 import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
+import npcs.NPC;
 import quest.Quest;
 
 public class NpcDialogueController {

@@ -1,7 +1,8 @@
-package npcs;
+package z.legacy;
 
 import game.Jeu;
 import nonActiveClasses.Scroll;
+import npcs.NPC;
 
 public class NpcLifeController {
 	
