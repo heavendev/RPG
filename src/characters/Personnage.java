@@ -4,22 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import combat.Combat;
-<<<<<<< HEAD:src/characters/Personnage.java
-import  java.util.ArrayList;
-import java.util.HashMap;
-
-public class Personnage implements Combat{
-	
-	//mes variables
-	protected String name;
-=======
 import nonActiveClasses.AttackTypes;
 
 public class Personnage implements Combat{
 	
 	protected String name;
 	
->>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:characters/Personnage.java
 	protected int maxLifePoints = 100;
 	protected int lifePoints = 100;
 	protected int maxWillPoints = 100;
@@ -33,10 +23,7 @@ public class Personnage implements Combat{
 	protected int level = 0;
 	protected int xp = 0;
 	protected Class charClass;
-<<<<<<< HEAD:src/characters/Personnage.java
-=======
 	protected AttackTypes attackType = AttackTypes.PHYSICAL;
->>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:characters/Personnage.java
 	
 	protected ArrayList<String[]> attacks;
 	protected ArrayList<String[]> criticalHit;
@@ -44,36 +31,15 @@ public class Personnage implements Combat{
 	protected ArrayList<String[]> magicCriticalHit;
 	
 	
-<<<<<<< HEAD:src/characters/Personnage.java
-	//constructeur 
-	public Personnage(String name, int level, int xp, String classe, ArrayList<String[]>attacks, ArrayList<String[]>criticalHit, ArrayList<String[]>magicAttack, ArrayList<String[]>magicCriticalHit) {
-=======
 	public Personnage(String name, int level, int xp, String classe, ArrayList<String[]> attacks,
 			ArrayList<String[]> criticalHit, ArrayList<String[]> magicAttack, ArrayList<String[]> magicCriticalHit) {
 		this.attacks = attacks;
 		this.criticalHit = criticalHit;
 		this.magicAttack = magicAttack;
 		this.magicCriticalHit = magicCriticalHit;
->>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:characters/Personnage.java
 		this.name = name;
 		this.xp = xp;
 		this.charClass = new Class(this,classe);
-<<<<<<< HEAD:src/characters/Personnage.java
-		this.criticalHit=criticalHit;
-		this.magicAttack=magicAttack;
-		this.attacks= attacks;
-		this.magicCriticalHit=magicCriticalHit;
-		while(this.level < level) {
-			levelUp();
-			this.level++;
-		}
-		
-		}
-
-protected void levelUp() {
-	
-}
-=======
 		while (this.level < level) {
 			levelUp();
 			this.level++;
@@ -125,13 +91,11 @@ protected void levelUp() {
 	protected void levelUp() {
 		
 	}
->>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:characters/Personnage.java
 	
 	
 	public int getMaxLifePoints() {
 		return maxLifePoints;
 	}
-	
 	public void setMaxLifePoints(int maxLifePoints) {
 		this.maxLifePoints = maxLifePoints;
 	}
@@ -207,46 +171,18 @@ protected void levelUp() {
 	public void setXp(int xp) {
 		this.xp = xp;
 	}
-<<<<<<< HEAD:src/characters/Personnage.java
-
-public boolean isAlive() {
-	if(lifePoints >0 && willPoints >0) {
-		return true;
-	}else {
-		return false;
-	}
-}
-
-	@Override
-	public int attaquer(Personnage personnageCible) {
-	
-		return 0;
-=======
 	public boolean isAlive() {
 		if (lifePoints > 0 && willPoints > 0) {
 			return true;
 		} else {
 			return false;
 		}
->>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:characters/Personnage.java
 	}
 	public Class getCharClass() {
 		return charClass;
 	}
-<<<<<<< HEAD:src/characters/Personnage.java
-
-
-
-
-
-	@Override
-	public int utiliserObjet(Personnage personnageCible) {
-		// TODO Auto-generated method stub
-		return 0;
-=======
 	public void setCharClass(Class charClass) {
 		this.charClass = charClass;
->>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:characters/Personnage.java
 	}
 	public AttackTypes getAttackType() {
 		return attackType;
@@ -278,23 +214,4 @@ public boolean isAlive() {
 	public void setMagicCriticalHit(ArrayList<String[]> magicCriticalHit) {
 		this.magicCriticalHit = magicCriticalHit;
 	}
-
-
-<<<<<<< HEAD:src/characters/Personnage.java
-	@Override
-	public int utiliserPouvoir(Personnage personnageCible) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-=======
-
-
-
-
-
-
-	
->>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:characters/Personnage.java
-	
-	
 }

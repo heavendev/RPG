@@ -1,9 +1,7 @@
 package combat;
 
-<<<<<<< HEAD:src/combat/CombatController.java
-=======
 import java.util.HashMap;
->>>>>>> cfe2fceeda41d5ae307267ba2ebef7e274c9696f:combat/CombatController.java
+
 import java.util.ArrayList;
 
 import characters.Boss;

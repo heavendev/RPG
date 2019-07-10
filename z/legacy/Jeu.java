@@ -1,4 +1,4 @@
-package game;
+package z.legacy;
 
 import java.awt.event.KeyEvent;
 import java.security.NoSuchAlgorithmException;
@@ -14,6 +14,12 @@ import map.*;
 import nonActiveClasses.*;
 import npcs.*;
 import quest.*;
+import z.legacy.NpcDialogueController;
+import z.legacy.NpcLifeController;
+import z.legacy.NpcLocations;
+import z.legacy.NpcNewQuestListController;
+import z.legacy.NpcQuestPresentationController;
+import z.legacy.NpcQuestTurnInListController;
 import connection.*;
 import data.*;
 
@@ -354,7 +360,7 @@ public class Jeu extends JFrame{
 	
 	public static void main(String[] args) {
 		Jeu jeu = new Jeu();
-
+		
 		
 //		try {
 //			DatabaseTest.getDatabaseTest().test();
@@ -369,6 +375,5 @@ public class Jeu extends JFrame{
 //		}
 		
 	}
-
 
 }

@@ -1,6 +1,7 @@
 package npcs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class NpcDisplay {
 	
@@ -58,7 +59,7 @@ public class NpcDisplay {
 		for (int i = 0; i < questNames.size(); i++) {
 			screen[2+(2*i)] = insertStringAt(screen[2+(2*i)], questNames.get(i), 50);
 		}
-		screen[2+(2*questNames.size())] = insertStringAt(screen[2+(2*selection)], "back", 50);
+		screen[2+(2*questNames.size())] = insertStringAt(screen[2+(2*questNames.size())], "back", 50);
 		screen[2+(2*selection)] = insertStringAt(screen[2+(2*selection)], "->", 47);
 		displayAndReset(portrait);
 	}
@@ -99,10 +100,45 @@ public class NpcDisplay {
 		displayAndReset(portrait);
 	}
 	
-	public void displayItemDetails() {
-		
+	public void displayItemDetails(HashMap h, int selection, boolean buyingOrSelling) {
+		screen[2] = insertStringAt(screen[2], (String) h.get("name"), 10);
+		screen[4] = insertStringAt(screen[4], "Modificateur d'attaque : " + h.get("attackBonus"), 20);
+		screen[5] = insertStringAt(screen[5], "Modificateur de défence : " + h.get("attackBonus"), 20);
+		screen[6] = insertStringAt(screen[6], "Modificateur de magie : " + h.get("attackBonus"), 20);
+		screen[7] = insertStringAt(screen[7], "Modificateur de résistance : " + h.get("attackBonus"), 20);
+		screen[8] = insertStringAt(screen[8], "Modificateur de vitesse : " + h.get("attackBonus"), 20);
+		screen[9] = insertStringAt(screen[9], "Modificateur de point de vie : " + h.get("attackBonus"), 20);
+		screen[10] = insertStringAt(screen[10], "Modificateur de points de volonté : " + h.get("attackBonus"), 20);
+		screen[12] = insertStringAt(screen[12], "Prix : " + h.get("value"), 20);
+		if (buyingOrSelling) {
+			screen[14] = insertStringAt(screen[14], "Acheter", 40);
+		} else {
+			screen[14] = insertStringAt(screen[14], "Vendre", 40);
+		}
+		screen[16] = insertStringAt(screen[16], "Retour", 40);
+		screen[14+(2*selection)] = insertStringAt(screen[14+(2*selection)], "->", 37);
+		for (int i = 0; i < screen.length; i++) {
+			System.out.println(screen[i]);
+		}
+		reset();
 	}
 	
+	public void displayItemTradeConfirmation(boolean buyingOrSelling, boolean transactionSuccess, String itemName) {
+		if (buyingOrSelling) {
+			if (transactionSuccess) {
+				screen[2] = insertStringAt(screen[2], "Vous avez acheté " + itemName + "avec succès!", 10);
+			} else {
+				screen[2] = insertStringAt(screen[2], "Vous n'avez pas assez d'or pour acheter " + itemName, 10);
+			}
+		} else {
+			screen[2] = insertStringAt(screen[2], "Vous avez vendu " + itemName + "avec succès!", 10);
+		}
+		screen[16] = insertStringAt(screen[16], "-> Continuer", 50);
+		for (int i = 0; i < screen.length; i++) {
+			System.out.println(screen[i]);
+		}
+		reset();
+	}
 	
 	private void displayAndReset(String[] portrait) {
 		for (int i = 1; i < portrait.length+1; i++) {

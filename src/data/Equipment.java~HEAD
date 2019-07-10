@@ -104,7 +104,6 @@ public class Equipment implements Cloneable{
 	
 	public HashMap<String,String> getEquipmentDetails() {
 		HashMap<String,String> h = new HashMap<String,String>();
-		h.get(owner);
 		h.put("name", name);
 		h.put("attackBonus", ""+attackBonus);
 		h.put("defenceBonus", ""+defenceBonus);
@@ -115,6 +114,10 @@ public class Equipment implements Cloneable{
 		h.put("willPointsBonus", ""+willPointsBonus);
 		h.put("value", ""+value);
 		return h;
+	}
+	
+	public int getValue() {
+		return value;
 	}
 	
  	public String getName() {
