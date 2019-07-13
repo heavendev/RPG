@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import combat.Combat;
+import data.Equipment;
 import nonActiveClasses.AttackTypes;
 
 public class Personnage implements Combat{
@@ -29,6 +30,8 @@ public class Personnage implements Combat{
 	protected ArrayList<String[]> criticalHit;
 	protected ArrayList<String[]> magicAttack;
 	protected ArrayList<String[]> magicCriticalHit;
+	
+	protected ArrayList<Equipment> equipment;
 	
 	
 	public Personnage(String name, int level, int xp, String classe, ArrayList<String[]> attacks,
@@ -88,11 +91,25 @@ public class Personnage implements Combat{
 		return toReturn;
 	}
 	
-	protected void levelUp() {
+	public void levelUp() {
 		
 	}
 	
-	
+	public void addEquipment(Equipment equip) {
+		if (equipment == null) {
+			equipment = new ArrayList<Equipment>();
+		}
+		equipment.add(equip);
+	}
+	public void setEquipment(ArrayList<Equipment> equipment) {
+		this.equipment = equipment;
+	}
+	public ArrayList<Equipment> getEquipment() {
+		return equipment;
+	}
+	public void removeEquipment(Equipment equip) {
+		equipment.remove(equip);
+	}
 	public int getMaxLifePoints() {
 		return maxLifePoints;
 	}
@@ -214,15 +231,4 @@ public class Personnage implements Combat{
 	public void setMagicCriticalHit(ArrayList<String[]> magicCriticalHit) {
 		this.magicCriticalHit = magicCriticalHit;
 	}
-
-
-
-
-
-
-
-
-	
-	
-	
 }

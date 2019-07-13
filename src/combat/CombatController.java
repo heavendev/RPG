@@ -1,10 +1,11 @@
 package combat;
 
 import java.util.HashMap;
+
 import java.util.ArrayList;
 
-import characters.Boss;
 import characters.Ennemy;
+import characters.EnnemyList;
 import characters.Personnage;
 import data.Squad;
 import game.Jeu;
@@ -22,7 +23,7 @@ public class CombatController {
 	private ActionResolution actionResolution;
 		
 	private Quest quest;
-	private Boss boss;
+	private String boss;
 	
 	private ArrayList<Ennemy> ennemies;
 	private ArrayList<Personnage> team;
@@ -43,7 +44,7 @@ public class CombatController {
 		reset(quest);
 	}
 
-	public CombatController(Boss boss, Jeu jeu) {
+	public CombatController(String boss, Jeu jeu) {
 		instantiate(jeu);
 		reset(boss);
 	}
@@ -71,7 +72,7 @@ public class CombatController {
 		combatLoop(); 
 	}
 
-	public void reset(Boss boss) {
+	public void reset(String boss) {
 		this.boss = boss;
 		this.quest = null;
 		ennemies = getRandomBoss();
@@ -195,15 +196,15 @@ public class CombatController {
 	}
 	
 	private ArrayList<Ennemy> getRandomEnnemy() {
-		return null;
+		return EnnemyList.getEnnemyList().getEnnemies();
 	}
 
 	private ArrayList<Ennemy> getRandomBoss() {
-		return null;
+		return EnnemyList.getEnnemyList().getBoss();
 	}
 
 	private ArrayList<Ennemy> getQuestBoss() {
-		return null;
+		return EnnemyList.getEnnemyList().getQuestBoss(quest.getBoss());
 	}
 	
 	
@@ -319,7 +320,7 @@ public class CombatController {
 		}
 	}
 	
-
+	
 	
 	
 	private enum Status {

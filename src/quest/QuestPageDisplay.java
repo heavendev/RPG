@@ -25,7 +25,7 @@ public class QuestPageDisplay implements Display{
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                  -> Continuer                *",
-			"*                                                                              *",
+			"*                                                                                                                                                             *",
 			"********************************************************************************",
 			"* entrer = valider                                                             *"};
 	

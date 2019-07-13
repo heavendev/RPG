@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>RpgFileRouge</name>
+=======
+	<name>RPG</name>
+>>>>>>> 9b1c63075470fb69e05c6d5981c2b687da664a10
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,8 +14,19 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+<<<<<<< HEAD
 	</buildSpec>
 	<natures>
+=======
+		<buildCommand>
+			<name>org.eclipse.wst.common.project.facet.core.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
+>>>>>>> 9b1c63075470fb69e05c6d5981c2b687da664a10
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
 </projectDescription>

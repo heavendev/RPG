@@ -11,3 +11,4 @@ public interface Combat {
 	public HashMap utiliserPouvoir(Personnage p);
 	
 }
+
