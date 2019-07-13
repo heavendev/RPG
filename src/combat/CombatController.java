@@ -33,7 +33,10 @@ public class CombatController {
 	private int step;
 	
 	
-
+	
+	
+	
+	
 	
 	public CombatController(Quest quest, Jeu jeu) {
 		instantiate(jeu);
@@ -102,7 +105,7 @@ public class CombatController {
 	}
 	
 	
- 
+
 	public void combatLoop() {
 		combatOrder = getCombatOrder();
 		step = 1;
@@ -117,16 +120,10 @@ public class CombatController {
 		}
 	}
 	
-	private void goToCombatEnded() {
-		step++;
-		if(isCombatEnded()) {
-			//jeu.goToCombatEnded(); 
-		}
-	}
 	private void goToNextStep() {
 		step++;
-		if(isCombatEnded()) {
-		    
+		if (isCombatEnded()) {
+//			Jeu.goToCombatEnded();
 		}
 		try {
 			Personnage p = combatOrder.get(step);
@@ -144,11 +141,13 @@ public class CombatController {
 			if (!isCombatEnded()) {
 				combatLoop();
 			} else {
-				
+//				Jeu.goToCombatEnded();
 			}
 		}
 	}
 	
+	
+	// returns TRUE if combat is over
 	public boolean isCombatEnded() {
 		boolean verif = true;
 		boolean verif2 = true;
@@ -168,6 +167,31 @@ public class CombatController {
 			return false;
 		}
 		return true;
+	}
+	
+	private HashMap<Integer,Personnage> getCombatOrder() {
+		HashMap<Integer,Personnage> toReturn = new HashMap<Integer,Personnage>();
+		int position = 1;
+		for (int i = 15; i >= 0; i--) {
+			ArrayList<Personnage> tmp = new ArrayList<Personnage>();
+			for (Personnage p : team) {
+				if (p.getSpeed() == i && p.isAlive()) {
+					tmp.add(p);
+				}
+			}
+			for (Ennemy p : ennemies) {
+				if (p.getSpeed() == i && p.isAlive()) {
+					tmp.add(p);
+				}
+			}
+			int tmpSize = tmp.size();
+			for (int j = 0; j < tmpSize; j++) {
+				toReturn.put(position, tmp.get((int)(Math.random()*tmp.size())));
+				tmp.remove(toReturn.get(position));
+				position++;
+			}
+		}
+		return toReturn;
 	}
 	
 	private ArrayList<Ennemy> getRandomEnnemy() {
@@ -190,9 +214,8 @@ public class CombatController {
 	private class EnnemyTurn {
 		private void reset(Ennemy p) {
 			Personnage target = getRandomPerso();
-			int degat = p.attaquerPerso(target);
-			display.ennemyAction(target.getName(),p.getName(), degat , team , ennemies);
-			
+			int degats = p.attaquerPerso(target);
+			display.ennemyAction(target.getName(), p.getName(), degats, team, ennemies);
 		}
 		private Personnage getRandomPerso() {
 			return team.get((int)(Math.random()*team.size()));
@@ -278,32 +301,6 @@ public class CombatController {
 		}
 	}
 	
-	private HashMap<Integer,Personnage> getCombatOrder(){
-		HashMap<Integer, Personnage> toReturn =  new HashMap<Integer,Personnage>();
-		int position = 1;
-		for(int i = 15; i >= 0 ; i--) {
-			ArrayList<Personnage> tmp = new ArrayList<Personnage>();
-			for(Personnage p : team) {
-				if(p.getSpeed() == i && p.isAlive()) {
-					tmp.add(p);
-				}
-			}
-				for(Ennemy p : ennemies) {
-					if(p.getSpeed() == i && p.isAlive()) {
-						tmp.add(p);
-				}
-			}
-				int tmpSize = tmp.size(); 
-				for(int j = 0 ; j < tmpSize ; j++) {
-					toReturn.put(position, tmp.get((int)(Math.random()*tmp.size())));
-					tmp.remove(toReturn.get(position));
-					position++;
-				}
-		}
-		
-		return toReturn; 
-	}
-	
 	private class ActionResolution {
 		private void reset(Personnage p, Ennemy ennemy, Action choice) {
 			HashMap action;
@@ -312,8 +309,7 @@ public class CombatController {
 			} else {
 				action = p.utiliserPouvoir(ennemy);
 			}
-			display.playerActionResolver(p.getName(), ennemy.getName(), (Integer)(action.get("damage")),
-					(String[])(action.get("text")), team, ennemies);
+			display.playerActionResolver(p.getName(), ennemy.getName(), (Integer)(action.get("damage")), (String[])(action.get("text")), team, ennemies);
 		}
 		private void scroll(Scroll scroll) {
 			if (scroll == Scroll.CONFIRM) {

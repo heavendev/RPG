@@ -6,7 +6,7 @@ import nonActiveClasses.Scroll;
 public class MainMenuController{
 	
 	private Jeu jeu;
-	private  int selection = 0;
+	private  int selection;
 	private MainMenuDisplay display;
 	
 	public MainMenuController(Jeu jeu) {

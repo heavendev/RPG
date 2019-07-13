@@ -15,8 +15,12 @@ public class Squad {
 	private ArrayList<Quest> quests;
 	private int mainQuestStage;
 	private ArrayList<Personnage> personnages;
+	private int gold;
+	private ArrayList<Equipment> equipment;
 	
 	
+	
+
 	public static Squad getInstance() {
 		if (instance == null) {
 			instance = new Squad();
@@ -41,7 +45,6 @@ public class Squad {
 		this.coorX = x;
 		this.coorY = y;
 	}
-	
 	public HashMap getCoordinates() {
 		HashMap toReturn = new HashMap();
 		toReturn.put("x", coorX);
@@ -50,8 +53,15 @@ public class Squad {
 		return toReturn;
 	}
 	
-	
-	
+	public void addEquipment(Equipment e) {
+		if (equipment == null) {
+			equipment = new ArrayList<Equipment>();
+		}
+		equipment.add(e);
+	}
+	public void removeEquipment(Equipment e) {
+		this.equipment.remove(e);
+	}
 	
 	public void addQuest(Quest quest) {
 		quests.add(quest);
@@ -59,13 +69,31 @@ public class Squad {
 	public void removeQuest(Quest quest) {
 		quests.remove(quest);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<Equipment> getEquipment() {
+		return equipment;
+	}
+	public void setEquipment(ArrayList<Equipment> equipment) {
+		this.equipment = equipment;
+	}
 	public void setQuests(ArrayList<Quest> quests) {
 		this.quests = quests;
 	}
 	public ArrayList<Quest> getQuests() {
 		return quests;
 	}
-	
 	public void setPersonnages(ArrayList<Personnage> personnages) {
 		this.personnages = personnages;
 	}
@@ -84,5 +112,10 @@ public class Squad {
 	public void setMainQuestStage(int stage) {
 		this.mainQuestStage = stage;
 	}
-	
+	public int getGold() {
+		return gold;
+	}
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
 }

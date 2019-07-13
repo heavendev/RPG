@@ -142,7 +142,13 @@ public class Personnage implements Combat{
 		this.resistance = resistance;
 	}
 	public int getSpeed() {
-		return speed;
+		if (speed > 15) {
+			return 15;
+		} else if (speed < 0) {
+			return 0;
+		} else {
+			return speed;
+		}
 	}
 	public void setSpeed(int speed) {
 		this.speed = speed;

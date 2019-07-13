@@ -2,6 +2,7 @@ package quest;
 
 import java.util.HashMap;
 
+import data.Squad;
 import nonActiveClasses.QuestStatus;
 import npcs.NPC;
 
@@ -67,6 +68,11 @@ public class Quest {
 		return coors;
 	}
 	
+	public void acceptQuest(NPC npc) {
+		this.status = QuestStatus.ACCEPTED;
+		Squad.getInstance().addQuest(this);
+		npc.removeQuest(this);
+	}
 	
 //	public Boss quest.getBoss() {
 //		if (type == "boss") {

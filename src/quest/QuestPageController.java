@@ -23,7 +23,6 @@ public class QuestPageController {
 
 	public void reset(Quest quest) {
 		this.currentQuest = quest;
-		System.out.println(quest.getStatus());
 		switch (quest.getStatus()) {
 			case ACCEPTED :
 				quest.setStatus(QuestStatus.ONGOING);
