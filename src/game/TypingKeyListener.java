@@ -1,4 +1,4 @@
-package Projet;
+package game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -18,7 +18,6 @@ public class TypingKeyListener implements KeyListener, Runnable{
 		t = new Thread(this);
 		t.start();
 	}
-	
 	
 	
 	public void keyTyped(KeyEvent e) {
@@ -220,7 +219,6 @@ public class TypingKeyListener implements KeyListener, Runnable{
 			} else {
 				typed = typed + "2";
 			}
-			
 		break;
 		case (KeyEvent.VK_3) :
 			typed = typed + "3";
@@ -267,8 +265,6 @@ public class TypingKeyListener implements KeyListener, Runnable{
 			uppercase = false;
 		}
 	}
-	
-	
 	
 	public void run() {
 		while (!jeu.isGameOver()) {
