@@ -2,35 +2,37 @@ package quest;
 
 import java.util.HashMap;
 
+import data.Equipment;
 import data.Squad;
 import nonActiveClasses.QuestStatus;
 import npcs.NPC;
 
 public class Quest {
 	
-	String questName;
-	QuestStatus status;
-	int coorX;
-	int coorY;
-	int mainQuestNumber;
-	boolean mainQuestChain;
-	String map;
-	String type;
-	String boss;
-	int xpReward;
-	int goldReward;
-	String[] questDescription;
-	String[] questPresentation;
-	String[] questObjectiveReached;
-	String[] questTurnIn;
-	NPC questGiver;
+	private String questName;
+	private QuestStatus status;
+	private int coorX;
+	private int coorY;
+	private int mainQuestNumber;
+	private boolean mainQuestChain;
+	private String map;
+	private String type;
+	private String boss;
+	private int xpReward;
+	private int goldReward;
+	private Equipment equipmentReward;
+	private String[] questDescription;
+	private String[] questPresentation;
+	private String[] questObjectiveReached;
+	private String[] questTurnIn;
+	private NPC questGiver;
 	
 	
 	
-
+	
 	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map,
 			String type, String boss, int mainQuestNumber,boolean mainQuestChain, int xpReward,
-			int goldReward, String[] questDescription, String[] questPresentation, 
+			Equipment equipmentReward, int goldReward, String[] questDescription, String[] questPresentation, 
 			String[] questObjectiveReached, String[] questTurnIn, NPC questGiver) {
 		this.questName = questName;
 		this.status = status;
@@ -42,6 +44,7 @@ public class Quest {
 		this.type = type;
 		this.boss = boss;
 		this.xpReward = xpReward;
+		this.equipmentReward = equipmentReward;
 		this.goldReward = goldReward;
 		this.questDescription = questDescription;
 		this.questPresentation = questPresentation;
@@ -50,6 +53,9 @@ public class Quest {
 		this.questGiver = questGiver;
 	}
 
+
+
+	
 
 
 	public boolean isAtQuestionLocation(int y, int x, String map) {
@@ -74,12 +80,28 @@ public class Quest {
 		npc.removeQuest(this);
 	}
 	
-//	public Boss quest.getBoss() {
-//		if (type == "boss") {
-//			return boss;
-//		}
-//	}
+	public String ifIsBossQuest() {
+		if (type == "boss") {
+			return boss;
+		} else {
+			return null;
+		}
+	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Equipment getEquipmentReward() {
+		return equipmentReward;
+	}
+	public void setEquipmentReward(Equipment equipmentReward) {
+		this.equipmentReward = equipmentReward;
+	}
 	public String getQuestName() {
 		return questName;
 	}
@@ -121,5 +143,8 @@ public class Quest {
 	}
 	public boolean isMainQuestChain() {
 		return mainQuestChain;
+	}
+	public String getBoss() {
+		return boss;
 	}
 }

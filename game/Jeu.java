@@ -84,7 +84,7 @@ public class Jeu extends JFrame{
 		String[] presentation = {"blabla","blubliblou","blabluig"};
 		String[] objectiveReached = {"blabla","blubliblou"};
 		String[] turnIn = {"blabla","blubliblou","FFIIIINNNIIIII"};
-		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", null, "get", 1, true, 50, 10,
+		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", null, "get", 1, true, 50, null, 10,
 				description, presentation, objectiveReached, turnIn, npc);
 		npc.addQuest(questOne);
 		ArrayList<NPC> npcs = new ArrayList<NPC>();

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import data.Equipment;
-import data.GameEquipmentList;
+import data.EquipmentList;
 import data.Squad;
 import game.Jeu;
 import nonActiveClasses.QuestStatus;
@@ -327,7 +327,7 @@ public class NpcController {
 		private String[] itemNames;
 		private void reset() {
 			selection = 0;
-			list = GameEquipmentList.getInstance().getList();
+			list = EquipmentList.getInstance().getList();
 			itemNames = new String[list.size()];
 			for (int i = 0; i < list.size(); i++) {
 				itemNames[i] = list.get(i).getName();
