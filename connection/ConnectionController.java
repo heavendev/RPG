@@ -1,15 +1,15 @@
 package connection;
 
-import Projet.Jeu;
+import game.Jeu;
 import nonActiveClasses.Scroll;
 
-public class Connection{
+public class ConnectionController{
 	
 	Jeu jeu;
 	ConnectionDisplay display;
 	private int selection;
 	
-	public Connection(Jeu jeu) {
+	public ConnectionController(Jeu jeu) {
 		this.jeu = jeu;
 		selection = 1;
 		display = new ConnectionDisplay(selection);

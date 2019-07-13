@@ -43,7 +43,8 @@ public class FileToMap {
 	
 	private MapElements[][] toElem(ArrayList<String> file) {
 		
-		MapElements[][] elems = new MapElements[file.size()][file.get(0).length()];
+		MapElements[][] elems = new MapElements[file.size()]
+				[file.get(0).length()];
 		
 		for (int i = 0; i < file.size(); i++) {
 			for (int j = 0; j < file.get(i).length(); j++) {
@@ -65,6 +66,8 @@ public class FileToMap {
 					elems[i][j] = MapElements.HOUSE_RIGHT_WALL;
 				} else if (file.get(i).charAt(j) == '~') {
 					elems[i][j] = MapElements.WATER;
+				} else if (file.get(i).charAt(j) == '-') {
+					elems[i][j] = MapElements.HOUSE_WALL_2;
 				}
 			}
 		}

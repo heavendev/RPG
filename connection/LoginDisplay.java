@@ -31,28 +31,20 @@ public class LoginDisplay implements Display{
 	
 	
 	public void display() {
-		for (int i = 0; i < username.length(); i++) {
-			log[6] = changeCharAt(log[6], i+30, username.charAt(i));
-		}
-		for (int i = 0; i < password.length(); i++) {
-			log[8] = changeCharAt(log[8], i+30, '*');
-		}
+		log[6] = insertStringAt(log[6], username, 30);
+		log[8] = insertStringAt(log[8], password, 30);
 		switch (selection) {
 			case 1 :
-				log[3] = changeCharAt(log[3], 10, '-');
-				log[3] = changeCharAt(log[3], 11, '>');
+				log[3] = insertStringAt(log[3], "->", 10);
 				break;
 			case 2 :
-				log[6] = changeCharAt(log[6], 10, '-');
-				log[6] = changeCharAt(log[6], 11, '>');
+				log[6] = insertStringAt(log[6], "->", 10);
 				break;
 			case 3:
-				log[8] = changeCharAt(log[8], 10, '-');
-				log[8] = changeCharAt(log[8], 11, '>');
+				log[8] = insertStringAt(log[8], "->", 10);
 				break;
 			case 4 :
-				log[11] = changeCharAt(log[11], 10, '-');
-				log[11] = changeCharAt(log[11], 11, '>');
+				log[11] = insertStringAt(log[11], "->", 10);
 				break;
 		}
 		for (int i = 0; i < log.length; i++) {
@@ -64,19 +56,9 @@ public class LoginDisplay implements Display{
 		log[11] = "*              | CONFIRM |                                                     *";
 	}
 	
-	private String changeCharAt(String str, int charAt, char replaceBy) {
-		String toReturn = "";
-		for (int i = 0; i < str.length(); i++) {
-			if (i == charAt-1) {
-				toReturn = toReturn + replaceBy;
-			} else {
-				toReturn = toReturn + str.charAt(i);
-			}
-		}
-		return toReturn;
+	private String insertStringAt(String baseString, String newString, int at) {
+		return (baseString.substring(0, at) + newString + baseString.substring(newString.length()+at));
 	}
-	
-	
 	
 	public void setSelection(int sel) {
 		selection = sel;

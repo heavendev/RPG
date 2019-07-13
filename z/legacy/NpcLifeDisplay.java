@@ -1,14 +1,11 @@
-package Intro;
+package z.legacy;
 
 import nonActiveClasses.Display;
 
-public class StoryIntroDisplay implements Display{
+public class NpcLifeDisplay implements Display{
 	
-	private String[] page;
-	private String[] screen = {"********************************************************************************",
-			"*                                                                              *",
-			"*                                                                              *",
-			"*                     PAGE 1                                                   *",
+	String[] npcLife;
+	String[] screen = {"********************************************************************************",
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                                              *",
@@ -21,24 +18,28 @@ public class StoryIntroDisplay implements Display{
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                                              *",
-			"*                                                        -> etape suivante     *",
+			"*                                                                              *",
+			"*                                                                              *",
+			"*                                                                              *",
+			"*                                                  -> Continuer                *",
 			"*                                                                              *",
 			"********************************************************************************",
 			"* entrer = valider                                                             *"};
 	
-	public StoryIntroDisplay(String[] page) {
-		this.page = page;
+	public void reset(String[] npcLife) {
+		this.npcLife = npcLife;
+		display();
 	}
 	
 	public void display() {
-		for (int i = 0; i < page.length; i++) {
-			screen[2+i] = insertStringAt(screen[2+i], page[i], 10);
+		for (int i = 0; i < npcLife.length; i++) {
+			screen[i+2] = insertStringAt(screen[i+2], npcLife[i], 10);
 		}
 		for (int i = 0; i < screen.length; i++) {
 			System.out.println(screen[i]);
 		}
-		for (int i = 0; i < page.length; i++) {
-			screen[2+i] = "*                                                                              *";
+		for (int i = 0; i < npcLife.length; i++) {
+			screen[i+2] = "*                                                                              *";
 		}
 	}
 	

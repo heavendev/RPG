@@ -1,9 +1,9 @@
 package Intro;
 
-import Projet.Jeu;
+import game.Jeu;
 import nonActiveClasses.Scroll;
 
-public class StoryIntro{
+public class StoryIntroController{
 	
 	private Jeu jeu;
 	StoryIntroDisplay display;
@@ -12,8 +12,9 @@ public class StoryIntro{
 		display.display();
 	}
 	
-	public StoryIntro(Jeu jeu) {
-		display = new StoryIntroDisplay();
+	public StoryIntroController(Jeu jeu) {
+		String[] page = {"blablibloublublebllaaa"};
+		display = new StoryIntroDisplay(page);
 		this.jeu = jeu;
 		display.display();
 	}

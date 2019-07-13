@@ -1,15 +1,14 @@
-package Intro;
+package z.legacy;
+
+import java.util.ArrayList;
 
 import nonActiveClasses.Display;
 
-public class StoryIntroDisplay implements Display{
+public class NpcQuestTurnInListDisplay implements Display{
 	
-	private String[] page;
-	private String[] screen = {"********************************************************************************",
-			"*                                                                              *",
-			"*                                                                              *",
-			"*                     PAGE 1                                                   *",
-			"*                                                                              *",
+	private int selection;
+	private ArrayList<String> questNames;
+	String[] screen = {"********************************************************************************",
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                                              *",
@@ -21,25 +20,44 @@ public class StoryIntroDisplay implements Display{
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                                              *",
-			"*                                                        -> etape suivante     *",
+			"*                                                                              *",
+			"*                                                                              *",
+			"*                                                                              *",
+			"*                                                                              *",
+			"*                                                                              *",
 			"*                                                                              *",
 			"********************************************************************************",
-			"* entrer = valider                                                             *"};
+			"* entrer = selectionner                                                        *"};
 	
-	public StoryIntroDisplay(String[] page) {
-		this.page = page;
+	
+	public void reset(ArrayList<String> questNames, int selection) {
+		this.questNames = questNames;
+		this.selection = selection;
+		for (int i = 0; i < questNames.size(); i++) {
+			System.out.println(questNames.get(i));
+		}
+		display();
 	}
 	
 	public void display() {
-		for (int i = 0; i < page.length; i++) {
-			screen[2+i] = insertStringAt(screen[2+i], page[i], 10);
+		for (int i = 0; i < questNames.size(); i++) {
+			screen[(i*2)+2] = insertStringAt(screen[(i*2)+2], questNames.get(i), 10);
 		}
+		screen[2+(2*questNames.size())] = insertStringAt(screen[2+(2*questNames.size())], "back", 10);
+		screen[selection*2] = insertStringAt(screen[selection*2], "->", 7);
 		for (int i = 0; i < screen.length; i++) {
 			System.out.println(screen[i]);
 		}
-		for (int i = 0; i < page.length; i++) {
-			screen[2+i] = "*                                                                              *";
+		for (int i = 0; i < 17; i++) {
+			screen[i+1] = "*                                                                              *";
 		}
+	}
+	
+	
+	
+	public void setSelection(int selection) {
+		this.selection = selection;
+		display();
 	}
 	
 	private String insertStringAt(String baseString, String newString, int at) {

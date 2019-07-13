@@ -1,15 +1,15 @@
 package ProjetMenu;
 
-import Projet.Jeu;
+import game.Jeu;
 import nonActiveClasses.Scroll;
 
-public class GameMenu{
+public class GameMenuController{
 	
 	private Jeu jeu;
 	private int selection = 0;
 	private GameMenuDisplay display;
 	
-	public GameMenu(Jeu jeu) {
+	public GameMenuController(Jeu jeu) {
 		this.jeu = jeu;
 		display = new GameMenuDisplay();
 		display.display();

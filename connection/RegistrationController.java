@@ -4,10 +4,10 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import Projet.Jeu;
+import game.Jeu;
 import nonActiveClasses.Scroll;
 
-public class Registration{
+public class RegistrationController{
 	
 	private Jeu jeu;
 	private RegistrationDisplay display;
@@ -25,7 +25,7 @@ public class Registration{
 	private String password = "";
 	private String passwordConfirm = "";
 	
-	public Registration(Jeu jeu) {
+	public RegistrationController(Jeu jeu) {
 		this.jeu = jeu;
 		display = new RegistrationDisplay();
 		resetRegistration();

@@ -11,7 +11,7 @@ public class RegistrationDisplay implements Display{
 	private String email = "";
 	private String password = "";
 	private String passwordConfirm = "";
-	private String[] reg = {"********************************************************************************",
+	private String[] screen = {"********************************************************************************",
 			"*              ------                                                          *", 
 			"*              |BACK|                                                          *",  
 			"*              ------                                                          *", 
@@ -34,85 +34,54 @@ public class RegistrationDisplay implements Display{
 	
 	
 	public void display() {
-		for (int i = 0; i < username.length(); i++) {
-			reg[5] = changeCharAt(reg[5], i+40, username.charAt(i));
-		}
-		for (int i = 0; i < firstName.length(); i++) {
-			reg[6] = changeCharAt(reg[6], i+40, firstName.charAt(i));
-		}
-		for (int i = 0; i < lastName.length(); i++) {
-			reg[7] = changeCharAt(reg[7], i+40, lastName.charAt(i));
-		}
-		for (int i = 0; i < email.length(); i++) {
-			reg[8] = changeCharAt(reg[8], i+40, email.charAt(i));
-		}
-		for (int i = 0; i < password.length(); i++) {
-			reg[9] = changeCharAt(reg[9], i+40, password.charAt(i));
-		}
-		for (int i = 0; i < passwordConfirm.length(); i++) {
-			reg[10] = changeCharAt(reg[10], i+40, passwordConfirm.charAt(i));
-		}
+		screen[5] = insertStringAt(screen[5], username, 40);
+		screen[6] = insertStringAt(screen[6], firstName, 40);
+		screen[7] = insertStringAt(screen[7], lastName, 40);
+		screen[8] = insertStringAt(screen[8], email, 40);
+		screen[9] = insertStringAt(screen[9], password, 40);
+		screen[10] = insertStringAt(screen[10], passwordConfirm, 40);
 		switch (selection) {
 			case (1) :
-				reg[2] = changeCharAt(reg[2], 10, '-');
-				reg[2] = changeCharAt(reg[2], 11, '>');
+				screen[2] = insertStringAt(screen[2], "->", 10);
 				break;
 			case (2) :
-				reg[5] = changeCharAt(reg[5], 10, '-');
-				reg[5] = changeCharAt(reg[5], 11, '>');
+				screen[5] = insertStringAt(screen[5], "->", 10);
 				break;
 			case (3) :
-				reg[6] = changeCharAt(reg[6], 10, '-');
-				reg[6] = changeCharAt(reg[6], 11, '>');
+				screen[6] = insertStringAt(screen[6], "->", 10);
 				break;
 			case (4) :
-				reg[7] = changeCharAt(reg[7], 10, '-');
-				reg[7] = changeCharAt(reg[7], 11, '>');
+				screen[7] = insertStringAt(screen[7], "->", 10);
 				break;
 			case (5) :
-				reg[8] = changeCharAt(reg[8], 10, '-');
-				reg[8] = changeCharAt(reg[8], 11, '>');
+				screen[8] = insertStringAt(screen[8], "->", 10);
 				break;
 			case (6) :
-				reg[9] = changeCharAt(reg[9], 10, '-');
-				reg[9] = changeCharAt(reg[9], 11, '>');
+				screen[9] = insertStringAt(screen[9], "->", 10);
 				break;
 			case (7) :
-				reg[10] = changeCharAt(reg[10], 10, '-');
-				reg[10] = changeCharAt(reg[10], 11, '>');
+				screen[10] = insertStringAt(screen[10], "->", 10);
 				break;
 			case (8) :
-				reg[13] = changeCharAt(reg[13], 10, '-');
-				reg[13] = changeCharAt(reg[13], 11, '>');
+				screen[13] = insertStringAt(screen[13], "->", 10);
 				break;
 		}
-		for (int i = 0; i < reg.length; i++) {
-			System.out.println(reg[i]);
+		for (int i = 0; i < screen.length; i++) {
+			System.out.println(screen[i]);
 		}
-		reg[2] = "*              |BACK|                                                          *";
-		reg[5] = "*              Username :                                                      *";
-		reg[6] = "*              Firstname :                                                     *";
-		reg[7] = "*              Lastname :                                                      *";
-		reg[8] = "*              Email :                                                         *";
-		reg[9] = "*              Password :                                                      *";
-		reg[10] = "*              Confirm Password :                                              *";
-		reg[13] = "*              | CONFIRM |                                                     *";
+		screen[2] = "*              |BACK|                                                          *";
+		screen[5] = "*              Username :                                                      *";
+		screen[6] = "*              Firstname :                                                     *";
+		screen[7] = "*              Lastname :                                                      *";
+		screen[8] = "*              Email :                                                         *";
+		screen[9] = "*              Password :                                                      *";
+		screen[10] = "*              Confirm Password :                                              *";
+		screen[13] = "*              | CONFIRM |                                                     *";
 	}
 	
-	
-	private String changeCharAt(String str, int charAt, char replaceBy) {
-		String toReturn = "";
-		for (int i = 0; i < str.length(); i++) {
-			if (i == charAt-1) {
-				toReturn = toReturn + replaceBy;
-			} else {
-				toReturn = toReturn + str.charAt(i);
-			}
-		}
-		return toReturn;
+	private String insertStringAt(String baseString, String newString, int at) {
+		return (baseString.substring(0, at) + newString + baseString.substring(newString.length()+at));
 	}
-	
-	
 	
 	public void setSelection(int sel) {
 		this.selection = sel;

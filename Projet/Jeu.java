@@ -29,13 +29,15 @@ public class Jeu extends JFrame{
 		this.addKeyListener(movementListener);
 		this.addKeyListener(scrollListener);
 		this.addKeyListener(typingListener);
+		Squad.getInstance().setCoordinates(62, 13, "main");
 		init();
 	}
 	
 	
 	public void init() {
 //		goToMainMenu();
-		goToWelcome();
+//		goToWelcome();
+		goToMap();
 	}
 	
 	

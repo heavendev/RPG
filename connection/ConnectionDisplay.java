@@ -5,7 +5,7 @@ import nonActiveClasses.Display;
 public class ConnectionDisplay implements Display{
 	
 	private int selection;
-	private String[] con = {"********************************************************************************",
+	private String[] screen = {"********************************************************************************",
 			"*                                                                              *", 
 			"*          @      @@    @@   @@@  @   @                                        *", 
 			"*          @     @  @  @      @   @@  @                                        *", 
@@ -31,54 +31,37 @@ public class ConnectionDisplay implements Display{
 	public void display() {
 		switch (selection) {
 			case (1) :
-				con[2] = change(con[2], 6);
-				con[3] = change(con[3], 6);
-				con[3] = change(con[3], 7);
-				con[4] = change(con[4], 6);
-				con[4] = change(con[4], 7);
-				con[4] = change(con[4], 8);
-				con[5] = change(con[5], 6);
-				con[5] = change(con[5], 7);
-				con[6] = change(con[6], 6);
+				screen[2] = insertStringAt(screen[2], "@", 6);
+				screen[3] = insertStringAt(screen[3], "@@", 6);
+				screen[4] = insertStringAt(screen[4], "@@@", 6);
+				screen[5] = insertStringAt(screen[5], "@@", 6);
+				screen[6] = insertStringAt(screen[6], "@", 6);
 				break;
 			case (2) :
-				con[8] = change(con[8], 6);
-				con[9] = change(con[9], 6);
-				con[9] = change(con[9], 7);
-				con[10] = change(con[10], 6);
-				con[10] = change(con[10], 7);
-				con[10] = change(con[10], 8);
-				con[11] = change(con[11], 6);
-				con[11] = change(con[11], 7);
-				con[12] = change(con[12], 6);
+				screen[8] = insertStringAt(screen[8], "@", 6);
+				screen[9] = insertStringAt(screen[9], "@@", 6);
+				screen[10] = insertStringAt(screen[10], "@@@", 6);
+				screen[11] = insertStringAt(screen[11], "@@", 6);
+				screen[12] = insertStringAt(screen[12], "@", 6);
 				break;
 		}
-		for (int i = 0; i < con.length; i++) {
-			System.out.println(con[i]);
+		for (int i = 0; i < screen.length; i++) {
+			System.out.println(screen[i]);
 		}
-		con[2] =  "*          @      @@    @@   @@@  @   @                                        *";
-		con[3] =  "*          @     @  @  @      @   @@  @                                        *";
-		con[4] =  "*          @     @  @  @ @@   @   @ @ @                                        *";
-		con[5] =  "*          @     @  @  @  @   @   @  @@                                        *";
-		con[6] =  "*          @@@@   @@    @@   @@@  @   @                                        *";
-		con[8] =  "*          @@@   @@@   @@   @@@  @@@@  @@@@@  @@@  @@@                         *";
-		con[9] =  "*          @ @   @    @      @   @       @    @    @ @                         *";
-		con[10] = "*          @@@   @@   @ @@   @   @@@@    @    @@   @@@                         *";
-		con[11] = "*          @  @  @    @  @   @      @    @    @    @  @                        *";
-		con[12] = "*          @  @  @@@   @@   @@@  @@@@    @    @@@  @  @                        *";
+		screen[2] =  "*          @      @@    @@   @@@  @   @                                        *";
+		screen[3] =  "*          @     @  @  @      @   @@  @                                        *";
+		screen[4] =  "*          @     @  @  @ @@   @   @ @ @                                        *";
+		screen[5] =  "*          @     @  @  @  @   @   @  @@                                        *";
+		screen[6] =  "*          @@@@   @@    @@   @@@  @   @                                        *";
+		screen[8] =  "*          @@@   @@@   @@   @@@  @@@@  @@@@@  @@@  @@@                         *";
+		screen[9] =  "*          @ @   @    @      @   @       @    @    @ @                         *";
+		screen[10] = "*          @@@   @@   @ @@   @   @@@@    @    @@   @@@                         *";
+		screen[11] = "*          @  @  @    @  @   @      @    @    @    @  @                        *";
+		screen[12] = "*          @  @  @@@   @@   @@@  @@@@    @    @@@  @  @                        *";
 	}
 	
-	
-	public String change(String str, int pos) {
-		String tmp = "";
-		for (int i = 0; i < pos; i++) {
-			tmp = tmp + str.charAt(i);
-		}
-		tmp = tmp + '@';
-		for (int i = (pos+1); i < str.length(); i++) {
-			tmp = tmp + str.charAt(i);
-		}
-		return (tmp);
+	private String insertStringAt(String baseString, String newString, int at) {
+		return (baseString.substring(0, at) + newString + baseString.substring(newString.length()+at));
 	}
 	
 	public ConnectionDisplay(int sel) {
