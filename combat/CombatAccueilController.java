@@ -1,6 +1,5 @@
 package combat;
 
-import characters.Boss;
 import game.Jeu;
 import nonActiveClasses.Scroll;
 import quest.Quest;
@@ -9,7 +8,7 @@ public class CombatAccueilController {
 	
 	private Jeu jeu;
 	private CombatAccueilDisplay display;
-	private Boss boss;
+	private String boss;
 	private Quest quest;
 	
 	public CombatAccueilController(Jeu jeu) {
@@ -17,7 +16,7 @@ public class CombatAccueilController {
 		display = new CombatAccueilDisplay();
 		reset();
 	}
-	public CombatAccueilController(Jeu jeu, Boss boss) {
+	public CombatAccueilController(Jeu jeu, String boss) {
 		this.jeu = jeu;
 		display = new CombatAccueilDisplay();
 		reset(boss);
@@ -33,7 +32,7 @@ public class CombatAccueilController {
 		this.boss = null;
 		display.display();
 	}
-	public void reset(Boss boss) {
+	public void reset(String boss) {
 		this.boss = boss;
 		this.quest = null;
 		display.display();

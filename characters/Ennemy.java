@@ -2,7 +2,7 @@ package characters;
 
 import java.util.ArrayList;
 
-public class Ennemy extends Personnage{
+public class Ennemy extends Personnage implements Cloneable{
 
 	public Ennemy(String name, int level, int xp, String classe, ArrayList<String[]> attacks,
 			ArrayList<String[]> criticalHit, ArrayList<String[]> magicAttack, ArrayList<String[]> magicCriticalHit) {
@@ -13,6 +13,15 @@ public class Ennemy extends Personnage{
 		int degats = attack - p.getDefence();
 		p.setLifePoints(p.getLifePoints() - degats);
 		return (degats);
+	}
+	
+	public Ennemy clone() {
+		try {
+			return (Ennemy) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 }

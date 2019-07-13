@@ -2,31 +2,25 @@ package data;
 
 import java.util.ArrayList;
 
-public class GameEquipmentList {
+public class EquipmentList {
 	
-	private static GameEquipmentList instance;
+	private static EquipmentList instance;
 	private ArrayList<Equipment> list;
 	
-	public static GameEquipmentList getInstance() {
+	public static EquipmentList getInstance() {
 		if (instance == null) {
-			instance = new GameEquipmentList();
+			instance = new EquipmentList();
 		}
 		return instance;
 	}
 	
-	private GameEquipmentList() {
+	private EquipmentList() {
 		list = new ArrayList<Equipment>();
 	}
-	
-	
 	
 	public void addEquipment(Equipment e) {
 		list.add(e);
 	}
-
-
-
-	
 	
 	
 	

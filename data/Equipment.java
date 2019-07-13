@@ -34,7 +34,7 @@ public class Equipment implements Cloneable{
 	public void buy() {
 		Squad squad = Squad.getInstance();
 		squad.setGold(squad.getGold() - value);
-		squad.addEquipment(this);
+		squad.addEquipment(clone());
 	}
 	
 	public void sell() {
@@ -101,6 +101,20 @@ public class Equipment implements Cloneable{
 			owner.setMaxWillPoints(owner.getMaxWillPoints() - willPointsBonus);
 		}
 	}
+	
+	
+	
+	public Equipment clone() {
+		try {
+			return (Equipment) super.clone();
+		} catch (CloneNotSupportedException e) {
+			return null;
+		}
+	}
+	
+	
+	
+	
 	
 	public HashMap<String,String> getEquipmentDetails() {
 		HashMap<String,String> h = new HashMap<String,String>();
