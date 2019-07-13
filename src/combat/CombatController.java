@@ -319,7 +319,7 @@ public class CombatController {
 		}
 	}
 	
-	
+
 	
 	
 	private enum Status {
