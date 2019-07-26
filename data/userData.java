@@ -12,13 +12,6 @@ public class userData {
 		return instance;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	public void clearData() {
 		instance = null;
 	}
