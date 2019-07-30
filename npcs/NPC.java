@@ -28,6 +28,16 @@ public class NPC {
 		this.y = y;
 	}
 	
+	public NPC(String name, boolean trader, String[] portrait, String[] life, String map, int x, int y) {
+		this.name = name;
+		this.trader = trader;
+		this.portrait = portrait;
+		this.life = life;
+		this.map = map;
+		this.x = x;
+		this.y = y;
+	}
+	
 	
 	public boolean isTrader() {
 		return trader;

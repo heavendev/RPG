@@ -91,9 +91,15 @@ public class Personnage implements Combat{
 		return toReturn;
 	}
 	
+	
 	public void levelUp() {
-		
+		xp -= 50;
+		level++;
 	}
+	
+	
+	
+	
 	
 	public void addEquipment(Equipment equip) {
 		if (equipment == null) {

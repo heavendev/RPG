@@ -30,13 +30,11 @@ public class Equipment implements Cloneable{
 		this.value = value;
 	}
 	
-	
 	public void buy() {
 		Squad squad = Squad.getInstance();
 		squad.setGold(squad.getGold() - value);
 		squad.addEquipment(clone());
 	}
-	
 	public void sell() {
 		Squad squad = Squad.getInstance();
 		squad.setGold(squad.getGold() + value);
@@ -45,8 +43,6 @@ public class Equipment implements Cloneable{
 		}
 		squad.removeEquipment(this);
 	}
-	
-	
 	
 	public void equip(Personnage owner) {
 		this.owner = owner;
@@ -74,7 +70,6 @@ public class Equipment implements Cloneable{
 			owner.setMaxWillPoints(owner.getMaxWillPoints() + willPointsBonus);
 		}
 	}
-	
 	public void unequip() {
 		this.owner = null;
 		if (attackBonus != 0) {
@@ -101,9 +96,6 @@ public class Equipment implements Cloneable{
 			owner.setMaxWillPoints(owner.getMaxWillPoints() - willPointsBonus);
 		}
 	}
-	
-	
-	
 	public Equipment clone() {
 		try {
 			return (Equipment) super.clone();
@@ -111,10 +103,6 @@ public class Equipment implements Cloneable{
 			return null;
 		}
 	}
-	
-	
-	
-	
 	
 	public HashMap<String,String> getEquipmentDetails() {
 		HashMap<String,String> h = new HashMap<String,String>();
@@ -130,14 +118,12 @@ public class Equipment implements Cloneable{
 		return h;
 	}
 	
+	
 	public int getValue() {
 		return value;
 	}
-	
  	public String getName() {
 		return name;
 	}
-	
-	
-	
+ 	
 }

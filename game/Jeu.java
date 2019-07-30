@@ -14,7 +14,7 @@ import nonActiveClasses.Displaying;
 import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
 import npcs.NPC;
-import npcs.NpcLocations;
+import npcs.NPCList;
 import quest.Quest;
 import ProjetMenu.GameMenuController;
 import ProjetMenu.MainMenuController;
@@ -29,7 +29,6 @@ import connection.WelcomeController;
 import quest.QuestEventController;
 import quest.QuestPageController;
 import npcs.NpcController;
-import npcs.NpcLocations;
 
 public class Jeu extends JFrame{
 	
@@ -79,7 +78,7 @@ public class Jeu extends JFrame{
 							 "QgQRRM PERE CASTOR BRQQgRgMRBQB       ",
 							 "ZgZgDg             BDgQMZgZgB5        "};
 		String[] life = {"blabla","blubliblou","blabla"};
-		NPC npc = new NPC("Pere Castor",false,null,portrait,life,"main",41,33);
+		NPC npc = new NPC("Pere Castor",true,null,portrait,life,"main",41,33);
 		String[] description = {"blabla","blubliblou","blabla"};
 		String[] presentation = {"blabla","blubliblou","blabluig"};
 		String[] objectiveReached = {"blabla","blubliblou"};
@@ -87,9 +86,7 @@ public class Jeu extends JFrame{
 		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", null, "get", 1, true, 50, null, 10,
 				description, presentation, objectiveReached, turnIn, npc);
 		npc.addQuest(questOne);
-		ArrayList<NPC> npcs = new ArrayList<NPC>();
-		npcs.add(npc);
-		NpcLocations.getNpcLocations(npcs);
+		NPCList.getNPCList().addActiveNPC(npc);
 		
 //		goToMainMenu();
 //		goToWelcome();

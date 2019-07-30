@@ -3,6 +3,7 @@ package data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import characters.CharacterList;
 import characters.Personnage;
 import quest.Quest;
 
@@ -30,6 +31,7 @@ public class Squad {
 	
 	private Squad() {
 		quests = new ArrayList<Quest>();
+		equipment = new ArrayList<Equipment>();
 		mainQuestStage = 1;
 	}
 	
@@ -53,6 +55,15 @@ public class Squad {
 		return toReturn;
 	}
 	
+	public void addPersonnage(Personnage p) {
+		personnages.add(p);
+	}
+	
+	public void removePersonnage(Personnage p) {
+		personnages.remove(p);
+		CharacterList.getCharacterList().addPersonnage(p);
+	}
+	
 	public void addEquipment(Equipment e) {
 		if (equipment == null) {
 			equipment = new ArrayList<Equipment>();
@@ -71,7 +82,14 @@ public class Squad {
 	}
 	
 	
-	
+	public Personnage getPerso(String name) {
+		for (Personnage p : personnages) {
+			if (p.getName().equals(name)) {
+				return p;
+			}
+		}
+		return null;
+	}
 	
 	
 	

@@ -2,6 +2,7 @@ package quest;
 
 import java.util.HashMap;
 
+import characters.Personnage;
 import data.Equipment;
 import data.Squad;
 import nonActiveClasses.QuestStatus;
@@ -21,6 +22,8 @@ public class Quest {
 	private int xpReward;
 	private int goldReward;
 	private Equipment equipmentReward;
+	private Personnage charReward;
+	private NPC npcReward;
 	private String[] questDescription;
 	private String[] questPresentation;
 	private String[] questObjectiveReached;
@@ -30,9 +33,9 @@ public class Quest {
 	
 	
 	
-	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map,
-			String type, String boss, int mainQuestNumber,boolean mainQuestChain, int xpReward,
-			Equipment equipmentReward, int goldReward, String[] questDescription, String[] questPresentation, 
+	public Quest(String questName, QuestStatus status, int coorX, int coorY, String map, String type, 
+			String boss, int mainQuestNumber,boolean mainQuestChain, int xpReward,Equipment equipmentReward, 
+			Personnage charReward, NPC npcReward, int goldReward, String[] questDescription, String[] questPresentation,
 			String[] questObjectiveReached, String[] questTurnIn, NPC questGiver) {
 		this.questName = questName;
 		this.status = status;
@@ -46,6 +49,8 @@ public class Quest {
 		this.xpReward = xpReward;
 		this.equipmentReward = equipmentReward;
 		this.goldReward = goldReward;
+		this.charReward = charReward;
+		this.npcReward = npcReward;
 		this.questDescription = questDescription;
 		this.questPresentation = questPresentation;
 		this.questObjectiveReached = questObjectiveReached;

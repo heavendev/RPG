@@ -11,7 +11,7 @@ import nonActiveClasses.MapElements;
 import nonActiveClasses.QuestStatus;
 import nonActiveClasses.Scroll;
 import npcs.NPC;
-import npcs.NpcLocations;
+import npcs.NPCList;
 import quest.Quest;
 
 public class MapController {
@@ -243,7 +243,7 @@ public class MapController {
 	}
 	
 	private void putNpcsInMap() {
-		npcsInMap = NpcLocations.getNpcLocations().getNpcListInMap(squadCurrentMap);
+		npcsInMap = NPCList.getNPCList().getNpcListInMap(squadCurrentMap);
 		for (int i = 0; i < npcsInMap.size(); i++) {
 			map[npcsInMap.get(i).getY()][npcsInMap.get(i).getX()] = MapElements.NPC;
 		}

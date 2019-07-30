@@ -30,6 +30,12 @@ public class EquipmentList {
 		return hList.get(name);
 	}
 	
+	
+	
+	
+	
+	
+	
 	public HashMap<String, Equipment> gethList() {
 		return hList;
 	}
