@@ -214,4 +214,18 @@ public class Personnage implements Combat{
 	public void setMagicCriticalHit(ArrayList<String[]> magicCriticalHit) {
 		this.magicCriticalHit = magicCriticalHit;
 	}
+	
+	public HashMap<String, String> getPersoDetails(){
+		HashMap<String, String>p= new HashMap <String, String>();
+		p.put("name", name);
+		p.put("attack","" + attack);
+		p.put("defence", "" + defence);
+		p.put("magic", "" + magic);
+		p.put("resistance", "" +resistance);
+		p.put("willpoints", ""+ willPoints);
+		p.put("speed",""+ speed);
+		
+		return p;
+		
+	}
 }

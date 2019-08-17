@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import characters.Personnage;
@@ -16,6 +18,7 @@ public class Equipment implements Cloneable{
 	private int lifePointsBonus;
 	private int willPointsBonus;
 	private int value;
+	private String [] equipmentOwner;
 
 	public Equipment(String name, int attackBonus, int defenceBonus, int magicBonus, int resistanceBonus,
 			int speedBonus, int lifePointsBonus, int willPointsBonus, int value) {
@@ -104,7 +107,7 @@ public class Equipment implements Cloneable{
 	
 	public HashMap<String,String> getEquipmentDetails() {
 		HashMap<String,String> h = new HashMap<String,String>();
-		h.get(owner);
+		h.put("equipmentOwner", "" +equipmentOwner);
 		h.put("name", name);
 		h.put("attackBonus", ""+attackBonus);
 		h.put("defenceBonus", ""+defenceBonus);
@@ -116,9 +119,38 @@ public class Equipment implements Cloneable{
 		h.put("value", ""+value);
 		return h;
 	}
-	
- 	public String getName() {
+
+ 	public int getValue() {
+		return value;
+	}
+
+ 	public String [] getEquipmentTeam(String [] name) {
 		return name;
+ 		
+ 	} 
+
+	public Personnage getOwner() {
+		return owner;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public String [] getEquipmentOwner() {
+		if (equipmentOwner != null) {
+			equipmentOwner .equals(owner);
+		}else {
+			System.out.println(equipmentOwner == null);
+		}
+		return equipmentOwner;
+	}
+
+
+	public void setEquipementOwner(String [] equipementOwner) {
+		this.equipmentOwner = equipementOwner;
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import characters.Personnage;
+import nonActiveClasses.QuestStatus;
 import quest.Quest;
 
 public class Squad {
@@ -69,19 +70,6 @@ public class Squad {
 	public void removeQuest(Quest quest) {
 		quests.remove(quest);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public ArrayList<Equipment> getEquipment() {
 		return equipment;
 	}
@@ -118,4 +106,29 @@ public class Squad {
 	public void setGold(int gold) {
 		this.gold = gold;
 	}
+	public ArrayList<Quest>getActiveQuests(){
+		ArrayList<Quest>activeQuests = new ArrayList<Quest>();
+		for(int i =0; i<quests.size(); i++) {
+			if(quests.get(i).getStatus() != QuestStatus.COMPLETED) {
+				activeQuests.add(quests.get(i));
+			}
+			
+		}
+		 return activeQuests;
+	}
+	
+	public void addPersonnageInTeam(Personnage perso) {
+		if(instance != null && personnages.size() <3) {
+			personnages.add(perso);
+			
+		}else {
+			System.out.println("you can add a new player in your team");
+		}
+		
+	}
+	 public void removePersonnageFromTeam(Personnage perso) {
+		 if(instance!=null) {
+			 this.personnages.remove(perso);
+		 }
+	 }
 }

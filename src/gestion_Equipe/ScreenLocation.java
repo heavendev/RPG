@@ -1,4 +1,4 @@
-package equipement;
+package gestion_Equipe;
 
 public enum ScreenLocation {
 	inTeam,

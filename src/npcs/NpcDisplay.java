@@ -1,11 +1,12 @@
-package npcs;
+ package npcs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NpcDisplay {
-	
-	private String[] screen = {"********************************************************************************",
+
+	private String[] screen = {
+			"********************************************************************************",
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                                              *",
@@ -70,7 +71,7 @@ public class NpcDisplay {
 		}
 		screen[16] = insertStringAt(screen[16], "Accepter    Refuser", 50);
 		screen[16] = insertStringAt(screen[16], "->", 47 + (selection == 0 ? 0 : 12));
-		screen[19] = "* q = gauche, d = droite, entrer = valider                                     *";
+		screen[19] = "* q = gauche, d = droite, entrer = valider *";
 		displayAndReset(portrait);
 	}
 	
@@ -103,12 +104,12 @@ public class NpcDisplay {
 	public void displayItemDetails(HashMap h, int selection, boolean buyingOrSelling) {
 		screen[2] = insertStringAt(screen[2], (String) h.get("name"), 10);
 		screen[4] = insertStringAt(screen[4], "Modificateur d'attaque : " + h.get("attackBonus"), 20);
-		screen[5] = insertStringAt(screen[5], "Modificateur de défence : " + h.get("attackBonus"), 20);
-		screen[6] = insertStringAt(screen[6], "Modificateur de magie : " + h.get("attackBonus"), 20);
-		screen[7] = insertStringAt(screen[7], "Modificateur de résistance : " + h.get("attackBonus"), 20);
-		screen[8] = insertStringAt(screen[8], "Modificateur de vitesse : " + h.get("attackBonus"), 20);
-		screen[9] = insertStringAt(screen[9], "Modificateur de point de vie : " + h.get("attackBonus"), 20);
-		screen[10] = insertStringAt(screen[10], "Modificateur de points de volonté : " + h.get("attackBonus"), 20);
+		screen[5] = insertStringAt(screen[5], "Modificateur de défence : " + h.get("defenceBonus"), 20);
+		screen[6] = insertStringAt(screen[6], "Modificateur de magie : " + h.get("magicBonus"), 20);
+		screen[7] = insertStringAt(screen[7], "Modificateur de résistance : " + h.get("resistanceBonus"), 20);
+		screen[8] = insertStringAt(screen[8], "Modificateur de vitesse : " + h.get("speedBonus"), 20);
+		screen[9] = insertStringAt(screen[9], "Modificateur de point de vie : " + h.get("lifePointsBonus"), 20);
+		screen[10] = insertStringAt(screen[10], "Modificateur de points de volonté : " + h.get("WillPointsBonus"), 20);
 		screen[12] = insertStringAt(screen[12], "Prix : " + h.get("value"), 20);
 		if (buyingOrSelling) {
 			screen[14] = insertStringAt(screen[14], "Acheter", 40);

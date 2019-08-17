@@ -7,15 +7,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
-import Intro.*;
-import ProjetMenu.*;
 import characters.Ennemy;
-import map.*;
-import nonActiveClasses.*;
-import npcs.*;
-import quest.*;
-import connection.*;
-import data.*;
+import data.Squad;
+import nonActiveClasses.Direction;
+import nonActiveClasses.Displaying;
+import nonActiveClasses.QuestStatus;
+import nonActiveClasses.Scroll;
+import npcs.NPC;
+import npcs.NpcLocations;
+import quest.Quest;
+import ProjetMenu.GameMenuController;
+import ProjetMenu.MainMenuController;
+import Intro.GameplayIntroController;
+import Intro.StoryIntroController;
+import map.MapController;
+import connection.ConnectionController;
+import connection.DatabaseConnector;
+import connection.LoginController;
+import connection.RegistrationController;
+import connection.WelcomeController;
+import quest.QuestEventController;
+import quest.QuestPageController;
+import npcs.NpcController;
+import npcs.NpcLocations;
 
 public class Jeu extends JFrame{
 	
@@ -77,9 +91,9 @@ public class Jeu extends JFrame{
 		npcs.add(npc);
 		NpcLocations.getNpcLocations(npcs);
 		
-		goToMainMenu();
+//		goToMainMenu();
 //		goToWelcome();
-//		goToMap();
+		goToMap();
 		
 	}
 	
@@ -126,19 +140,7 @@ public class Jeu extends JFrame{
 				((QuestPageController) gameElements.get("QuestPage")).scroll(scroll);
 				break;
 			case NPC_DIALOGUE :
-				((NpcDialogueController) gameElements.get("NpcDialoguePage")).scroll(scroll);
-				break;
-			case NPC_LIFE :
-				((NpcLifeController) gameElements.get("NpcLifePage")).scroll(scroll);
-				break;
-			case NPC_NEW_QUESTS :
-				((NpcNewQuestListController) gameElements.get("NpcNewQuestListPage")).scroll(scroll);
-				break;
-			case NPC_PRESENTING_QUEST :
-				((NpcQuestPresentationController) gameElements.get("NpcQuestPresentationPage")).scroll(scroll);
-				break;
-			case NPC_QUEST_TURN_IN :
-				((NpcQuestTurnInListController) gameElements.get("NpcQuestTurnInListPage")).scroll(scroll);															
+				((NpcController) gameElements.get("NpcPage")).scroll(scroll);
 				break;
 			default:
 				
@@ -276,41 +278,9 @@ public class Jeu extends JFrame{
 	public void goToNpcDialogue(NPC npc) {
 		onDisplay = Displaying.NPC_DIALOGUE;
 		try {
-			((NpcDialogueController) gameElements.get("NpcDialoguePage")).reset(npc);
+			((NpcController) gameElements.get("NpcPage")).reset(npc);
 		} catch (NullPointerException e) {
-			gameElements.put("NpcDialoguePage", new NpcDialogueController(this,npc));
-		}
-	}
-	public void goToNpcLife(NPC npc) {
-		onDisplay = Displaying.NPC_LIFE;
-		try {
-			((NpcLifeController) gameElements.get("NpcLifePage")).reset(npc);
-		} catch (NullPointerException e) {
-			gameElements.put("NpcLifePage", new NpcLifeController(this,npc));
-		}
-	}
-	public void goToNpcQuestList(NPC npc) {
-		onDisplay = Displaying.NPC_NEW_QUESTS;
-		try {
-			((NpcNewQuestListController) gameElements.get("NpcNewQuestListPage")).reset(npc);
-		} catch (NullPointerException e) {
-			gameElements.put("NpcNewQuestListPage", new NpcNewQuestListController(this,npc));
-		}
-	}
-	public void goToNpcQuestPresentation(NPC npc, Quest quest) {
-		onDisplay = Displaying.NPC_PRESENTING_QUEST;
-		try {
-			((NpcQuestPresentationController) gameElements.get("NpcQuestPresentationPage")).reset(quest, npc);
-		} catch (NullPointerException e) {
-			gameElements.put("NpcQuestPresentationPage", new NpcQuestPresentationController(this, quest, npc));
-		}
-	}
-	public void goToNpcQuestTurnIn(NPC npc) {
-		onDisplay = Displaying.NPC_QUEST_TURN_IN;
-		try {
-			((NpcQuestTurnInListController) gameElements.get("NpcQuestTurnInListPage")).reset(npc);
-		} catch (NullPointerException e) {
-			gameElements.put("NpcQuestTurnInListPage", new NpcQuestTurnInListController(this,npc));
+			gameElements.put("NpcPage", new NpcController(this,npc));
 		}
 	}
 	public void goToQuestEvent(Quest quest) {
@@ -354,7 +324,7 @@ public class Jeu extends JFrame{
 	
 	public static void main(String[] args) {
 		Jeu jeu = new Jeu();
-
+		
 		
 //		try {
 //			DatabaseTest.getDatabaseTest().test();
@@ -369,6 +339,5 @@ public class Jeu extends JFrame{
 //		}
 		
 	}
-
 
 }

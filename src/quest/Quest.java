@@ -60,6 +60,7 @@ public class Quest {
 	}
 	
 	
+	
 	public HashMap getQuestLocation() {
 		HashMap coors = new HashMap();
 		coors.put("x", coorX);

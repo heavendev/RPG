@@ -8,7 +8,8 @@ public class QuestPageDisplay implements Display{
 	String[] questText;
 	int xpReward;
 	int goldReward;
-	String[] screen = {"********************************************************************************",
+	String[] screen = {
+			"********************************************************************************",
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                                              *",
@@ -25,7 +26,7 @@ public class QuestPageDisplay implements Display{
 			"*                                                                              *",
 			"*                                                                              *",
 			"*                                                  -> Continuer                *",
-			"*                                                                                                                                                             *",
+			"*                                                                              *",
 			"********************************************************************************",
 			"* entrer = valider                                                             *"};
 	
@@ -34,6 +35,13 @@ public class QuestPageDisplay implements Display{
 	
 	
 	public void display() {
+		//que represente i dans cette boucle 
+		/*
+		 * quand je suis sur l'ecran 2 etoile en bas j'affiche le nom de ma quete 
+		 * je parcours le taille du text de ma quete et je dis 
+		 * pour tous entier i? =0 celui-ci dois etre inferieur a la taille de mon text, i++
+		 * puis a ecran i+4 
+		 * */
 		screen[2] = insertStringAt(screen[2], questName, 10);
 		for (int i = 0; i < questText.length; i++) {
 			screen[i+4] = insertStringAt(screen[i+4], questText[i], 10);
