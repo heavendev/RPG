@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+C:\Users\stagiaire\Documents\RPG\.metadata\.plugins\org.eclipse.jdt.core
