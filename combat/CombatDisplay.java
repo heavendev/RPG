@@ -91,8 +91,8 @@ public class CombatDisplay{
 		for (int i = 0; i < actionText.length; i++) {
 			screen[6+i] = insertStringAt(screen[6+i], actionText[i], 5);
 		}
-		screen[6 + actionText.length + 2] = insertStringAt(screen[6 + actionText.length + 2], nom + "inflige" + pntVie + "degats", 10);
-		screen[8 + actionText.length + 2] = insertStringAt(screen[8 + actionText.length + 2], "à" + nomMob, 10);
+		screen[6 + actionText.length + 2] = insertStringAt(screen[6 + actionText.length + 2], nom + " inflige " + pntVie + " degats", 10);
+		screen[8 + actionText.length + 2] = insertStringAt(screen[8 + actionText.length + 2], " à " + nomMob, 10);
 		screen[16] = insertStringAt(screen[16],"-> Continuer", 25);
 		for(int i= 0; i < screen.length; i++) {
 			System.out.println(zonePersoGentil[i] + zonePersoMechant[i] +screen[i]);
@@ -123,8 +123,8 @@ public class CombatDisplay{
 	// Résultat des dégâts d'une personne n sur un autre personnage
 	public void ennemyAction(String nom, String nomMechant, int degats, ArrayList<Personnage> pGentil, ArrayList<Ennemy> pMechant) {
 		getLeftScreenInfos(pGentil,pMechant);
-		screen[6] = insertStringAt(screen[6], nomMechant +"inflige" + degats +"degats", 10);
-		screen[8] = insertStringAt(screen[8], "à" + nom, 10);
+		screen[6] = insertStringAt(screen[6], nomMechant +" inflige " + degats +" degats ", 10);
+		screen[8] = insertStringAt(screen[8], " à " + nom, 10);
 		screen[10] = insertStringAt(screen[10],"-> Continuer", 20);
 		for(int i= 0; i < screen.length; i++) {
 			System.out.println(zonePersoGentil[i] + zonePersoMechant[i] +screen[i]);
@@ -212,7 +212,7 @@ public class CombatDisplay{
 		  for(int i = 0; i < pMechant.size();i++) {
 			  zonePersoMechant[(i*5)+3] = insertStringAt(zonePersoMechant[((i*5)+3)],pMechant.get(i).getName(),3);
 			  zonePersoMechant[(i*5)+4] = insertStringAt(zonePersoMechant[(i*5)+4], 
-					  "PV: " + createPointString(pGentil.get(i).getLifePoints(), pMechant.get(i).getMaxLifePoints()), 3);
+					  "PV: " + createPointString(pMechant.get(i).getLifePoints(), pMechant.get(i).getMaxLifePoints()), 3);
 			  zonePersoMechant[(i*5)+5] = insertStringAt(zonePersoMechant[(i*5)+5], 
 					  "Volonte: " + createPointString(pMechant.get(i).getWillPoints(), pMechant.get(i).getMaxWillPoints()), 3);
 		  }	  

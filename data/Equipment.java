@@ -119,6 +119,30 @@ public class Equipment implements Cloneable{
 	}
 	
 	
+	public Personnage getOwner() {
+		return owner;
+	}
+	public int getAttackBonus() {
+		return attackBonus;
+	}
+	public int getDefenceBonus() {
+		return defenceBonus;
+	}
+	public int getMagicBonus() {
+		return magicBonus;
+	}
+	public int getResistanceBonus() {
+		return resistanceBonus;
+	}
+	public int getSpeedBonus() {
+		return speedBonus;
+	}
+	public int getLifePointsBonus() {
+		return lifePointsBonus;
+	}
+	public int getWillPointsBonus() {
+		return willPointsBonus;
+	}
 	public int getValue() {
 		return value;
 	}

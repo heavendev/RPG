@@ -30,14 +30,14 @@ public class Class {
 				perso.setSpeed(perso.getSpeed()+2);
 				perso.setAttack(perso.getAttack()+5);
 				perso.setMaxWillPoints(perso.getMaxWillPoints()+20);
-				perso.setWillPoints(perso.getMaxWillPoints()+20);
+				perso.setWillPoints(perso.getWillPoints()+20);
 				break;
 			case "Enchanteresse" :
 				perso.setAttackType(AttackTypes.PSYCHOLOGICAL);
 				perso.setMagic(perso.getMagic()+10);
 				perso.setResistance(perso.getResistance()+10);
 				perso.setMaxWillPoints(perso.getMaxWillPoints()+50);
-				perso.setWillPoints(perso.getMaxWillPoints()+50);
+				perso.setWillPoints(perso.getWillPoints()+50);
 				break;
 			case "Boss" :
 				perso.setAttack(perso.getAttack()+20);
@@ -55,7 +55,7 @@ public class Class {
 				perso.setDefence(perso.getDefence() + 2);
 				perso.setSpeed(perso.getSpeed()+1);
 				perso.setMaxWillPoints(perso.getMaxWillPoints()-30);
-				perso.setWillPoints(perso.getMaxWillPoints()-30);
+				perso.setWillPoints(perso.getWillPoints()-30);
 				break;
 		}
 	}

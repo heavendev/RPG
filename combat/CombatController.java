@@ -31,6 +31,7 @@ public class CombatController {
 	
 	private HashMap<Integer,Personnage> combatOrder;
 	private int step;
+	private int aliveChars;
 	
 	
 	
@@ -67,21 +68,21 @@ public class CombatController {
 	public void reset(Quest quest) {
 		this.quest = quest;
 		this.boss = null;
-		ennemies = getQuestBoss();
+		ennemies = EnnemyList.getEnnemyList().getQuestBoss(quest.getBoss());
 		combatLoop(); 
 	}
 
 	public void reset(String boss) {
 		this.boss = boss;
 		this.quest = null;
-		ennemies = getRandomBoss();
+		ennemies = EnnemyList.getEnnemyList().getBoss();
 		combatLoop();
 	}
 	
 	public void reset() {
 		this.quest = null;
 		this.boss = null;
-		ennemies = getRandomEnnemy();
+		ennemies = EnnemyList.getEnnemyList().getEnnemies();
 		combatLoop();
 	}
 	
@@ -124,31 +125,53 @@ public class CombatController {
 		step++;
 		if (isCombatEnded()) {
 //			Jeu.goToCombatEnded();
+			jeu.goToMap();
 		}
-		try {
-			Personnage p = combatOrder.get(step);
-			if (team.contains(p) && p.isAlive()) {
-				status = Status.ACTION_CHOICE;
-				actionChoice.reset(p);
-			} else if (ennemies.contains(p) && p.isAlive()) {
-				Ennemy ennemy = ennemies.get(ennemies.indexOf(p));
-				status = Status.ENNEMY_TURN;
-				ennemyTurn.reset(ennemy);
-			} else {
-				goToNextStep();
-			}
-		} catch (NullPointerException e) {
-			if (!isCombatEnded()) {
+		if (!isCombatEnded()) {
+			if (step > aliveChars()) {
 				combatLoop();
-			} else {
-//				Jeu.goToCombatEnded();
+			}
+			try {
+				Personnage p = combatOrder.get(step);
+				if (team.contains(p) && p.isAlive()) {
+					status = Status.ACTION_CHOICE;
+					actionChoice.reset(p);
+				} else if (ennemies.contains(p) && p.isAlive()) {
+					Ennemy ennemy = ennemies.get(ennemies.indexOf(p));
+					status = Status.ENNEMY_TURN;
+					ennemyTurn.reset(ennemy);
+				} else {
+					goToNextStep();
+				}
+			} catch (NullPointerException e) {
+				if (!isCombatEnded()) {
+					combatLoop();
+				} else {
+	//				Jeu.goToCombatEnded();
+					jeu.goToMap();
+				}
 			}
 		}
+		
 	}
 	
+	private int aliveChars() {
+		int aliveChars = 0;
+		for (Personnage p : team) {
+			if (p.getLifePoints()> 0 && p.getWillPoints() > 0) {
+				aliveChars++;
+			}
+		}
+		for (Personnage p : ennemies) {
+			if (p.getLifePoints() > 0 && p.getWillPoints() > 0) {
+				aliveChars++;
+			}
+		}
+		return aliveChars;
+	}
 	
 	// returns TRUE if combat is over
-	public boolean isCombatEnded() {
+	private boolean isCombatEnded() {
 		boolean verif = true;
 		boolean verif2 = true;
 		for (Personnage p : team) {
@@ -194,17 +217,6 @@ public class CombatController {
 		return toReturn;
 	}
 	
-	private ArrayList<Ennemy> getRandomEnnemy() {
-		return EnnemyList.getEnnemyList().getEnnemies();
-	}
-
-	private ArrayList<Ennemy> getRandomBoss() {
-		return EnnemyList.getEnnemyList().getBoss();
-	}
-
-	private ArrayList<Ennemy> getQuestBoss() {
-		return EnnemyList.getEnnemyList().getQuestBoss(quest.getBoss());
-	}
 	
 	
 	

@@ -8,6 +8,9 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 
 import characters.Ennemy;
+import characters.EnnemyList;
+import characters.Personnage;
+import combat.CombatController;
 import data.Squad;
 import nonActiveClasses.Direction;
 import nonActiveClasses.Displaying;
@@ -83,14 +86,44 @@ public class Jeu extends JFrame{
 		String[] presentation = {"blabla","blubliblou","blabluig"};
 		String[] objectiveReached = {"blabla","blubliblou"};
 		String[] turnIn = {"blabla","blubliblou","FFIIIINNNIIIII"};
-		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", null, "get", 1, true, 50, null, 10,
+		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", null, "get", 1, true, 50, null, null, null, 10,
 				description, presentation, objectiveReached, turnIn, npc);
 		npc.addQuest(questOne);
 		NPCList.getNPCList().addActiveNPC(npc);
 		
+		/*
+		 * 		Creating dummy main char and ennemy for combat tests
+		 */
+		
+		ArrayList<String[]> attacksArray = new ArrayList<String[]>();
+		ArrayList<String[]> critsArray = new ArrayList<String[]>();
+		String[] attacks = {"i attackz!","you!","hihi"};
+		attacksArray.add(attacks);
+		String[] critAttacks = {"i attackz!","you!","CRIIIT"};
+		critsArray.add(critAttacks);
+		EnnemyList.getEnnemyList().addEnnemy(new Ennemy("Vadim", 1, 1, "Canaille", 
+				attacksArray, critsArray, attacksArray, critsArray));
+		EnnemyList.getEnnemyList().addEnnemy(new Ennemy("Blyat", 1, 1, "Canaille", 
+				attacksArray, critsArray, attacksArray, critsArray));
+		EnnemyList.getEnnemyList().addEnnemy(new Ennemy("Blyn", 1, 1, "Canaille", 
+				attacksArray, critsArray, attacksArray, critsArray));
+		
+		
+		ArrayList<String[]> pAttacksArray = new ArrayList<String[]>();
+		ArrayList<String[]> pCritsArray = new ArrayList<String[]>();
+		String[] pAttacks = {"i attackz!","you!","pizda"};
+		pAttacksArray.add(pAttacks);
+		String[] pCritAttacks = {"i attackz!","blyat!","CRIIIT"};
+		pCritsArray.add(pCritAttacks);
+		Squad.getInstance().addPersonnage(new Personnage("Peter Pan", 5, 1, "Bagarreur", pAttacksArray, pCritsArray, pAttacksArray, pCritsArray));
+		Squad.getInstance().addPersonnage(new Personnage("Boris", 5, 1, "Bagarreur", pAttacksArray, pCritsArray, pAttacksArray, pCritsArray));
+		Squad.getInstance().addPersonnage(new Personnage("Anatoli", 5, 1, "Bagarreur", pAttacksArray, pCritsArray, pAttacksArray, pCritsArray));
+		
+		
 //		goToMainMenu();
 //		goToWelcome();
-		goToMap();
+//		goToMap();
+		goToCombat();
 		
 	}
 	
@@ -138,6 +171,9 @@ public class Jeu extends JFrame{
 				break;
 			case NPC_DIALOGUE :
 				((NpcController) gameElements.get("NpcPage")).scroll(scroll);
+				break;
+			case COMBAT :
+				((CombatController) gameElements.get("CombatPage")).scroll(scroll);
 				break;
 			default:
 				
@@ -287,7 +323,30 @@ public class Jeu extends JFrame{
 			gameElements.put("QuestEvent", new QuestEventController(this,quest));
 		}
 	}
-	
+	public void goToCombat() {
+		onDisplay = Displaying.COMBAT;
+		try  {
+			((CombatController) gameElements.get("CombatPage")).reset();
+		} catch (NullPointerException e) {
+			gameElements.put("CombatPage", new CombatController(this));
+		}
+	}
+	public void goToCombat(Quest quest) {
+		onDisplay = Displaying.COMBAT;
+		try  {
+			((CombatController) gameElements.get("CombatPage")).reset();
+		} catch (NullPointerException e) {
+			gameElements.put("CombatPage", new CombatController(quest, this));
+		}
+	}
+	public void goToCombat(String boss) {
+		onDisplay = Displaying.COMBAT;
+		try  {
+			((CombatController) gameElements.get("CombatPage")).reset();
+		} catch (NullPointerException e) {
+			gameElements.put("CombatPage", new CombatController(boss, this));
+		}
+	}
 	
 	
 	// PLACEHOLDERS

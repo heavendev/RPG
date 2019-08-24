@@ -56,6 +56,9 @@ public class Squad {
 	}
 	
 	public void addPersonnage(Personnage p) {
+		if (personnages == null) {
+			personnages = new ArrayList<Personnage>();
+		}
 		personnages.add(p);
 	}
 	

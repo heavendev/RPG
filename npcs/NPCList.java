@@ -65,5 +65,8 @@ public class NPCList {
 		inactive.remove(npc);
 		active.add(npc);
 	}
+	public ArrayList<NPC> getInactive() {
+		return inactive;
+	}
 	
 }

@@ -9,6 +9,7 @@ public enum Displaying {
 	INTRO_GAMEPLAY,
 	
 	QUEST_PAGE,
+	QUEST_EVENT,
 	
 	MAP,
 	DUNGEON,

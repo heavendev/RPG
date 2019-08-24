@@ -157,7 +157,8 @@ public class GameSetup {
 				if ((boolean) eh.get("isForLoot")) {
 					e.addLoot((Equipment)((EquipmentList.getInstance().getEquipment((String)eh.get("equipmentName"))).clone()));
 				} else {
-					(EquipmentList.getInstance().getEquipment((String)eh.get("equipmentName"))).clone().equip(e);
+					Equipment equipment = (EquipmentList.getInstance().getEquipment((String)eh.get("equipmentName")));
+					e.addEquipment(equipment);
 				}
 			}
 			eList.addEnnemy(e);

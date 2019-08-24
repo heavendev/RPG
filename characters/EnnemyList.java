@@ -2,6 +2,8 @@ package characters;
 
 import java.util.ArrayList;
 
+import data.Squad;
+
 public class EnnemyList {
 	
 	private static EnnemyList instance;
@@ -34,11 +36,7 @@ public class EnnemyList {
 	
 	public ArrayList<Ennemy> getEnnemies() {
 		ArrayList<Ennemy> e = new ArrayList<Ennemy>();
-		e.add(ennemies.get((int)(Math.random()*ennemies.size())).clone());
-		if (Math.random() > 0.4) {
-			e.add(ennemies.get((int)(Math.random()*ennemies.size())).clone());
-		}
-		if (Math.random() > 0.6) {
+		for (int i = 0; i < Squad.getInstance().getPersonnages().size(); i++) {
 			e.add(ennemies.get((int)(Math.random()*ennemies.size())).clone());
 		}
 		return e;
