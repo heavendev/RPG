@@ -10,8 +10,7 @@ public class FileToMap {
 	
 	private static FileToMap instance;
 	
-	private FileToMap() {
-	}
+	private FileToMap() { }
 	
 	public static FileToMap getFileToMap() {
 		if (instance == null) {
@@ -19,11 +18,6 @@ public class FileToMap {
 		}
 		return instance;
 	}
-	//"C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\WorldMap.txt"
-	public MapElements[][] getMapFromFile(String path) {
-		return toMap(path);
-	}
-	
 	
 	public MapElements[][] toMap(String path) {
 		ArrayList<String> file = new ArrayList<String>();
@@ -43,8 +37,7 @@ public class FileToMap {
 	
 	private MapElements[][] toElem(ArrayList<String> file) {
 		
-		MapElements[][] elems = new MapElements[file.size()]
-				[file.get(0).length()];
+		MapElements[][] elems = new MapElements[file.size()][file.get(0).length()];
 		
 		for (int i = 0; i < file.size(); i++) {
 			for (int j = 0; j < file.get(i).length(); j++) {

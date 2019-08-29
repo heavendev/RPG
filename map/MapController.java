@@ -18,7 +18,6 @@ public class MapController {
 	
 	Jeu jeu;
 	MapDisplay display;
-	MapStorage mapStorage;
 	MapBackground mapBorder;
 	MapElements[][] map;
 	ArrayList<NPC> npcsInMap;
@@ -30,7 +29,6 @@ public class MapController {
 	public MapController(Jeu jeu) {
 		this.jeu = jeu;
 		display = new MapDisplay();
-		mapStorage = new MapStorage();
 		resetMap();
 	}
 	
@@ -39,37 +37,44 @@ public class MapController {
 		squadCurrentMap = (String) tmp.get("map");
 		cx = (int) tmp.get("x");
 		cy = (int) tmp.get("y");
-		if (squadCurrentMap == "main") {
-			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\WorldMap.txt");
-			mapBorder = MapBackground.FOREST;
-		} else if (squadCurrentMap == "House"){
-			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
-			mapBorder = MapBackground.HOUSE;
+		switch (squadCurrentMap) {
+			case "main" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\WorldMap.txt");
+				mapBorder = MapBackground.FOREST;
+				break;
+			case "House" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
+				mapBorder = MapBackground.HOUSE;
+				break;
+			case "SouthWest Dungeon" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
+				mapBorder = MapBackground.DUNGEON;
+				break;
+			case "Tower" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
+				mapBorder = MapBackground.TOWER;
+				break;
+			case "NorthCenter Dungeon" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
+				mapBorder = MapBackground.DUNGEON;
+				break;
+			case "SouthCenter Dungeon" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
+				mapBorder = MapBackground.DUNGEON;
+				break;
+			case "NorthEast Dungeon" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
+				mapBorder = MapBackground.DUNGEON;
+				break;
+			case "Village" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
+				mapBorder = MapBackground.VILLAGE;
+				break;
+			case "SouthEast Dungeon" :
+				map = FileToMap.getFileToMap().toMap("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\game\\test.txt");
+				mapBorder = MapBackground.DUNGEON;
+				break;
 		}
-		
-		//  PLACEHOLDER FOR DUNGEONS/VILLAGES/HOUSES
-//		else if (squadCurrentMap == "SouthWest Dungeon"){
-//			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
-//			mapBorder = MapBackground.DUNGEON;
-//		} else if (squadCurrentMap == "Tower"){
-//			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
-//			mapBorder = MapBackground.TOWER;
-//		} else if (squadCurrentMap == "NorthCenter Dungeon"){
-//			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
-//			mapBorder = MapBackground.DUNGEON;
-//		} else if (squadCurrentMap == "SouthCenter Dungeon"){
-//			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
-//			mapBorder = MapBackground.DUNGEON;
-//		} else if (squadCurrentMap == "NorthEast Dungeon"){
-//			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
-//			mapBorder = MapBackground.DUNGEON;
-//		} else if (squadCurrentMap == "Village"){
-//			map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
-//			mapBorder = MapBackground.VILLAGE;
-//		} else if (squadCurrentMap == "SouthEast Dungeon"){
-//		map = FileToMap.getFileToMap().getMapFromFile("C:\\Users\\modele\\eclipse-workspace\\Git\\src\\Projet\\test.txt");
-//		mapBorder = MapBackground.DUNGEON;
-//	}
 		putNpcsInMap();
 		display.resetMapDisplay(map, cx, cy, mapBorder,  getQuestsLocations(squadCurrentMap));
 	}
@@ -184,13 +189,21 @@ public class MapController {
 		
 		if (map[cy][cx] == MapElements.ENTRANCE) {
 			teleportTo(cx,cy);
-			resetMap();
+			if (squadCurrentMap != "main" && squadCurrentMap != "house" && squadCurrentMap != "village") {
+				Quest q = getLocalQuest();
+				if (q != null) {
+					jeu.goToCombat(q);
+				} else {
+					jeu.goToCombat("boss");
+				}
+			} else {
+				resetMap();
+			}
 		} else if ((quest = checkForQuestLocation()) != null) {
 			jeu.goToQuestEvent(quest);
+		} else if ((int)(Math.random()*300) == 0) {
+			jeu.goToCombat();
 		}
-		/*else if ((int)(Math.random()*1000) == 0) {
-			jeu.startRandomCombat();
-		}*/
 	}
 	
 	private boolean isClear(int x, int y) {
@@ -208,19 +221,19 @@ public class MapController {
 			if (x == 6 && y == 3) {
 				Squad.getInstance().setCoordinates(4, 22, "House");
 			} else if (x == 16 && y == 43) {
-				Squad.getInstance().setCoordinates(1, 1, "SouthWest Dungeon");
+				Squad.getInstance().setCoordinates(14, 14, "SouthWest Dungeon");
 			} else if (x == 50 && y == 16) {
-				Squad.getInstance().setCoordinates(1, 1, "Tower");
+				Squad.getInstance().setCoordinates(14, 14, "Tower");
 			} else if (x == 77 && y == 7) {
-				Squad.getInstance().setCoordinates(1, 1, "NorthCenter Dungeon");
+				Squad.getInstance().setCoordinates(14, 14, "NorthCenter Dungeon");
 			} else if (x == 70 && y == 40) {
-				Squad.getInstance().setCoordinates(1, 1, "SouthCenter Dungeon");
+				Squad.getInstance().setCoordinates(14, 14, "SouthCenter Dungeon");
 			} else if (x == 149 && y == 4) {
-				Squad.getInstance().setCoordinates(1, 1, "NorthEast Dungeon");
+				Squad.getInstance().setCoordinates(14, 14, "NorthEast Dungeon");
 			} else if (x == 131 && y == 28) {
-				Squad.getInstance().setCoordinates(1, 1, "Village");
+				Squad.getInstance().setCoordinates(14, 14, "Village");
 			} else if (x == 151 && y == 48) {
-				Squad.getInstance().setCoordinates(1, 1, "SouthEast Dungeon");
+				Squad.getInstance().setCoordinates(14, 14, "SouthEast Dungeon");
 			}
 		} else if (Squad.getInstance().getCurrentMap() == "House") {
 			Squad.getInstance().setCoordinates(6, 4, "main");
@@ -265,6 +278,16 @@ public class MapController {
 		for (int i = 0; i < quests.size(); i++) {
 			if (quests.get(i).isAtQuestionLocation(cy, cx, squadCurrentMap) && quests.get(i).getStatus() == QuestStatus.ONGOING) {
 				return quests.get(i);
+			}
+		}
+		return null;
+	}
+	
+	private Quest getLocalQuest() {
+		ArrayList<Quest> quests = Squad.getInstance().getQuests();
+		for (Quest q : quests) {
+			if (q.getQuestLocation().get("map").equals(squadCurrentMap)) {
+				return q;
 			}
 		}
 		return null;

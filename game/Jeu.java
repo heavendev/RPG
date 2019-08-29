@@ -81,15 +81,24 @@ public class Jeu extends JFrame{
 							 "QgQRRM PERE CASTOR BRQQgRgMRBQB       ",
 							 "ZgZgDg             BDgQMZgZgB5        "};
 		String[] life = {"blabla","blubliblou","blabla"};
-		NPC npc = new NPC("Pere Castor",true,null,portrait,life,"main",41,33);
-		String[] description = {"blabla","blubliblou","blabla"};
-		String[] presentation = {"blabla","blubliblou","blabluig"};
-		String[] objectiveReached = {"blabla","blubliblou"};
+		NPC npc = new NPC("Pere Castor",false,null,portrait,life,"main",41,33);
+		
+		String[] description = {"blabla","description de la quzte","blabla"};
+		String[] presentation = {"blabla","presentation de la quete","blabluig"};
+		String[] objectiveReached = {"blabla","objectif accompli!"};
 		String[] turnIn = {"blabla","blubliblou","FFIIIINNNIIIII"};
-		Quest questOne = new Quest("titre 1", QuestStatus.NOT_TAKEN, 44, 33, "main", null, "get", 1, true, 50, null, null, null, 10,
+		
+		Quest questOne = new Quest("quete1", QuestStatus.NOT_TAKEN, 44, 33, "main", null, "get", 1, true, 50, null, null, null, 10,
 				description, presentation, objectiveReached, turnIn, npc);
+		
 		npc.addQuest(questOne);
+		
 		NPCList.getNPCList().addActiveNPC(npc);
+		
+		
+//		Quest questTwo = new Quest("quete2", QuestStatus.NOT_TAKEN, 44, 31, "main", null, "get", 2, true, 10, null, null, null, 5,
+//				description, presentation, objectiveReached, turnIn, npc);
+//		npc.addQuest(questTwo);
 		
 		/*
 		 * 		Creating dummy main char and ennemy for combat tests
@@ -122,8 +131,8 @@ public class Jeu extends JFrame{
 		
 //		goToMainMenu();
 //		goToWelcome();
-//		goToMap();
-		goToCombat();
+		goToMap();
+//		goToCombat();
 		
 	}
 	
@@ -380,20 +389,6 @@ public class Jeu extends JFrame{
 	
 	public static void main(String[] args) {
 		Jeu jeu = new Jeu();
-		
-		
-//		try {
-//			DatabaseTest.getDatabaseTest().test();
-//		} catch (NoSuchAlgorithmException | SQLException e) {
-//			e.printStackTrace();
-//		}
-		
-//		try {
-//			DatabaseTest.getDatabaseTest().t();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-		
 	}
 
 }

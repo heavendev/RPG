@@ -38,13 +38,13 @@ public class LoginController{
 	public void scroll(Scroll scroll) {
 		switch (scroll) {
 			case UP :
-				if (selection != 1 && !inName && !inPassword) {
+				if (selection > 1 && !inName && !inPassword) {
 					selection--;
 					display.setSelection(selection);
 				}
 				break;
 			case DOWN :
-				if (selection != 4 && !inName && !inPassword) {
+				if (selection < 4 && !inName && !inPassword) {
 					selection ++;
 					display.setSelection(selection);
 				}
@@ -59,7 +59,6 @@ public class LoginController{
 							inName = false;
 						} else {
 							inName = true;
-							display.setUsername(username);
 						}
 						break;
 					case 3 :
@@ -67,7 +66,6 @@ public class LoginController{
 							inPassword = false;
 						} else {
 							inPassword = true;
-							display.setPassword(password.length());
 						}
 						break;
 					case 4 :
@@ -99,7 +97,6 @@ public class LoginController{
 				break;
 		}
 	}
-	
 	
 	public void type(String str) {
 		if (inName) {

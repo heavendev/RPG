@@ -402,14 +402,14 @@ public class NpcController {
 	private class ItemCheckController {
 		private Equipment item;
 		private int selection;
-		private boolean buyingOrSelling;
+		private boolean buying;
 		private HashMap itemDetails;
-		private void reset(Equipment item, boolean buyingOrSelling) {
+		private void reset(Equipment item, boolean buying) {
 			this.item = item;
 			selection = 0;
-			this.buyingOrSelling = buyingOrSelling;
+			this.buying = buying;
 			itemDetails = item.getEquipmentDetails();
-			display.displayItemDetails(itemDetails, selection, buyingOrSelling);
+			display.displayItemDetails(itemDetails, selection, buying);
 		}
 		private void scroll(Scroll scroll) {
 			switch (scroll) {
@@ -417,28 +417,28 @@ public class NpcController {
 				if (selection > 0) {
 					selection--;
 				}
-				display.displayItemDetails(itemDetails, selection, buyingOrSelling);
+				display.displayItemDetails(itemDetails, selection, buying);
 				break;
 			case DOWN :
 				if (selection < 1) {
 					selection++;
 				}
-				display.displayItemDetails(itemDetails, selection, buyingOrSelling);
+				display.displayItemDetails(itemDetails, selection, buying);
 				break;
 			case CONFIRM :
 				if (selection == 0) {
 					status = Status.TRANSACTION_CONFIRMED;
 					boolean success = true;
-					if (buyingOrSelling && Squad.getInstance().getGold() >= item.getValue()) {
+					if (buying && Squad.getInstance().getGold() >= item.getValue()) {
 						item.buy();
-					} else if (buyingOrSelling) {
+					} else if (buying) {
 						success = false;
 					} else {
 						item.sell();
 					}
-					transactionConfirmed.reset(buyingOrSelling, success, item.getName());
+					transactionConfirmed.reset(buying, success, item.getName());
 				} else {
-					if (buyingOrSelling) {
+					if (buying) {
 						status = Status.MARKET_BUY;
 						marketBuy.reset();
 					} else {

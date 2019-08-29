@@ -34,14 +34,17 @@ public class QuestPageDisplay implements Display{
 	
 	
 	public void display() {
+		for (int i = 0; i < questText.length; i++) {
+			System.out.println(questText[i]);
+		}
 		screen[2] = insertStringAt(screen[2], questName, 10);
 		for (int i = 0; i < questText.length; i++) {
 			screen[i+4] = insertStringAt(screen[i+4], questText[i], 10);
 		}
+		screen[14] = insertStringAt(screen[14], "Completing this quest will grant you " + xpReward + "XP and " + goldReward + " gold", 5);
 		for (int i = 0; i < screen.length; i++) {
 			System.out.println(screen[i]);
 		}
-		screen[14] = insertStringAt(screen[14], "Completing this quest will grant you " + xpReward + "XP and " + goldReward + " gold", 5);
 		for (int i = 0; i < questText.length; i++) {
 			screen[i+4] = "*                                                                              *";
 		}
